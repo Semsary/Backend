@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "GdaEYaLdQI4=",
+  "dgSpecHash": "ZO6HRH9NYXY=",
   "success": true,
-  "projectFilePath": "F:\\FCI\\Projects\\Semsary application\\backend\\backend\\semsary_backend\\semsary_backend\\semsary_backend.csproj",
+  "projectFilePath": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\semsary_backend\\semsary_backend.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mahmoud\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\mahmoud\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",

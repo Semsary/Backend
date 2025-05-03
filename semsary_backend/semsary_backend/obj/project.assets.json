@@ -5255,11 +5255,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\FCI\\Projects\\Semsary application\\backend\\backend\\semsary_backend\\semsary_backend\\semsary_backend.csproj",
+      "projectUniqueName": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\semsary_backend\\semsary_backend.csproj",
       "projectName": "semsary_backend",
-      "projectPath": "F:\\FCI\\Projects\\Semsary application\\backend\\backend\\semsary_backend\\semsary_backend\\semsary_backend.csproj",
+      "projectPath": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\semsary_backend\\semsary_backend.csproj",
       "packagesPath": "C:\\Users\\mahmoud\\.nuget\\packages\\",
-      "outputPath": "F:\\FCI\\Projects\\Semsary application\\backend\\backend\\semsary_backend\\semsary_backend\\obj\\",
+      "outputPath": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\semsary_backend\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\mahmoud\\AppData\\Roaming\\NuGet\\NuGet.Config",

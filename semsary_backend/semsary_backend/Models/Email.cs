@@ -1,12 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace semsary_backend.Models
 {
     public enum OTPType
     {
         Verification,
-        PasswordReset
+        PasswordReset,
+        Deletion
 
     }
     
@@ -24,6 +26,7 @@ namespace semsary_backend.Models
         public string email {  get; set; }
         public bool IsVerified {  get; set; }=false;
         public string ownerUsername {  get; set; }
+        [JsonIgnore]
         public semsary_backend.Models.SermsaryUser owner { get; set; }
         public string otp { get; set; }
         public DateTime? OtpExpiry { get; set; } 

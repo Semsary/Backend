@@ -1,49 +1,21 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "F:\\FCI\\Projects\\Semsary application\\backend\\backend\\semsary_backend\\",
+  "WorkspaceRootPath": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|f:\\fci\\projects\\semsary application\\backend\\backend\\semsary_backend\\semsary_backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|f:\\fci\\projects\\semsary back\\backend\\semsary_backend\\semsary_backend\\dto\\userdtocs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\dto\\userdtocs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|f:\\fci\\projects\\semsary application\\backend\\backend\\semsary_backend\\semsary_backend\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|f:\\fci\\projects\\semsary back\\backend\\semsary_backend\\semsary_backend\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|f:\\fci\\projects\\semsary application\\backend\\backend\\semsary_backend\\semsary_backend\\models\\customerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\models\\customerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|f:\\fci\\projects\\semsary back\\backend\\semsary_backend\\semsary_backend\\models\\sermsaryuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\models\\sermsaryuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|f:\\fci\\projects\\semsary application\\backend\\backend\\semsary_backend\\semsary_backend\\dto\\customerservicedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\dto\\customerservicedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|f:\\fci\\projects\\semsary application\\backend\\backend\\semsary_backend\\semsary_backend\\dto\\signuplandlord.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\dto\\signuplandlord.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|f:\\fci\\projects\\semsary application\\backend\\backend\\semsary_backend\\semsary_backend\\dto\\resetpassworddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\dto\\resetpassworddto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|f:\\fci\\projects\\semsary application\\backend\\backend\\semsary_backend\\semsary_backend\\dto\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\dto\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|f:\\fci\\projects\\semsary application\\backend\\backend\\semsary_backend\\semsary_backend\\dto\\verifyemaildto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\dto\\verifyemaildto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|f:\\fci\\projects\\semsary application\\backend\\backend\\semsary_backend\\semsary_backend\\service\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\service\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|f:\\fci\\projects\\semsary application\\backend\\backend\\semsary_backend\\semsary_backend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|f:\\fci\\projects\\semsary application\\backend\\backend\\semsary_backend\\semsary_backend\\models\\email.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|f:\\fci\\projects\\semsary back\\backend\\semsary_backend\\semsary_backend\\models\\email.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\models\\email.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -54,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 392,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -62,136 +34,54 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "CustomerService.cs",
-              "DocumentMoniker": "F:\\FCI\\Projects\\Semsary application\\backend\\backend\\semsary_backend\\semsary_backend\\Models\\CustomerService.cs",
-              "RelativeDocumentMoniker": "semsary_backend\\Models\\CustomerService.cs",
-              "ToolTip": "F:\\FCI\\Projects\\Semsary application\\backend\\backend\\semsary_backend\\semsary_backend\\Models\\CustomerService.cs",
-              "RelativeToolTip": "semsary_backend\\Models\\CustomerService.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-02T23:52:21.127Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "CustomerserviceDTO.cs",
-              "DocumentMoniker": "F:\\FCI\\Projects\\Semsary application\\backend\\backend\\semsary_backend\\semsary_backend\\DTO\\CustomerserviceDTO.cs",
-              "RelativeDocumentMoniker": "semsary_backend\\DTO\\CustomerserviceDTO.cs",
-              "ToolTip": "F:\\FCI\\Projects\\Semsary application\\backend\\backend\\semsary_backend\\semsary_backend\\DTO\\CustomerserviceDTO.cs",
-              "RelativeToolTip": "semsary_backend\\DTO\\CustomerserviceDTO.cs",
-              "ViewState": "AQIAAAkAAAAAAAAAAAAYwBAAAAAIAAAA",
+              "Title": "Email.cs",
+              "DocumentMoniker": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\semsary_backend\\Models\\Email.cs",
+              "RelativeDocumentMoniker": "semsary_backend\\Models\\Email.cs",
+              "ToolTip": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\semsary_backend\\Models\\Email.cs",
+              "RelativeToolTip": "semsary_backend\\Models\\Email.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAxwBwAAAAUAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-02T23:52:11.984Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "SignUpLandlord.cs",
-              "DocumentMoniker": "F:\\FCI\\Projects\\Semsary application\\backend\\backend\\semsary_backend\\semsary_backend\\DTO\\SignUpLandlord.cs",
-              "RelativeDocumentMoniker": "semsary_backend\\DTO\\SignUpLandlord.cs",
-              "ToolTip": "F:\\FCI\\Projects\\Semsary application\\backend\\backend\\semsary_backend\\semsary_backend\\DTO\\SignUpLandlord.cs",
-              "RelativeToolTip": "semsary_backend\\DTO\\SignUpLandlord.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAHAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-02T12:13:15.424Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "F:\\FCI\\Projects\\Semsary application\\backend\\backend\\semsary_backend\\semsary_backend\\appsettings.json",
-              "RelativeDocumentMoniker": "semsary_backend\\appsettings.json",
-              "ToolTip": "F:\\FCI\\Projects\\Semsary application\\backend\\backend\\semsary_backend\\semsary_backend\\appsettings.json",
-              "RelativeToolTip": "semsary_backend\\appsettings.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-05-02T11:53:53.345Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "F:\\FCI\\Projects\\Semsary application\\backend\\backend\\semsary_backend\\semsary_backend\\Program.cs",
-              "RelativeDocumentMoniker": "semsary_backend\\Program.cs",
-              "ToolTip": "F:\\FCI\\Projects\\Semsary application\\backend\\backend\\semsary_backend\\semsary_backend\\Program.cs",
-              "RelativeToolTip": "semsary_backend\\Program.cs",
-              "ViewState": "AQIAAFwAAAAAAAAAAAAiwGwAAAAkAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-02T11:53:46.921Z",
+              "WhenOpened": "2025-05-03T14:45:24.229Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "EmailService.cs",
-              "DocumentMoniker": "F:\\FCI\\Projects\\Semsary application\\backend\\backend\\semsary_backend\\semsary_backend\\Service\\EmailService.cs",
-              "RelativeDocumentMoniker": "semsary_backend\\Service\\EmailService.cs",
-              "ToolTip": "F:\\FCI\\Projects\\Semsary application\\backend\\backend\\semsary_backend\\semsary_backend\\Service\\EmailService.cs",
-              "RelativeToolTip": "semsary_backend\\Service\\EmailService.cs",
+              "DocumentIndex": 2,
+              "Title": "SermsaryUser.cs",
+              "DocumentMoniker": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\semsary_backend\\Models\\SermsaryUser.cs",
+              "RelativeDocumentMoniker": "semsary_backend\\Models\\SermsaryUser.cs",
+              "ToolTip": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\semsary_backend\\Models\\SermsaryUser.cs",
+              "RelativeToolTip": "semsary_backend\\Models\\SermsaryUser.cs",
               "ViewState": "AQIAAAYAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-02T11:51:51.164Z"
+              "WhenOpened": "2025-05-03T14:35:29.514Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "LoginDTO.cs",
-              "DocumentMoniker": "F:\\FCI\\Projects\\Semsary application\\backend\\backend\\semsary_backend\\semsary_backend\\DTO\\LoginDTO.cs",
-              "RelativeDocumentMoniker": "semsary_backend\\DTO\\LoginDTO.cs",
-              "ToolTip": "F:\\FCI\\Projects\\Semsary application\\backend\\backend\\semsary_backend\\semsary_backend\\DTO\\LoginDTO.cs",
-              "RelativeToolTip": "semsary_backend\\DTO\\LoginDTO.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "DocumentIndex": 0,
+              "Title": "UserDTOcs.cs",
+              "DocumentMoniker": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\semsary_backend\\DTO\\UserDTOcs.cs",
+              "RelativeDocumentMoniker": "semsary_backend\\DTO\\UserDTOcs.cs",
+              "ToolTip": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\semsary_backend\\DTO\\UserDTOcs.cs",
+              "RelativeToolTip": "semsary_backend\\DTO\\UserDTOcs.cs",
+              "ViewState": "AQIAAAEAAAAAAAAAAAAAAA0AAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-02T11:26:41.715Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ResetPasswordDTO.cs",
-              "DocumentMoniker": "F:\\FCI\\Projects\\Semsary application\\backend\\backend\\semsary_backend\\semsary_backend\\DTO\\ResetPasswordDTO.cs",
-              "RelativeDocumentMoniker": "semsary_backend\\DTO\\ResetPasswordDTO.cs",
-              "ToolTip": "F:\\FCI\\Projects\\Semsary application\\backend\\backend\\semsary_backend\\semsary_backend\\DTO\\ResetPasswordDTO.cs",
-              "RelativeToolTip": "semsary_backend\\DTO\\ResetPasswordDTO.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAIAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-02T11:24:19.906Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "Email.cs",
-              "DocumentMoniker": "F:\\FCI\\Projects\\Semsary application\\backend\\backend\\semsary_backend\\semsary_backend\\Models\\Email.cs",
-              "RelativeDocumentMoniker": "semsary_backend\\Models\\Email.cs",
-              "ToolTip": "F:\\FCI\\Projects\\Semsary application\\backend\\backend\\semsary_backend\\semsary_backend\\Models\\Email.cs",
-              "RelativeToolTip": "semsary_backend\\Models\\Email.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAABkAAAAyAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-02T11:16:21.54Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "VerifyEmailDTO.cs",
-              "DocumentMoniker": "F:\\FCI\\Projects\\Semsary application\\backend\\backend\\semsary_backend\\semsary_backend\\DTO\\VerifyEmailDTO.cs",
-              "RelativeDocumentMoniker": "semsary_backend\\DTO\\VerifyEmailDTO.cs",
-              "ToolTip": "F:\\FCI\\Projects\\Semsary application\\backend\\backend\\semsary_backend\\semsary_backend\\DTO\\VerifyEmailDTO.cs",
-              "RelativeToolTip": "semsary_backend\\DTO\\VerifyEmailDTO.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAnAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-02T11:05:34.645Z"
+              "WhenOpened": "2025-05-03T14:34:24.563Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
               "Title": "AuthController.cs",
-              "DocumentMoniker": "F:\\FCI\\Projects\\Semsary application\\backend\\backend\\semsary_backend\\semsary_backend\\Controllers\\AuthController.cs",
+              "DocumentMoniker": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\semsary_backend\\Controllers\\AuthController.cs",
               "RelativeDocumentMoniker": "semsary_backend\\Controllers\\AuthController.cs",
-              "ToolTip": "F:\\FCI\\Projects\\Semsary application\\backend\\backend\\semsary_backend\\semsary_backend\\Controllers\\AuthController.cs",
+              "ToolTip": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\semsary_backend\\Controllers\\AuthController.cs",
               "RelativeToolTip": "semsary_backend\\Controllers\\AuthController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwBAAAzAAAA",
+              "ViewState": "AQIAALYAAAAAAAAAAADwv84AAAA2AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-02T11:02:38.489Z",
+              "WhenOpened": "2025-05-03T14:14:14.539Z",
               "EditorCaption": ""
             }
           ]

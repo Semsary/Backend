@@ -19,14 +19,14 @@ namespace semsary_backend.Controllers
         private readonly TokenService tokenGenertor;
         private readonly ApiContext apiContext;
 
-        public AuthController(EmailService emailService,TokenService TokenGenertor,ApiContext apiContext)
+        public AuthController(EmailService emailService, TokenService TokenGenertor, ApiContext apiContext)
         {
             _emailService = emailService;
             tokenGenertor = TokenGenertor;
             this.apiContext = apiContext;
         }
 
-        
+
         [HttpPost("Landlord/register")]
         public async Task<IActionResult> RegisterLandlord([FromBody] SignUpLandlord landlordDTO)
         {
@@ -34,16 +34,16 @@ namespace semsary_backend.Controllers
             {
                 return BadRequest("Invalid data.");
             }
-            if(ModelState.IsValid == false)
+            if (ModelState.IsValid == false)
             {
                 return BadRequest(ModelState);
             }
-            var user=  apiContext.SermsaryUsers.Include(w=>w.Emails).FirstOrDefault(e=>(e.Emails.Any(Em =>Em.email==landlordDTO.Email)));
+            var user = apiContext.SermsaryUsers.Include(w => w.Emails).FirstOrDefault(e => (e.Emails.Any(Em => Em.email == landlordDTO.Email)));
             if (user != null)
             {
                 return BadRequest("Email already exists.");
             }
-            var UserEmail= new Email
+            var UserEmail = new Email
             {
                 email = landlordDTO.Email,
                 IsVerified = false,
@@ -57,24 +57,24 @@ namespace semsary_backend.Controllers
                 Firstname = landlordDTO.firstname,
                 Lastname = landlordDTO.lastname,
                 password = PasswordHelper.HashPassword(landlordDTO.Password),
-                UserType=UserType.landlord
+                UserType = UserType.landlord
 
 
             };
 
             UserEmail.owner = landlord;
-            UserEmail.ownerUsername= landlord.Username;  
+            UserEmail.ownerUsername = landlord.Username;
             landlord.Emails = new List<Email>();
             landlord.Emails.Add(UserEmail);
-            var otp= UserEmail.otp;
+            var otp = UserEmail.otp;
             var email = UserEmail.email;
-            await _emailService.SendEmailAsync(email,"verification request","to verify your email please enter this otp on the website "+ otp +"if you don't ask this otp please ignore this message");
+            await _emailService.SendEmailAsync(email, "verification request", "to verify your email please enter this otp on the website " + otp + "if you don't ask this otp please ignore this message");
             apiContext.SermsaryUsers.Add(landlord);
             await apiContext.SaveChangesAsync();
             return Ok("Registration successful. Please check your email for verification.");
 
 
-            
+
         }
 
 
@@ -101,7 +101,7 @@ namespace semsary_backend.Controllers
                 otp = GenerateOtp.Generate(6),
                 OtpExpiry = DateTime.UtcNow.AddMinutes(5),
                 NumberofMismatch = 0,
-                
+
             };
 
             var Tenant = new Tenant
@@ -142,7 +142,7 @@ namespace semsary_backend.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var user = await apiContext.SermsaryUsers.Include(e=> e.Emails)
+            var user = await apiContext.SermsaryUsers.Include(e => e.Emails)
                 .FirstOrDefaultAsync(u => u.Emails.Any(e => e.email == verifyEmailDTO.Email));
 
             if (user == null)
@@ -178,33 +178,53 @@ namespace semsary_backend.Controllers
 
             return Ok(landlords);
         }
-        
+
+
         [HttpPost("Login")]
         public async Task<IActionResult> Login(LoginDTO loginDTO)
         {
-            if(loginDTO ==null)
+            if (loginDTO == null)
                 return BadRequest();
-            if (ModelState.IsValid==false)
+            if (ModelState.IsValid == false)
                 return BadRequest(ModelState);
-            
-            var user= apiContext.SermsaryUsers.FirstOrDefault(e=>e.Emails.Any(m=>m.email==loginDTO.Email && m.IsVerified));
-            if (user == null || PasswordHelper.VerifyPassword(loginDTO.Password,user.password)==false)
+            var email = await apiContext.Emails.Include(em => em.owner).FirstOrDefaultAsync(e => e.email == loginDTO.Email);
+            if (email == null)
+                return NotFound("this email wasn't found");
+            if (email.IsVerified == false)
+                return BadRequest("This Email isn't verified,please verify it or ask to delete it");
+
+            var user = email.owner;
+            if (PasswordHelper.VerifyPassword(loginDTO.Password, user.password) == false)
                 return BadRequest("invalid email or password");
             return Ok(tokenGenertor.GenerateToken(user));
 
         }
+
         [Authorize]
-        [HttpGet("GetCurUser")]
+        [HttpGet("GetUserInfo")]
         public async Task<IActionResult> GetCurUser()
         {
-            return Ok(tokenGenertor.GetCurUser());
+            var username = tokenGenertor.GetCurUser();
+            var user = await apiContext.SermsaryUsers
+                .Include(e => e.Emails)
+                .FirstOrDefaultAsync(e => e.Username == username);
+            if (user == null)
+                return NotFound("User not found.");
+            var userInfo = new UserDTOcs();
+            userInfo.firstname = user.Firstname;
+            userInfo.lastname = user.Lastname;
+            userInfo.username = user.Username;
+            userInfo.emails = user.Emails;
+            userInfo.address = user.Address;
+            userInfo.userType = user.UserType;
+            return Ok(userInfo);
         }
 
         [HttpGet("UpdatePasword")]
         public async Task<IActionResult> UpdatePassword(string email)
         {
-             var Em=await  apiContext.Emails.FirstOrDefaultAsync(e => e.email == email);
-            if(Em == null)
+            var Em = await apiContext.Emails.FirstOrDefaultAsync(e => e.email == email);
+            if (Em == null)
             {
                 return BadRequest("Email not found");
             }
@@ -215,8 +235,8 @@ namespace semsary_backend.Controllers
             Em.NumberofMismatch = 0;
             Em.OtpExpiry = DateTime.UtcNow.AddMinutes(5);
             String subject = "Reset password";
-            String body = "your reset password otp is "+Em.otp+" \n if you didn't ask to reset your password,please ignore this message";
-            await _emailService.SendEmailAsync(email,subject,body);
+            String body = "your reset password otp is " + Em.otp + " \n if you didn't ask to reset your password,please ignore this message";
+            await _emailService.SendEmailAsync(email, subject, body);
             await apiContext.SaveChangesAsync();
             return Ok("an otp was sent to your email");
 
@@ -227,13 +247,13 @@ namespace semsary_backend.Controllers
         {
             if (resetdto == null)
                 return BadRequest("invalid input");
-            if (ModelState.IsValid==false)
+            if (ModelState.IsValid == false)
                 return BadRequest(ModelState);
-            var email =await apiContext.Emails.Include(e=>e.owner).FirstOrDefaultAsync(e=>e.email==resetdto.Email);
+            var email = await apiContext.Emails.Include(e => e.owner).FirstOrDefaultAsync(e => e.email == resetdto.Email);
             if (email == null)
                 return NotFound("this email wasn't found");
 
-            if (email.IsVerified == false) 
+            if (email.IsVerified == false)
                 return BadRequest("This Email isn't verified,please verify this email first");
             if (email.OtpExpiry < DateTime.UtcNow)
                 return BadRequest("expired otp");
@@ -241,8 +261,8 @@ namespace semsary_backend.Controllers
             if (email.NumberofMismatch > 3)
                 return BadRequest("you have reached maximum number of attempts");
 
-            
-            if(email.otp!=resetdto.Otp)
+
+            if (email.otp != resetdto.Otp)
             {
                 email.NumberofMismatch++;
                 apiContext.SaveChanges();
@@ -250,7 +270,7 @@ namespace semsary_backend.Controllers
             }
             email.NumberofMismatch = 0;
             email.OtpExpiry = DateTime.MinValue;
-            email.owner.password=PasswordHelper.HashPassword(resetdto.Password);
+            email.owner.password = PasswordHelper.HashPassword(resetdto.Password);
             await apiContext.SaveChangesAsync();
 
             return Ok("password updated successfully");
@@ -262,7 +282,7 @@ namespace semsary_backend.Controllers
         {
             var username = tokenGenertor.GetCurUser();
             var user = await apiContext.SermsaryUsers.FirstOrDefaultAsync(e => e.Username == username);
-            if(user.UserType!=UserType.Admin)
+            if (user.UserType != UserType.Admin)
                 return Unauthorized("you are not authorized to add customer service");
 
             if (dto == null)
@@ -270,9 +290,9 @@ namespace semsary_backend.Controllers
             if (ModelState.IsValid == false)
                 return BadRequest(ModelState);
 
-            var em=apiContext.Emails.FirstOrDefault(e => e.email == dto.email);
-            if(em!=null)
-                {
+            var em = apiContext.Emails.FirstOrDefault(e => e.email == dto.email);
+            if (em != null)
+            {
                 return BadRequest("this email is already taken");
             }
             var email = new Email
@@ -302,6 +322,77 @@ namespace semsary_backend.Controllers
             return Ok("customer service was created successfully");
 
         }
-       
+        [HttpGet("GetVerifictioncode")]
+        public async Task<IActionResult> GetVerifictioncode(string email)
+        {
+            var em = await apiContext.Emails.FirstOrDefaultAsync(e => e.email == email);
+            if (em == null)
+                return NotFound("this email wasn't found");
+            if (em.IsVerified == true)
+                return BadRequest("this email is already verified");
+
+            em.otp = GenerateOtp.Generate(6);
+            em.OtpExpiry = DateTime.UtcNow.AddMinutes(5);
+            em.NumberofMismatch = 0;
+            em.otpType = OTPType.Verification;
+
+            await _emailService.SendEmailAsync(email, "verification request", "to verify your email please enter this otp on the website " + em.otp + "\nif you don't ask this otp please ignore this message");
+            await apiContext.SaveChangesAsync();
+            return Ok("verification code was sent to your email");
+        }
+        [HttpGet("GetDeletionCode")]
+        public async Task<IActionResult> GetDeletionCode(string email)
+        {
+            var em = await apiContext.Emails.FirstOrDefaultAsync(e => e.email == email);
+            if (em == null)
+                return NotFound("this email wasn't found");
+            if (em.IsVerified)
+                return BadRequest("this email is already verified");
+
+            em.otp = GenerateOtp.Generate(6);
+            em.OtpExpiry = DateTime.UtcNow.AddMinutes(5);
+            em.NumberofMismatch = 0;
+            em.otpType = OTPType.Deletion;
+
+            await _emailService.SendEmailAsync(email, "Delettion request", "to delete your email please enter this otp on the website " + em.otp + "\nif you don't ask this otp please ignore this message");
+            await apiContext.SaveChangesAsync();
+            return Ok("deletion code was sent to your email");
+
+        }
+        [HttpPost("DeleteEmail")]
+        public async Task<IActionResult> DeleteEmail(VerifyEmailDTO verifyEmailDTO)
+        {
+            if (verifyEmailDTO == null)
+                return BadRequest("invalid input");
+            if (ModelState.IsValid == false)
+                return BadRequest(ModelState);
+
+            var email = await apiContext.Emails.Include(e => e.owner).FirstOrDefaultAsync(e => e.email == verifyEmailDTO.Email);
+            if (email == null)
+                return NotFound("this email wasn't found");
+
+            if (email.IsVerified)
+                return BadRequest("this email is already verified");
+            if (email.otpType != OTPType.Deletion)
+                return BadRequest("this otp isn't for deletion");
+
+            if (email.OtpExpiry < DateTime.UtcNow)
+                return BadRequest("expired otp");
+
+            if (email.NumberofMismatch > 3)
+                return BadRequest("you have reached maximum number of attempts");
+            if (email.otp != verifyEmailDTO.Otp)
+            {
+                email.NumberofMismatch++;
+                apiContext.SaveChanges();
+                return BadRequest("wrong otp");
+            }
+            var owner = email.owner;
+            apiContext.Emails.Remove(email);
+            apiContext.SermsaryUsers.Remove(owner);
+            return Ok("email was deleted successfully");
+
+
+        }
     }
 }
