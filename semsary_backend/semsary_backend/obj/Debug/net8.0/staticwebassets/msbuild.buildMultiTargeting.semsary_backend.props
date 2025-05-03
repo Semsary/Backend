@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\semsary_backend.props" />
+</Project>
