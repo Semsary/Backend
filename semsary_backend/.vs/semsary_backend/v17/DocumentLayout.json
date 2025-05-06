@@ -3,20 +3,32 @@
   "WorkspaceRootPath": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|f:\\fci\\projects\\semsary back\\backend\\semsary_backend\\semsary_backend\\dto\\userdtocs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\dto\\userdtocs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|f:\\fci\\projects\\semsary back\\backend\\semsary_backend\\semsary_backend\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|f:\\fci\\projects\\semsary back\\backend\\semsary_backend\\semsary_backend\\models\\sermsaryuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\models\\sermsaryuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|f:\\fci\\projects\\semsary back\\backend\\semsary_backend\\semsary_backend\\entityconfigurations\\dbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\entityconfigurations\\dbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|f:\\fci\\projects\\semsary back\\backend\\semsary_backend\\semsary_backend\\models\\email.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\models\\email.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|f:\\fci\\projects\\semsary back\\backend\\semsary_backend\\semsary_backend\\models\\unverifieduser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\models\\unverifieduser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|f:\\fci\\projects\\semsary back\\backend\\semsary_backend\\semsary_backend\\enums\\identitystatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\enums\\identitystatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|f:\\fci\\projects\\semsary back\\backend\\semsary_backend\\semsary_backend\\dto\\identitydto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\dto\\identitydto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|f:\\fci\\projects\\semsary back\\backend\\semsary_backend\\semsary_backend\\models\\landlord.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\models\\landlord.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|f:\\fci\\projects\\semsary back\\backend\\semsary_backend\\semsary_backend\\models\\tenant.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\models\\tenant.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,63 +38,102 @@
       "DocumentGroups": [
         {
           "DockedWidth": 392,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 6,
           "Children": [
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "DbContext.cs",
+              "DocumentMoniker": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\semsary_backend\\EntityConfigurations\\DbContext.cs",
+              "RelativeDocumentMoniker": "semsary_backend\\EntityConfigurations\\DbContext.cs",
+              "ToolTip": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\semsary_backend\\EntityConfigurations\\DbContext.cs",
+              "RelativeToolTip": "semsary_backend\\EntityConfigurations\\DbContext.cs",
+              "ViewState": "AQIAABMAAAAAAAAAAAA5wBoAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-06T13:41:15.798Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "IdentityDTO.cs",
+              "DocumentMoniker": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\semsary_backend\\DTO\\IdentityDTO.cs",
+              "RelativeDocumentMoniker": "semsary_backend\\DTO\\IdentityDTO.cs",
+              "ToolTip": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\semsary_backend\\DTO\\IdentityDTO.cs",
+              "RelativeToolTip": "semsary_backend\\DTO\\IdentityDTO.cs",
+              "ViewState": "AQIAAAQAAAAAAAAAAAAxwAUAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-06T13:25:48.986Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "Email.cs",
-              "DocumentMoniker": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\semsary_backend\\Models\\Email.cs",
-              "RelativeDocumentMoniker": "semsary_backend\\Models\\Email.cs",
-              "ToolTip": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\semsary_backend\\Models\\Email.cs",
-              "RelativeToolTip": "semsary_backend\\Models\\Email.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAxwBwAAAAUAAAA",
+              "Title": "IdentityStatus.cs",
+              "DocumentMoniker": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\semsary_backend\\Enums\\IdentityStatus.cs",
+              "RelativeDocumentMoniker": "semsary_backend\\Enums\\IdentityStatus.cs",
+              "ToolTip": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\semsary_backend\\Enums\\IdentityStatus.cs",
+              "RelativeToolTip": "semsary_backend\\Enums\\IdentityStatus.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAQAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-03T14:45:24.229Z",
+              "WhenOpened": "2025-05-06T13:22:24.769Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Landlord.cs",
+              "DocumentMoniker": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\semsary_backend\\Models\\Landlord.cs",
+              "RelativeDocumentMoniker": "semsary_backend\\Models\\Landlord.cs",
+              "ToolTip": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\semsary_backend\\Models\\Landlord.cs",
+              "RelativeToolTip": "semsary_backend\\Models\\Landlord.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAfAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-06T13:19:31.684Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Tenant.cs",
+              "DocumentMoniker": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\semsary_backend\\Models\\Tenant.cs",
+              "RelativeDocumentMoniker": "semsary_backend\\Models\\Tenant.cs",
+              "ToolTip": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\semsary_backend\\Models\\Tenant.cs",
+              "RelativeToolTip": "semsary_backend\\Models\\Tenant.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAmAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-06T13:19:00.358Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "SermsaryUser.cs",
-              "DocumentMoniker": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\semsary_backend\\Models\\SermsaryUser.cs",
-              "RelativeDocumentMoniker": "semsary_backend\\Models\\SermsaryUser.cs",
-              "ToolTip": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\semsary_backend\\Models\\SermsaryUser.cs",
-              "RelativeToolTip": "semsary_backend\\Models\\SermsaryUser.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Title": "UnverifiedUser.cs",
+              "DocumentMoniker": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\semsary_backend\\Models\\UnverifiedUser.cs",
+              "RelativeDocumentMoniker": "semsary_backend\\Models\\UnverifiedUser.cs",
+              "ToolTip": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\semsary_backend\\Models\\UnverifiedUser.cs",
+              "RelativeToolTip": "semsary_backend\\Models\\UnverifiedUser.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAfAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-03T14:35:29.514Z",
+              "WhenOpened": "2025-05-06T13:16:50.687Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "UserDTOcs.cs",
-              "DocumentMoniker": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\semsary_backend\\DTO\\UserDTOcs.cs",
-              "RelativeDocumentMoniker": "semsary_backend\\DTO\\UserDTOcs.cs",
-              "ToolTip": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\semsary_backend\\DTO\\UserDTOcs.cs",
-              "RelativeToolTip": "semsary_backend\\DTO\\UserDTOcs.cs",
-              "ViewState": "AQIAAAEAAAAAAAAAAAAAAA0AAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-03T14:34:24.563Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
               "Title": "AuthController.cs",
               "DocumentMoniker": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\semsary_backend\\Controllers\\AuthController.cs",
               "RelativeDocumentMoniker": "semsary_backend\\Controllers\\AuthController.cs",
               "ToolTip": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\semsary_backend\\Controllers\\AuthController.cs",
               "RelativeToolTip": "semsary_backend\\Controllers\\AuthController.cs",
-              "ViewState": "AQIAALYAAAAAAAAAAADwv84AAAA2AAAA",
+              "ViewState": "AQIAAJIBAAAAAAAAAAAnwMABAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-03T14:14:14.539Z",
+              "WhenOpened": "2025-05-06T11:16:00.714Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             }
           ]
         }

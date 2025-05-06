@@ -522,3 +522,6 @@ F:\FCI\Projects\Semsary back\Backend\semsary_backend\semsary_backend\obj\Debug\n
 F:\FCI\Projects\Semsary back\Backend\semsary_backend\semsary_backend\obj\Debug\net8.0\semsary_.F8C267E1.Up2Date
 F:\FCI\Projects\Semsary back\Backend\semsary_backend\semsary_backend\obj\Debug\net8.0\semsary_backend.genruntimeconfig.cache
 F:\FCI\Projects\Semsary back\Backend\semsary_backend\semsary_backend\obj\Debug\net8.0\ref\semsary_backend.dll
+F:\FCI\Projects\Semsary back\Backend\semsary_backend\semsary_backend\bin\Debug\net8.0\AWSSDK.Core.dll
+F:\FCI\Projects\Semsary back\Backend\semsary_backend\semsary_backend\bin\Debug\net8.0\AWSSDK.S3.dll
+F:\FCI\Projects\Semsary back\Backend\semsary_backend\semsary_backend\bin\Debug\net8.0\Microsoft.Extensions.Configuration.dll

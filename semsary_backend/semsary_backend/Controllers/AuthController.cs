@@ -18,12 +18,15 @@ namespace semsary_backend.Controllers
         private EmailService _emailService;
         private readonly TokenService tokenGenertor;
         private readonly ApiContext apiContext;
+        private readonly R2StorageService storageService;
 
-        public AuthController(EmailService emailService, TokenService TokenGenertor, ApiContext apiContext)
+        public AuthController(EmailService emailService, TokenService TokenGenertor, ApiContext apiContext,R2StorageService storageService)
         {
             _emailService = emailService;
             tokenGenertor = TokenGenertor;
             this.apiContext = apiContext;
+            this.storageService = storageService;
+            
         }
 
 
@@ -392,6 +395,110 @@ namespace semsary_backend.Controllers
             apiContext.SermsaryUsers.Remove(owner);
             return Ok("email was deleted successfully");
 
+
+        }
+        
+        [Authorize]
+        [HttpGet("SubmitIdentity")]
+        public async Task<IActionResult> SubmitIdentity(IdentityDTO iddto)
+        {
+            if(iddto == null)
+                return BadRequest("invalid input");
+            if (ModelState.IsValid == false)    
+                return BadRequest(ModelState);
+            var username = tokenGenertor.GetCurUser();
+            var user = await apiContext.UnverifiedUsers.Include(e => e.Emails).FirstOrDefaultAsync(e => e.Username == username);
+            if (user == null)
+                return NotFound("User not found.");
+            if(user.IsVerified)
+                return BadRequest("this user is already verified");
+            List<string> UserImages =new List<string>
+            {
+                await storageService.UploadFileAsync(iddto.UserImage),
+                await storageService.UploadFileAsync(iddto.IdentityFront),
+               await  storageService.UploadFileAsync(iddto.IdentityBack)
+            };
+            var identity = new IdentityDocument
+            {
+                OwnerUsername = user.Username,
+                ImageURLS = UserImages,
+                Status = IdentityStatus.Pending,
+                Id = Ulid.NewUlid().ToString(),
+                Owner = user
+            };
+            user.Identity.Add(identity);
+            apiContext.identityDocuments.Add(identity);
+            await apiContext.SaveChangesAsync();
+            return Ok("identity was submitted successfully");
+
+        }
+        [Authorize]
+        [HttpGet("GetFile")]
+        public async Task<IActionResult> GetFiles( string Url)
+        {
+            var res= await storageService.GetFileAsync(Url);
+            if (res == null)
+                return NotFound("this file wasn't found");
+            return   File(res, "application/octet-stream",Url);
+
+
+        }
+        [Authorize]
+        [HttpGet("GetIdentity")]
+        public async Task<IActionResult> GetIdentity()
+        {
+            var username= tokenGenertor.GetCurUser();
+            var user = await apiContext.UnverifiedUsers.Include(e => e.Identity).FirstOrDefaultAsync(e => e.Username == username);
+            if (user == null)
+                return NotFound("User not found.");
+            if (user.IsVerified)
+                return BadRequest("this user is already verified");
+            if (user.Identity.Count == 0)
+                return NotFound("this user didn't submit any identity");
+            
+            return Ok(user.Identity);
+
+        }
+        [Authorize]
+        [HttpGet("GetAllIdentity")]
+        public async Task<IActionResult> GetAllIdentity()
+        {
+            var username = tokenGenertor.GetCurUser();
+            var user = await apiContext.SermsaryUsers.FirstOrDefaultAsync(e => e.Username == username);
+            if (user == null)
+                return NotFound("User not found.");
+            if (user.UserType != UserType.Customerservice)
+                return Unauthorized("you are not authorized to get all identity");
+
+            var identities = await apiContext.identityDocuments.Where(e=>e.Status==IdentityStatus.Pending).ToListAsync();
+            if (identities.Count == 0)
+                return NotFound("there is no identity submitted");
+            return Ok(identities);
+
+        }
+        [Authorize]
+        [HttpPost("ReviewIdentity")]
+        public async Task<IActionResult> ReviewIdentity(string id, IdentityStatus status, string comment)
+        {
+            var username = tokenGenertor.GetCurUser();
+            var user = await apiContext.SermsaryUsers.FirstOrDefaultAsync(e => e.Username == username);
+            if (user == null)
+                return NotFound("User not found.");
+            if (user.UserType != UserType.Customerservice)
+                return Unauthorized("you are not authorized to review identity");
+            var identity = await apiContext.identityDocuments.Include(e => e.Owner).FirstOrDefaultAsync(e => e.Id == id);
+            if (identity == null)
+                return NotFound("this identity wasn't found");
+
+            identity.Status = status;
+            identity.Comment = comment;
+            identity.ReviewerUsername = user.Username;
+            identity.reviewer = (CustomerService)user;
+            identity.ReviewedAt = DateTime.UtcNow;
+            if (status == IdentityStatus.Verified)
+                identity.Owner.IsVerified = true;
+            await apiContext.SaveChangesAsync();
+            return Ok("identity was reviewed successfully");
 
         }
     }

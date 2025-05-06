@@ -1,6 +1,8 @@
 
+using Amazon.S3;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using NETCore.MailKit.Core;
 using semsary_backend.EntityConfigurations;
@@ -24,9 +26,31 @@ namespace semsary_backend
             builder.Services.AddSwaggerGen();
             builder.Services.AddSingleton<Service.EmailService>();
             builder.Services.AddSingleton<Service.TokenService>();
+            
             builder.Services.AddHttpContextAccessor();
             builder.Services.AddDbContext<EntityConfigurations.ApiContext>(options=>options.UseInMemoryDatabase("semsary_db"));
-            
+
+
+            builder.Services.Configure<CloudflareR2Settings>(builder.Configuration.GetSection("CloudflareR2"));
+
+            builder.Services.AddSingleton<IAmazonS3>(provider =>
+            {
+                var settings = provider.GetRequiredService<IOptions<CloudflareR2Settings>>().Value;
+
+                var config = new AmazonS3Config
+                {
+                    ServiceURL = settings.ServiceURL,
+                    ForcePathStyle = true, // Important for R2 compatibility
+                    SignatureVersion="4",
+                    BufferSize=8192,
+                    ResignRetries=false
+                   
+
+                };
+
+                return new AmazonS3Client(settings.AccessKey, settings.SecretKey, config);
+            });
+            builder.Services.AddScoped<R2StorageService>();
             builder.Services.AddAuthentication(
                 options =>
                 {

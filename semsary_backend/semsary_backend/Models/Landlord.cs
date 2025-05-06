@@ -1,6 +1,6 @@
 ﻿namespace semsary_backend.Models
 {
-    public class Landlord:SermsaryUser
+    public class Landlord:UnverifiedUser
     {
         public Landlord()
         {
