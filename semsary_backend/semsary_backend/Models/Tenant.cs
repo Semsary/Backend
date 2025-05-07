@@ -9,13 +9,15 @@
     {
 
     }
-    public class Tenant:semsary_backend.Models.SermsaryUser
+    public class Tenant:UnverifiedUser
     {
         public int Balance { get; set; }
         public string ?ImageUrl { get; set;}
         public int height {  get; set; }
         public Gender gender { get; set; }
         public Governorate governorate { get; set; }
+        public List<IdentityDocument> documents { get; set; }
+
 
         public int age { get; set; }
         public bool IsSmoker {  get; set; }

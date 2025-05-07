@@ -38,6 +38,8 @@ namespace semsary_backend.EntityConfigurations
         public DbSet<Tenant> Tenant { get; set; }
         public DbSet<CustomerService> CustomerServices { get; set; }
         public DbSet<Admin> Admin { get; set; }
+        public DbSet<UnverifiedUser>UnverifiedUsers { get; set; }
+        public DbSet<IdentityDocument>identityDocuments { get; set; }
 
         public DbSet<House> Houses { get; set; }
         public DbSet<HouseInspection> HouseInspections { get; set; }

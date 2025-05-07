@@ -2,7 +2,6 @@
 {
     public class CustomerService:semsary_backend.Models.SermsaryUser
     {
-        public string ?ImageUrl { get; set; }
         
 
 
