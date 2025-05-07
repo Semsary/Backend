@@ -11,7 +11,6 @@ namespace semsary_backend.Models
         public int ComplaintId { get; set; }
         public ComplainStatus status { get; set; }
         public CustomerService VerifiedBy {  get; set; }
-
         public string ComplaintReview { get; set; } 
         public string ComplaintDetails { get; set; }
         public Tenant SubmittedBy { get; set; }

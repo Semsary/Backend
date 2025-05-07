@@ -522,7 +522,7 @@ F:\FCI\Projects\Semsary back\Backend\semsary_backend\semsary_backend\obj\Debug\n
 F:\FCI\Projects\Semsary back\Backend\semsary_backend\semsary_backend\obj\Debug\net8.0\semsary_.F8C267E1.Up2Date
 F:\FCI\Projects\Semsary back\Backend\semsary_backend\semsary_backend\obj\Debug\net8.0\semsary_backend.genruntimeconfig.cache
 F:\FCI\Projects\Semsary back\Backend\semsary_backend\semsary_backend\obj\Debug\net8.0\ref\semsary_backend.dll
-<<<<<<< HEAD
+HEAD
 C:\Users\City Tech\Desktop\Backend\semsary_backend\semsary_backend\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\City Tech\Desktop\Backend\semsary_backend\semsary_backend\bin\Debug\net8.0\appsettings.json
 C:\Users\City Tech\Desktop\Backend\semsary_backend\semsary_backend\bin\Debug\net8.0\semsary_backend.exe
@@ -701,8 +701,10 @@ C:\Users\City Tech\Desktop\Backend\semsary_backend\semsary_backend\obj\Debug\net
 C:\Users\City Tech\Desktop\Backend\semsary_backend\semsary_backend\obj\Debug\net8.0\semsary_backend.pdb
 C:\Users\City Tech\Desktop\Backend\semsary_backend\semsary_backend\obj\Debug\net8.0\semsary_backend.genruntimeconfig.cache
 C:\Users\City Tech\Desktop\Backend\semsary_backend\semsary_backend\obj\Debug\net8.0\ref\semsary_backend.dll
-=======
 F:\FCI\Projects\Semsary back\Backend\semsary_backend\semsary_backend\bin\Debug\net8.0\AWSSDK.Core.dll
 F:\FCI\Projects\Semsary back\Backend\semsary_backend\semsary_backend\bin\Debug\net8.0\AWSSDK.S3.dll
 F:\FCI\Projects\Semsary back\Backend\semsary_backend\semsary_backend\bin\Debug\net8.0\Microsoft.Extensions.Configuration.dll
->>>>>>> 2acfcfb169034fc3b998d33eabebac28927ac3c6
+2acfcfb169034fc3b998d33eabebac28927ac3c6
+C:\Users\City Tech\Desktop\Backend\semsary_backend\semsary_backend\bin\Debug\net8.0\AWSSDK.Core.dll
+C:\Users\City Tech\Desktop\Backend\semsary_backend\semsary_backend\bin\Debug\net8.0\AWSSDK.S3.dll
+C:\Users\City Tech\Desktop\Backend\semsary_backend\semsary_backend\bin\Debug\net8.0\Microsoft.Extensions.Configuration.dll

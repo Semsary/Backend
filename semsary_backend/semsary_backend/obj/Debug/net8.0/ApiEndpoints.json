@@ -33,6 +33,16 @@
   },
   {
     "ContainingType": "semsary_backend.Controllers.AuthController",
+    "Method": "GetAllIdentity",
+    "RelativePath": "api/Auth/GetAllIdentity",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "semsary_backend.Controllers.AuthController",
     "Method": "GetDeletionCode",
     "RelativePath": "api/Auth/GetDeletionCode",
     "HttpMethod": "GET",
@@ -45,6 +55,32 @@
         "IsRequired": false
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "semsary_backend.Controllers.AuthController",
+    "Method": "GetFiles",
+    "RelativePath": "api/Auth/GetFile",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Url",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "semsary_backend.Controllers.AuthController",
+    "Method": "GetIdentity",
+    "RelativePath": "api/Auth/GetIdentity",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   },
   {
@@ -133,6 +169,58 @@
   },
   {
     "ContainingType": "semsary_backend.Controllers.AuthController",
+    "Method": "ReviewIdentity",
+    "RelativePath": "api/Auth/ReviewIdentity",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "status",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "comment",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "semsary_backend.Controllers.AuthController",
+    "Method": "SubmitIdentity",
+    "RelativePath": "api/Auth/SubmitIdentity",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "UserImage",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "IdentityFront",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      },
+      {
+        "Name": "IdentityBack",
+        "Type": "Microsoft.AspNetCore.Http.IFormFile",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "semsary_backend.Controllers.AuthController",
     "Method": "RegisterTenant",
     "RelativePath": "api/Auth/Tenant/register",
     "HttpMethod": "POST",
@@ -181,24 +269,8 @@
   },
   {
     "ContainingType": "semsary_backend.Controllers.CustomerServiceController",
-    "Method": "GetComplaint",
-    "RelativePath": "api/CustomerService/Complaint/{complaintId}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "complaintId",
-        "Type": "System.String",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "semsary_backend.Controllers.CustomerServiceController",
     "Method": "ComplaintStatus",
-    "RelativePath": "api/CustomerService/ComplaintStatus/{houseInspectionId}",
+    "RelativePath": "api/CustomerService/ComplaintStatus/{complaintId}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -206,16 +278,11 @@
       {
         "Name": "complaintId",
         "Type": "System.String",
-        "IsRequired": false
+        "IsRequired": true
       },
       {
         "Name": "complaintStatusDTO",
         "Type": "semsary_backend.DTO.ComplaintStatusDTO",
-        "IsRequired": true
-      },
-      {
-        "Name": "houseInspectionId",
-        "Type": "",
         "IsRequired": true
       }
     ],
@@ -266,7 +333,7 @@
   {
     "ContainingType": "semsary_backend.Controllers.CustomerServiceController",
     "Method": "ReviewComplaint",
-    "RelativePath": "api/CustomerService/ReviewInspection/{complaintId}",
+    "RelativePath": "api/CustomerService/ReviewComplaint/{complaintId}",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -279,6 +346,22 @@
       {
         "Name": "complaintReviewDTO",
         "Type": "semsary_backend.DTO.ComplaintReviewDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "semsary_backend.Controllers.CustomerServiceController",
+    "Method": "GetComplaint",
+    "RelativePath": "api/CustomerService/ShowComplaint/{complaintId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "complaintId",
+        "Type": "System.String",
         "IsRequired": true
       }
     ],

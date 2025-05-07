@@ -126,7 +126,7 @@ namespace semsary_backend.Controllers
             return Ok($"House inspection status updated to \"{inspectionStatusDTO.inspectionStatus}\" successfully");
         }
 
-        [HttpGet("Complaint/{complaintId}")]
+        [HttpGet("ShowComplaint/{complaintId}")]
         public async Task<IActionResult> GetComplaint(string complaintId)
         {
             var username = tokenGenertor.GetCurUser();
@@ -157,7 +157,7 @@ namespace semsary_backend.Controllers
             };
             return Ok(complaintDTO);
         }
-        [HttpPut("ComplaintStatus/{houseInspectionId}")]
+        [HttpPut("ComplaintStatus/{complaintId}")]
         public async Task<IActionResult> ComplaintStatus(string complaintId, [FromBody] ComplaintStatusDTO complaintStatusDTO)
         {
             var username = tokenGenertor.GetCurUser();
@@ -191,7 +191,7 @@ namespace semsary_backend.Controllers
 
             return Ok($"Complaint status updated to \"{complaint.status}\" successfully");
         }
-        [HttpPost("ReviewInspection/{complaintId}")]
+        [HttpPost("ReviewComplaint/{complaintId}")]
         public async Task<IActionResult> ReviewComplaint(string complaintId , [FromBody] ComplaintReviewDTO complaintReviewDTO)
         {
             var username = tokenGenertor.GetCurUser();
