@@ -5,6 +5,10 @@
         Bending,
         InProgress,
         Aproved,
-        Rejected
+
+        // judging
+        BlockTenant,
+        BlockLandlord,
+        NoBlock
     }
 }

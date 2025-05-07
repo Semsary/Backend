@@ -9,7 +9,7 @@ namespace semsary_backend.Models
         public SermsaryUser()
         {
             Username = Ulid.NewUlid().ToString();
-            
+
         }
         [Key]
         public  string Username { get; set; } 

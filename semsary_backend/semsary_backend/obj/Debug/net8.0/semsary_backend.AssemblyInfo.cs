@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("semsary_backend")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3f8f6c9473c2ae71a4bf631ca660a3b532292218")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ac79e39aa12e74c6e6ccfb9885dbc116b766f405")]
 [assembly: System.Reflection.AssemblyProductAttribute("semsary_backend")]
 [assembly: System.Reflection.AssemblyTitleAttribute("semsary_backend")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

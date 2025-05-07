@@ -3,7 +3,7 @@
     public class House
     {
         public required string HouseId { get; set; }
-        public required string LandlordUsername { get; set; }  
+        public string LandlordUsername { get; set; }  
         public string Address { get; set; }
         public List<Rate> ?Rates { get; set; } 
         public List<HouseInspection> HouseInspections { get; set; }

@@ -13,7 +13,7 @@ namespace semsary_backend.ModelsConfigurations
             builder.Property(c => c.ComplaintId)
                 .ValueGeneratedOnAdd();
 
-            builder.Property(c => c.ComplaintDate)
+            builder.Property(c => c.SubmittingDate)
                 .IsRequired();
             
             builder.Property(c => c.ComplaintDetails)
@@ -21,7 +21,6 @@ namespace semsary_backend.ModelsConfigurations
 
             builder.Property(r => r.RentalId)
                 .IsRequired();
-
 
         }
     }

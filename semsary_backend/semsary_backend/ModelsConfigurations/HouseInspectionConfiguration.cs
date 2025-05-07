@@ -17,12 +17,6 @@ namespace semsary_backend.ModelsConfigurations
             builder.Property(h => h.InspectionDate)
                 .IsRequired();
 
-            builder.Property(h => h.InspectorId)
-                .IsRequired();
-
-            builder.Property(h => h.HouseId)
-                .IsRequired();
-
             builder.HasMany( h => h.HouseImages)
                 .WithOne(r => r.HouseInspection)
                 .HasForeignKey(r => r.HouseInspectionId)

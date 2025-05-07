@@ -1,7 +1,13 @@
-﻿namespace semsary_backend.Models
+﻿using semsary_backend.Enums;
+
+namespace semsary_backend.Models
 {
     public class HouseInspection
     {
+        public HouseInspection()
+        {
+            inspectionStatus = InspectionStatus.Bending;
+        }
         public int FloorNumber {  get; set; }
         public int NumberOfAirConditionnar {  get; set; }
         public int NumberOfPathRooms {  get; set; }
@@ -32,20 +38,15 @@
         public bool DiningRoom {  get; set; }
         
 
-
         public int price {  get; set; }
 
 
-
-
-
-
-        public required string HouseInspectionId { get; set; }
-        public required DateTime InspectionDate { get; set; }
-        public required string InspectorId { get; set; }     //customer service
-        public required string HouseId { get; set; }
+        public string HouseInspectionId { get; set; }
+        public DateTime InspectionDate { get; set; }
+        public string InspectorId { get; set; }     //customer service
+        public string HouseId { get; set; }
         
-        public byte Status { get; set; }
+        public InspectionStatus inspectionStatus { get; set; }
         public List<HouseImage> HouseImages { get; set; }
         public House House { get; set; }
 

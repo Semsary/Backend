@@ -1,1 +1,287 @@
-[]
+[
+  {
+    "ContainingType": "semsary_backend.Controllers.AuthController",
+    "Method": "Add",
+    "RelativePath": "api/Auth/Customerservice/Add",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "semsary_backend.DTO.CustomerserviceDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "semsary_backend.Controllers.AuthController",
+    "Method": "DeleteEmail",
+    "RelativePath": "api/Auth/DeleteEmail",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "verifyEmailDTO",
+        "Type": "semsary_backend.DTO.VerifyEmailDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "semsary_backend.Controllers.AuthController",
+    "Method": "GetDeletionCode",
+    "RelativePath": "api/Auth/GetDeletionCode",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "semsary_backend.Controllers.AuthController",
+    "Method": "GetLandlord",
+    "RelativePath": "api/Auth/getLandlord",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "semsary_backend.Controllers.AuthController",
+    "Method": "GetCurUser",
+    "RelativePath": "api/Auth/GetUserInfo",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "semsary_backend.Controllers.AuthController",
+    "Method": "GetVerifictioncode",
+    "RelativePath": "api/Auth/GetVerifictioncode",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "semsary_backend.Controllers.AuthController",
+    "Method": "RegisterLandlord",
+    "RelativePath": "api/Auth/Landlord/register",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "landlordDTO",
+        "Type": "semsary_backend.DTO.SignUpLandlord",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "semsary_backend.Controllers.AuthController",
+    "Method": "Login",
+    "RelativePath": "api/Auth/Login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "loginDTO",
+        "Type": "semsary_backend.DTO.LoginDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "semsary_backend.Controllers.AuthController",
+    "Method": "resetpassword",
+    "RelativePath": "api/Auth/resetpassword",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "resetdto",
+        "Type": "semsary_backend.DTO.ResetPasswordDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "semsary_backend.Controllers.AuthController",
+    "Method": "RegisterTenant",
+    "RelativePath": "api/Auth/Tenant/register",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "TenantDTO",
+        "Type": "semsary_backend.DTO.SignUpLandlord",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "semsary_backend.Controllers.AuthController",
+    "Method": "UpdatePassword",
+    "RelativePath": "api/Auth/UpdatePasword",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "email",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "semsary_backend.Controllers.AuthController",
+    "Method": "VerifyEmail",
+    "RelativePath": "api/Auth/verifyEmail",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "verifyEmailDTO",
+        "Type": "semsary_backend.DTO.VerifyEmailDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "semsary_backend.Controllers.CustomerServiceController",
+    "Method": "GetComplaint",
+    "RelativePath": "api/CustomerService/Complaint/{complaintId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "complaintId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "semsary_backend.Controllers.CustomerServiceController",
+    "Method": "ComplaintStatus",
+    "RelativePath": "api/CustomerService/ComplaintStatus/{houseInspectionId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "complaintId",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "complaintStatusDTO",
+        "Type": "semsary_backend.DTO.ComplaintStatusDTO",
+        "IsRequired": true
+      },
+      {
+        "Name": "houseInspectionId",
+        "Type": "",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "semsary_backend.Controllers.CustomerServiceController",
+    "Method": "MakeHouseInspection",
+    "RelativePath": "api/CustomerService/HouseInspection/{houseId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "houseId",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "HouseInspectionDTO",
+        "Type": "semsary_backend.DTO.HouseInspectionDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "semsary_backend.Controllers.CustomerServiceController",
+    "Method": "EditInspectionStatus",
+    "RelativePath": "api/CustomerService/InspectionStatus/{houseInspectionId}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "houseInspectionId",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "inspectionStatusDTO",
+        "Type": "semsary_backend.DTO.InspectionStatusDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "semsary_backend.Controllers.CustomerServiceController",
+    "Method": "ReviewComplaint",
+    "RelativePath": "api/CustomerService/ReviewInspection/{complaintId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "complaintId",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "complaintReviewDTO",
+        "Type": "semsary_backend.DTO.ComplaintReviewDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]
