@@ -388,5 +388,26 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "semsary_backend.Controllers.TenantController",
+    "Method": "MakeComplaint",
+    "RelativePath": "api/Tenant/MakeComplaint/{rentalId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "rentalId",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "complaintRequestDTO",
+        "Type": "semsary_backend.DTO.ComplaintRequestForTentatDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   }
 ]

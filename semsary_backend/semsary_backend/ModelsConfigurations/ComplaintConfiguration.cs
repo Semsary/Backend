@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using semsary_backend.Models;
+using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace semsary_backend.ModelsConfigurations
 {
@@ -21,6 +22,12 @@ namespace semsary_backend.ModelsConfigurations
 
             builder.Property(r => r.RentalId)
                 .IsRequired();
+
+            builder.Property(r => r.VerifiedBy)
+                .IsRequired(false);
+
+            builder.Property(r => r.ComplaintReview)
+                .IsRequired(false);
 
             builder.HasOne(c => c.CustomerService)
                .WithMany(c => c.Complaints)

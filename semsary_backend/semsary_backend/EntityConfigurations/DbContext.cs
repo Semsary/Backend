@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Org.BouncyCastle.Bcpg;
 using semsary_backend.Models;
 
 namespace semsary_backend.EntityConfigurations
@@ -15,20 +16,6 @@ namespace semsary_backend.EntityConfigurations
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApiContext).Assembly);
 
-            //modelBuilder.Entity<Email>()
-            //.HasOne(e => e.owner)
-            //.WithMany(u => u.Emails)
-            //.HasForeignKey(e => e.ownerUsername);
-
-            //modelBuilder.Entity<SermsaryUser>().HasData(
-            //    new SermsaryUser { Username = "basant", Firstname = "b", Lastname = "b" , password = "jhg765*&JHy" , UserType = Enums.UserType.Customerservice }
-            //    );
-
-            //modelBuilder.Entity<Email>().HasData(
-            //    new Email {email = "basant@gmail.com" , IsVerified=true , ownerUsername="basant"}
-            //    ); 
-
-
         }
 
 
@@ -43,7 +30,9 @@ namespace semsary_backend.EntityConfigurations
 
         public DbSet<House> Houses { get; set; }
         public DbSet<HouseInspection> HouseInspections { get; set; }
-  
+        public DbSet<Complaint> Complaints { get; set; }
+        public DbSet<Rental> Rentals { get; set; }
+        public DbSet<RentalUnit> RentalUnits { get; set; }
 
     }
 }

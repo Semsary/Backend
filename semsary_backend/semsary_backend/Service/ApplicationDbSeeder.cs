@@ -11,6 +11,7 @@ namespace semsary_backend.Service
         {
             var dbContext = serviceProvider.GetRequiredService<ApiContext>();
 
+#region Admin
             string adminEmail = "semsary.app@gmail.com";
             string adminPassword = "Recoloring"; // Choose a strong password
 
@@ -46,10 +47,11 @@ namespace semsary_backend.Service
                 dbContext.Admin.Add(adminUser2);
                 dbContext.SaveChanges();
             }
+#endregion
 
+#region Customer Service
             string CustomerServiceEmail = "CustomerService@gmail.com";
             string CustomerServicePassword = "jhg765*&JHy";
-
 
             var CustomerServiceUser = dbContext.SermsaryUsers
                 .FirstOrDefault(u => u.Emails.Any(m => m.email == CustomerServiceEmail));
@@ -81,7 +83,9 @@ namespace semsary_backend.Service
                 dbContext.CustomerServices.Add(CustomerServiceUser2);
                 dbContext.SaveChanges();
             }
+#endregion
 
+#region Landlord
             string LandlordEmail = "Landlord@gmail.com";
             string LandlordPassword = "jhg765*&JHy";
 
@@ -113,8 +117,43 @@ namespace semsary_backend.Service
                 dbContext.Landlords.Add(LandlordUser2);
                 dbContext.SaveChanges();
             }
+#endregion
 
+#region Tenant
+            string TenantEmail = "Tenant@gmail.com";
+            string TenantPassword = "jhg765*&JHy";
 
+            var TenantUser = dbContext.SermsaryUsers
+                .FirstOrDefault(u => u.Emails.Any(m => m.email == TenantEmail));
+
+            if (TenantUser == null)
+            {
+                var passwordHash = PasswordHelper.HashPassword(TenantPassword);
+
+                var email = new Email
+                {
+                    email = TenantEmail,
+                    IsVerified = true
+                };
+                var Tenant2 = new Tenant
+                {
+                    Username = "tenant1",
+                    Firstname = "b",
+                    Lastname = "b",
+                    password = passwordHash,
+                    UserType = Enums.UserType.Tenant,
+
+                };
+                Tenant2.Emails = new List<Email> { email };
+                email.owner = Tenant2;
+                email.ownerUsername = Tenant2.Username;
+
+                dbContext.Tenant.Add(Tenant2);
+                dbContext.SaveChanges();
+            }
+#endregion
+
+#region House
             var house = dbContext.Houses.FirstOrDefault(h => h.HouseId == "H1");
             if (house == null)
             {
@@ -131,6 +170,37 @@ namespace semsary_backend.Service
                 dbContext.Houses.Add(house2);
                 dbContext.SaveChanges();
             }
+#endregion
+
+#region RenalUnit
+            //var rentalUnit = dbContext.RentalUnits.FirstOrDefault(h => h.RentalUnitId == "RentalUnit1");
+            //if (rentalUnit == null)
+            //{
+            //    var rentalUnit2 = new RentalUnit
+            //    {
+            //        RentalUnitId = "RentalUnit1",
+            //    };
+            //    dbContext.RentalUnits.Add(rentalUnit2);
+            //    dbContext.SaveChanges();
+            //}
+#endregion
+
+#region Rental
+            var rental = dbContext.Rentals.FirstOrDefault(h => h.RentalId == 1);
+            if (rental == null)
+            {
+                var renatal2 = new Rental
+                {
+                    TenantUsername = "tenant1",
+                    StartDate = DateTime.UtcNow,
+                    RentalUnitId = "RentalUnit1"
+                };
+          
+                dbContext.Rentals.Add(renatal2);
+                dbContext.SaveChanges();
+            }
+#endregion
+
         }
     }
 

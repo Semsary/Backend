@@ -3,7 +3,7 @@ using semsary_backend.Models;
 
 namespace semsary_backend.DTO
 {
-    public class ComplaintRequestDTO
+    public class ComplaintRequestForCustomerDTO
     {
         public string SubmittedBy { get; set; }
         public  DateTime SubmittingDate { get; set; }

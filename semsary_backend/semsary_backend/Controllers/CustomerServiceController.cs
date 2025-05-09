@@ -38,7 +38,7 @@ namespace semsary_backend.Controllers
             }
             if (HouseInspectionDTO == null)
             {
-                return BadRequest("Invalid data.");
+                return BadRequest(new { message = "Invalid data." });
             }
             if (ModelState.IsValid == false)
             {
@@ -47,7 +47,7 @@ namespace semsary_backend.Controllers
 
             var house = await apiContext.Houses.FindAsync(houseId);
             if (house == null)
-                return NotFound("House not found");
+                return NotFound(new { message = "House not found" });
 
             var inspection = new HouseInspection
             {
@@ -77,7 +77,7 @@ namespace semsary_backend.Controllers
             apiContext.HouseInspections.Add(inspection);
             await apiContext.SaveChangesAsync();
 
-            return Ok($"House Inespection created successfully with id {inspection.HouseInspectionId}");
+            return Ok(new { message = $"House Inespection created successfully with id {inspection.HouseInspectionId}" });
         }
 
         [HttpPut("Inspection/acknowledge/{houseInspectionId}")]
@@ -95,14 +95,14 @@ namespace semsary_backend.Controllers
             
             var houseInspection = await apiContext.FindAsync<HouseInspection>(houseInspectionId);
             if (houseInspection == null)
-                return NotFound("House inspection not found");
+                return NotFound(new { message = "House inspection not found" });
 
             houseInspection.inspectionStatus = InspectionStatus.InProgress;
             houseInspection.InspectorId = user.Username;
 
             await apiContext.SaveChangesAsync();
 
-            return Ok($"House inspection status updated to \"{InspectionStatus.InProgress}\" successfully");
+            return Ok(new { message = $"House inspection status updated to \"{InspectionStatus.InProgress}\" successfully" });
         }
 
         [HttpGet("ShowComplaint/{complaintId}")]
@@ -114,20 +114,20 @@ namespace semsary_backend.Controllers
 
             if (user == null || user.UserType != UserType.Customerservice)
             {
-                return NotFound("User not found.");
+                return NotFound(new { message = "User not found." });
             }
 
             int id;
             if (!int.TryParse(complaintId, out id))
             {
-                return BadRequest("Invalid data format.");
+                return BadRequest(new { message = "Invalid data format." });
             }
 
             var complaint = await apiContext.FindAsync<Complaint>(id);
             if (complaint == null)
-                return NotFound("Complaint not found");
+                return NotFound(new { message = "Complaint not found" });
 
-            ComplaintRequestDTO complaintDTO = new ComplaintRequestDTO
+            ComplaintRequestForCustomerDTO complaintDTO = new ComplaintRequestForCustomerDTO
             {
                 ComplaintDetails = complaint.ComplaintDetails,
                 SubmittedBy = complaint.SubmittedBy,
@@ -152,18 +152,18 @@ namespace semsary_backend.Controllers
             int id;
             if (!int.TryParse(complaintId, out id))
             {
-                return BadRequest("Invalid data format.");
+                return BadRequest(new { message = "Invalid data format." });
             }
 
             var complaint = await apiContext.FindAsync<Complaint>(id);
             if (complaint == null)
-                return NotFound("Complaint not found");
+                return NotFound(new { message = "Complaint not found" });
 
             complaint.status = ComplainStatus.Bending;
             complaint.VerifiedBy = user.Username;
             await apiContext.SaveChangesAsync();
 
-            return Ok($"Complaint status updated to \"{complaint.status}\" successfully");
+            return Ok(new { message = $"Complaint status updated to \"{complaint.status}\" successfully" });
         }
         [HttpPost("ReviewComplaint/{complaintId}")]
         public async Task<IActionResult> ReviewComplaint(string complaintId , [FromBody] ComplaintReviewDTO complaintReviewDTO)
@@ -174,24 +174,24 @@ namespace semsary_backend.Controllers
 
             if (user == null || user.UserType != UserType.Customerservice)
             {
-                return NotFound("User not found.");
+                return NotFound(new { message = "User not found." });
             }
             int id;
             if (!int.TryParse(complaintId, out id))
             {
-                return BadRequest("Invalid data format.");
+                return BadRequest(new { message = "Invalid data format." });
             }
 
             var complaint = await apiContext.FindAsync<Complaint>(id);
             if (complaint == null)
             {
-                return NotFound("Complaint not found");
+                return NotFound(new { message = "Complaint not found" });
             }
             complaint.VerifiedBy = user.Username;
             complaint.ComplaintReview = complaintReviewDTO.ComplaintReview;
             complaint.ReviewDate = DateTime.UtcNow;
 
-            return Ok("Complaint review added successfully");
+            return Ok(new { message = "Complaint review added successfully" });
            
         }
     }
