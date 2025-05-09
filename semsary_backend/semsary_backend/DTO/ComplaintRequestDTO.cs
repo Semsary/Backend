@@ -5,6 +5,7 @@ namespace semsary_backend.DTO
 {
     public class ComplaintRequestDTO
     {
+        public int ComplaintId { get; set; } 
         public Tenant SubmittedBy { get; set; }
         public  DateTime SubmittingDate { get; set; }
         public string ComplaintDetails { get; set; }

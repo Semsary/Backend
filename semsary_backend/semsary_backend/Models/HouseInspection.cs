@@ -9,7 +9,9 @@ namespace semsary_backend.Models
         {
             inspectionStatus = InspectionStatus.Bending;
             HouseImages = new List<string>();
-        }
+            HouseInspectionId=Ulid.NewUlid().ToString();
+
+        } // unique random value
         public int FloorNumber {  get; set; }
         public int NumberOfAirConditionnar {  get; set; }
         public int NumberOfPathRooms {  get; set; }

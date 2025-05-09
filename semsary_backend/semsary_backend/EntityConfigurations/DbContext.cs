@@ -43,7 +43,8 @@ namespace semsary_backend.EntityConfigurations
 
         public DbSet<House> Houses { get; set; }
         public DbSet<HouseInspection> HouseInspections { get; set; }
-  
+        public DbSet<Complaint> Complaints { get; set; }
+
 
     }
 }
