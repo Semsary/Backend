@@ -27,12 +27,10 @@ namespace semsary_backend.EntityConfigurations
         public DbSet<Admin> Admin { get; set; }
         public DbSet<UnverifiedUser>UnverifiedUsers { get; set; }
         public DbSet<IdentityDocument>identityDocuments { get; set; }
-
         public DbSet<House> Houses { get; set; }
         public DbSet<HouseInspection> HouseInspections { get; set; }
         public DbSet<Complaint> Complaints { get; set; }
         public DbSet<Rental> Rentals { get; set; }
         public DbSet<RentalUnit> RentalUnits { get; set; }
-
     }
 }

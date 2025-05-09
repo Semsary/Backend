@@ -25,7 +25,7 @@ namespace semsary_backend.Controllers
             this.r2StorageService = r2StorageService;
         }
 
-        [HttpPost("HouseInspection/{houseId}")]
+        [HttpPost("HouseInspection/create/{houseId}")]
         public async Task<IActionResult> MakeHouseInspection(string houseId, [FromBody] HouseInspectionDTO HouseInspectionDTO)
         {
             var username = tokenGenertor.GetCurUser();
@@ -80,7 +80,7 @@ namespace semsary_backend.Controllers
             return Ok(new { message = $"House Inespection created successfully with id {inspection.HouseInspectionId}" });
         }
 
-        [HttpPut("Inspection/acknowledge/{houseInspectionId}")]
+        [HttpPut("HouseInspection/acknowledge/{houseInspectionId}")]
         public async Task<IActionResult> EditInspectionStatus(string houseInspectionId)
         {
             var username = tokenGenertor.GetCurUser();
@@ -105,8 +105,8 @@ namespace semsary_backend.Controllers
             return Ok(new { message = $"House inspection status updated to \"{InspectionStatus.InProgress}\" successfully" });
         }
 
-        [HttpGet("ShowComplaint/{complaintId}")]
-        public async Task<IActionResult> GetComplaint(string complaintId)
+        [HttpGet("Complaint/GetAll")]
+        public async Task<IActionResult> GetComplaint()
         {
             var username = tokenGenertor.GetCurUser();
             var user = await apiContext.SermsaryUsers
@@ -114,27 +114,22 @@ namespace semsary_backend.Controllers
 
             if (user == null || user.UserType != UserType.Customerservice)
             {
-                return NotFound(new { message = "User not found." });
+                return NotFound("User not found.");
             }
 
-            int id;
-            if (!int.TryParse(complaintId, out id))
-            {
-                return BadRequest(new { message = "Invalid data format." });
-            }
+            var complaints = await apiContext.Complaints.Where(c => c.status == ComplainStatus.Bending)
+                .Select(c => new ComplaintRequestForCustomerDTO
+                {
+                    ComplaintId = c.ComplaintId,
+                    ComplaintDetails = c.ComplaintDetails,
+                    SubmittedBy = c.SubmittedBy,
+                    SubmittingDate = c.SubmittingDate,
+                    RentalId = c.RentalId,
 
-            var complaint = await apiContext.FindAsync<Complaint>(id);
-            if (complaint == null)
-                return NotFound(new { message = "Complaint not found" });
+                })
+                .ToListAsync();
 
-            ComplaintRequestForCustomerDTO complaintDTO = new ComplaintRequestForCustomerDTO
-            {
-                ComplaintDetails = complaint.ComplaintDetails,
-                SubmittedBy = complaint.SubmittedBy,
-                SubmittingDate = complaint.SubmittingDate,
-                RentalId = complaint.RentalId,
-            };
-            return Ok(complaintDTO);
+            return Ok(complaints);
         }
         [HttpPut("Complaint/acknowledge/{complaintId}")]
         public async Task<IActionResult> ComplaintStatus(string complaintId)
@@ -165,7 +160,7 @@ namespace semsary_backend.Controllers
 
             return Ok(new { message = $"Complaint status updated to \"{complaint.status}\" successfully" });
         }
-        [HttpPost("ReviewComplaint/{complaintId}")]
+        [HttpPost("Complaint/Review/{complaintId}")]
         public async Task<IActionResult> ReviewComplaint(string complaintId , [FromBody] ComplaintReviewDTO complaintReviewDTO)
         {
             var username = tokenGenertor.GetCurUser();
@@ -193,6 +188,35 @@ namespace semsary_backend.Controllers
 
             return Ok(new { message = "Complaint review added successfully" });
            
+        }
+        [HttpGet("HouseInspections/GetAll")]
+        public async Task<IActionResult> GetHouseInspections()
+        {
+            var username = tokenGenertor.GetCurUser();
+            var user = await apiContext.SermsaryUsers
+                .FirstOrDefaultAsync(e => e.Username == username);
+
+            if (user == null || user.UserType != UserType.Customerservice)
+            {
+                return Forbid();
+            }
+
+            var houseInspections = await apiContext.HouseInspections
+                .Include(h => h.House).Where(e=>e.inspectionStatus== InspectionStatus.Bending)
+                .Select(h => new 
+                {
+                    HouseInspectionId = h.HouseInspectionId,
+                    HouseId = h.HouseId,
+                    ownerId = h.House.LandlordUsername,
+                    SubmitedAt=h.InspectionRequestDate,
+                    Governorate=h.House.governorate,
+                    city=h.House.city,
+                    street=h.House.street
+
+                })
+                .ToListAsync();
+
+            return Ok(houseInspections);
         }
     }
 }
