@@ -399,7 +399,7 @@ namespace semsary_backend.Controllers
         }
         
         [Authorize]
-        [HttpGet("SubmitIdentity")]
+        [HttpPost("SubmitIdentity")]
         public async Task<IActionResult> SubmitIdentity(IdentityDTO iddto)
         {
             if(iddto == null)
@@ -432,19 +432,10 @@ namespace semsary_backend.Controllers
             return Ok("identity was submitted successfully");
 
         }
-        [Authorize]
-        [HttpGet("GetFile")]
-        public async Task<IActionResult> GetFiles( string Url)
-        {
-            var res= await storageService.GetFileAsync(Url);
-            if (res == null)
-                return NotFound("this file wasn't found");
-            return   File(res, "application/octet-stream",Url);
-
-
-        }
+        
         [Authorize]
         [HttpGet("GetIdentity")]
+        
         public async Task<IActionResult> GetIdentity()
         {
             var username= tokenGenertor.GetCurUser();

@@ -37,15 +37,11 @@ namespace semsary_backend.Service
             };
 
             await _s3Client.PutObjectAsync(request);
+            key =Path.Combine(_settings.MainPath, key);
 
             return key;
         }
-        public async Task<Stream> GetFileAsync(string key)
-        {
-            var response = await _s3Client.GetObjectAsync(_settings.BucketName, key);
-              
-            return response.ResponseStream;
-        }
+        
 
         public async Task DeleteFileAsync(string key)
         {

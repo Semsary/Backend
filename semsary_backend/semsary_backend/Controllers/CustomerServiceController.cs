@@ -16,10 +16,13 @@ namespace semsary_backend.Controllers
     {
         private readonly TokenService tokenGenertor;
         private readonly ApiContext apiContext;
-        public CustomerServiceController(TokenService TokenGenertor, ApiContext apiContext)
+        private readonly R2StorageService r2StorageService;
+
+        public CustomerServiceController(TokenService TokenGenertor, ApiContext apiContext,R2StorageService r2StorageService)
         {
             tokenGenertor = TokenGenertor;
             this.apiContext = apiContext;
+            this.r2StorageService = r2StorageService;
         }
 
         [HttpPost("HouseInspection/{houseId}")]
@@ -31,7 +34,7 @@ namespace semsary_backend.Controllers
 
             if (user == null || user.UserType != UserType.Customerservice)
             {
-                return NotFound("User not found.");
+                return Forbid();//update in case of the token isn't valid or not Customerservice ,return forbidden
             }
             if (HouseInspectionDTO == null)
             {
@@ -62,42 +65,23 @@ namespace semsary_backend.Controllers
                 NumberOfBalacons = HouseInspectionDTO.NumberOfBalacons,
                 NumberOfTables = HouseInspectionDTO.NumberOfTables,
                 NumberOfChairs = HouseInspectionDTO.NumberOfChairs,
-
-                HaveNearHospital = HouseInspectionDTO.HaveNearHospital,
-                HaveNearGym = HouseInspectionDTO.HaveNearGym,
-                HaveNearPlayGround = HouseInspectionDTO.HaveNearPlayGround,
-                HaveNearSchool = HouseInspectionDTO.HaveNearSchool,
-                HaveNearUniversity = HouseInspectionDTO.HaveNearUniversity,
-                HaveNearSupermarket = HouseInspectionDTO.HaveNearSupermarket,
-                HaveNearRestaurant = HouseInspectionDTO.HaveNearRestaurant,
-                HaveNearBusStation = HouseInspectionDTO.HaveNearBusStation,
-                HaveNearBank = HouseInspectionDTO.HaveNearBank,
-
-                HaveWiFi = HouseInspectionDTO.HaveWiFi,
-                HaveTV = HouseInspectionDTO.HaveTV,
-                Havekitchen = HouseInspectionDTO.Havekitchen,
-                HaveElevator = HouseInspectionDTO.HaveElevator,
-                HaveWashingMachine = HouseInspectionDTO.HaveWashingMachine,
-                HaveCooker = HouseInspectionDTO.HaveCooker,
-                HaveFridge = HouseInspectionDTO.HaveFridge,
-                HaveHeater = HouseInspectionDTO.HaveHeater,
-                HaveInternet = HouseInspectionDTO.HaveInternet,
-                HaveSalon = HouseInspectionDTO.HaveSalon,
-                DiningRoom = HouseInspectionDTO.DiningRoom,
-                HouseImages = HouseInspectionDTO.HouseImages
+                HouseFeature=HouseInspectionDTO.HouseFeature,
             };
-            foreach (var img in inspection.HouseImages)
+            foreach(var img in HouseInspectionDTO.HouseImages)
             {
-                img.HouseInspectionId = inspection.HouseInspectionId;
+                var url= await r2StorageService.UploadFileAsync(img);
+                inspection.HouseImages.Add(url);
+
             }
+            
             apiContext.HouseInspections.Add(inspection);
             await apiContext.SaveChangesAsync();
 
             return Ok($"House Inespection created successfully with id {inspection.HouseInspectionId}");
         }
 
-        [HttpPut("InspectionStatus/{houseInspectionId}")]
-        public async Task<IActionResult> EditInspectionStatus(string houseInspectionId, [FromBody] InspectionStatusDTO inspectionStatusDTO)
+        [HttpPut("Inspection/acknowledge/{houseInspectionId}")]
+        public async Task<IActionResult> EditInspectionStatus(string houseInspectionId)
         {
             var username = tokenGenertor.GetCurUser();
             var user = await apiContext.SermsaryUsers
@@ -105,25 +89,20 @@ namespace semsary_backend.Controllers
 
             if (user == null || user.UserType != UserType.Customerservice)
             {
-                return NotFound("User not found.");
+                return Forbid("User not found.");
             }
-            if (inspectionStatusDTO == null)
-            {
-                return BadRequest("Invalid data.");
-            }
-            if (ModelState.IsValid == false)
-            {
-                return BadRequest(ModelState);
-            }
-
+            
+            
             var houseInspection = await apiContext.FindAsync<HouseInspection>(houseInspectionId);
             if (houseInspection == null)
                 return NotFound("House inspection not found");
 
-            houseInspection.inspectionStatus = inspectionStatusDTO.inspectionStatus;
+            houseInspection.inspectionStatus = InspectionStatus.InProgress;
+            houseInspection.InspectorId = user.Username;
+
             await apiContext.SaveChangesAsync();
 
-            return Ok($"House inspection status updated to \"{inspectionStatusDTO.inspectionStatus}\" successfully");
+            return Ok($"House inspection status updated to \"{InspectionStatus.InProgress}\" successfully");
         }
 
         [HttpGet("ShowComplaint/{complaintId}")]
@@ -157,8 +136,8 @@ namespace semsary_backend.Controllers
             };
             return Ok(complaintDTO);
         }
-        [HttpPut("ComplaintStatus/{complaintId}")]
-        public async Task<IActionResult> ComplaintStatus(string complaintId, [FromBody] ComplaintStatusDTO complaintStatusDTO)
+        [HttpPut("Complaint/acknowledge/{complaintId}")]
+        public async Task<IActionResult> ComplaintStatus(string complaintId)
         {
             var username = tokenGenertor.GetCurUser();
             var user = await apiContext.SermsaryUsers
@@ -166,16 +145,10 @@ namespace semsary_backend.Controllers
 
             if (user == null || user.UserType != UserType.Customerservice)
             {
-                return NotFound("User not found.");
+                return Forbid();
             }
-            if (complaintStatusDTO == null)
-            {
-                return BadRequest("Invalid data.");
-            }
-            if (ModelState.IsValid == false)
-            {
-                return BadRequest(ModelState);
-            }
+
+            
             int id;
             if (!int.TryParse(complaintId, out id))
             {
@@ -186,7 +159,8 @@ namespace semsary_backend.Controllers
             if (complaint == null)
                 return NotFound("Complaint not found");
 
-            complaint.status = complaintStatusDTO.status;
+            complaint.status = ComplainStatus.Bending;
+            complaint.VerifiedBy = user as CustomerService;
             await apiContext.SaveChangesAsync();
 
             return Ok($"Complaint status updated to \"{complaint.status}\" successfully");

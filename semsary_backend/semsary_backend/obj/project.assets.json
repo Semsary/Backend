@@ -5390,19 +5390,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\City Tech\\.nuget\\packages\\": {}
+    "C:\\Users\\mahmoud\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\semsary_backend.csproj",
+      "projectUniqueName": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\semsary_backend\\semsary_backend.csproj",
       "projectName": "semsary_backend",
-      "projectPath": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\semsary_backend.csproj",
-      "packagesPath": "C:\\Users\\City Tech\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\obj\\",
+      "projectPath": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\semsary_backend\\semsary_backend.csproj",
+      "packagesPath": "C:\\Users\\mahmoud\\.nuget\\packages\\",
+      "outputPath": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\semsary_backend\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\City Tech\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\mahmoud\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5508,16 +5508,8 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.400/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.300/PortableRuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problem reading the cache file C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
-    }
-  ]
+  }
 }
