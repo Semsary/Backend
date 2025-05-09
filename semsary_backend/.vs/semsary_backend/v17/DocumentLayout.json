@@ -3,20 +3,36 @@
   "WorkspaceRootPath": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|f:\\fci\\projects\\semsary back\\backend\\semsary_backend\\semsary_backend\\models\\houseinspection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\models\\houseinspection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|f:\\fci\\projects\\semsary back\\backend\\semsary_backend\\semsary_backend\\models\\house.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\models\\house.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|f:\\fci\\projects\\semsary back\\backend\\semsary_backend\\semsary_backend\\controllers\\landlordcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\controllers\\landlordcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|f:\\fci\\projects\\semsary back\\backend\\semsary_backend\\semsary_backend\\service\\applicationdbseeder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\service\\applicationdbseeder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|f:\\fci\\projects\\semsary back\\backend\\semsary_backend\\semsary_backend\\enums\\address.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\enums\\address.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|f:\\fci\\projects\\semsary back\\backend\\semsary_backend\\semsary_backend\\models\\tenant.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\models\\tenant.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|f:\\fci\\projects\\semsary back\\backend\\semsary_backend\\semsary_backend\\enums\\governorate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\enums\\governorate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|f:\\fci\\projects\\semsary back\\backend\\semsary_backend\\semsary_backend\\dto\\housedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\dto\\housedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|f:\\fci\\projects\\semsary back\\backend\\semsary_backend\\semsary_backend\\models\\house.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\models\\house.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|f:\\fci\\projects\\semsary back\\backend\\semsary_backend\\semsary_backend\\models\\houseinspection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\models\\houseinspection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,19 +42,45 @@
       "DocumentGroups": [
         {
           "DockedWidth": 173,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "HouseInspection.cs",
-              "DocumentMoniker": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\semsary_backend\\Models\\HouseInspection.cs",
-              "RelativeDocumentMoniker": "semsary_backend\\Models\\HouseInspection.cs",
-              "ToolTip": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\semsary_backend\\Models\\HouseInspection.cs",
-              "RelativeToolTip": "semsary_backend\\Models\\HouseInspection.cs",
-              "ViewState": "AQIAABoAAAAAAAAAAAA6wCYAAAAAAAAA",
+              "DocumentIndex": 4,
+              "Title": "Tenant.cs",
+              "DocumentMoniker": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\semsary_backend\\Models\\Tenant.cs",
+              "RelativeDocumentMoniker": "semsary_backend\\Models\\Tenant.cs",
+              "ToolTip": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\semsary_backend\\Models\\Tenant.cs",
+              "RelativeToolTip": "semsary_backend\\Models\\Tenant.cs",
+              "ViewState": "AQIAAAkAAAAAAAAAAAASwBAAAAA0AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-09T16:10:18.696Z",
+              "WhenOpened": "2025-05-09T18:22:07.105Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "governorate.cs",
+              "DocumentMoniker": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\semsary_backend\\Enums\\governorate.cs",
+              "RelativeDocumentMoniker": "semsary_backend\\Enums\\governorate.cs",
+              "ToolTip": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\semsary_backend\\Enums\\governorate.cs",
+              "RelativeToolTip": "semsary_backend\\Enums\\governorate.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAATAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-09T18:21:39.136Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Address.cs",
+              "DocumentMoniker": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\semsary_backend\\Enums\\Address.cs",
+              "RelativeDocumentMoniker": "semsary_backend\\Enums\\Address.cs",
+              "ToolTip": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\semsary_backend\\Enums\\Address.cs",
+              "RelativeToolTip": "semsary_backend\\Enums\\Address.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-09T18:17:50.739Z",
               "EditorCaption": ""
             },
             {
@@ -48,6 +90,32 @@
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "ApplicationDbSeeder.cs",
+              "DocumentMoniker": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\semsary_backend\\Service\\ApplicationDbSeeder.cs",
+              "RelativeDocumentMoniker": "semsary_backend\\Service\\ApplicationDbSeeder.cs",
+              "ToolTip": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\semsary_backend\\Service\\ApplicationDbSeeder.cs",
+              "RelativeToolTip": "semsary_backend\\Service\\ApplicationDbSeeder.cs",
+              "ViewState": "AQIAAG4AAAAAAAAAAIAwwH8AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-09T18:11:18.497Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "HouseInspection.cs",
+              "DocumentMoniker": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\semsary_backend\\Models\\HouseInspection.cs",
+              "RelativeDocumentMoniker": "semsary_backend\\Models\\HouseInspection.cs",
+              "ToolTip": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\semsary_backend\\Models\\HouseInspection.cs",
+              "RelativeToolTip": "semsary_backend\\Models\\HouseInspection.cs",
+              "ViewState": "AQIAAAEAAAAAAAAAAAAqwCYAAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-09T16:10:18.696Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "HouseDTO.cs",
               "DocumentMoniker": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\semsary_backend\\DTO\\HouseDTO.cs",
               "RelativeDocumentMoniker": "semsary_backend\\DTO\\HouseDTO.cs",
@@ -60,13 +128,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "House.cs",
               "DocumentMoniker": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\semsary_backend\\Models\\House.cs",
               "RelativeDocumentMoniker": "semsary_backend\\Models\\House.cs",
               "ToolTip": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\semsary_backend\\Models\\House.cs",
               "RelativeToolTip": "semsary_backend\\Models\\House.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAArAAAA",
+              "ViewState": "AQIAAAgAAAAAAAAAAAA3wBMAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-09T15:48:42.625Z",
               "EditorCaption": ""
@@ -79,7 +147,7 @@
               "RelativeDocumentMoniker": "semsary_backend\\Controllers\\LandLordController.cs",
               "ToolTip": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\semsary_backend\\Controllers\\LandLordController.cs",
               "RelativeToolTip": "semsary_backend\\Controllers\\LandLordController.cs",
-              "ViewState": "AQIAABAAAAAAAAAAAAAuwHUAAAAIAAAA",
+              "ViewState": "AQIAABYAAAAAAAAAAAAQwGcAAAAvAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-09T15:47:33.473Z",
               "EditorCaption": ""

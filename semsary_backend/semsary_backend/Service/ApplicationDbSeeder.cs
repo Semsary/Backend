@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using semsary_backend.EntityConfigurations;
+using semsary_backend.Enums;
 using semsary_backend.Models;
 
 namespace semsary_backend.Service
@@ -120,7 +121,11 @@ namespace semsary_backend.Service
                 var house2 = new House
                 {
                     HouseId = "H1",
-                    Address = "Cairo",
+                    
+                       governorate = Governorate.Cairo,
+                       city = "Cairo",
+                       street = "Street 1",
+
                     LandlordUsername = "landlord1",
                 };
                 dbContext.Houses.Add(house2);

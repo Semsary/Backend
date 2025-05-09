@@ -1,14 +1,13 @@
-﻿namespace semsary_backend.Models
+﻿using semsary_backend.Enums;
+
+namespace semsary_backend.Models
 {
     public enum Gender
     {
         male,
         female,
     }
-    public enum Governorate
-    {
-
-    }
+    
     public class Tenant:UnverifiedUser
     {
         public int Balance { get; set; }

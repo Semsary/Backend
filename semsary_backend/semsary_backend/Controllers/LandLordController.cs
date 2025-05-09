@@ -31,7 +31,10 @@ namespace semsary_backend.Controllers
             
             var house = new House
             {
-                Address = houseDTO.address,
+                governorate = houseDTO.address._gover,
+                city = houseDTO.address._city,
+                street = houseDTO.address.street,
+
                 LandlordUsername = user.Username,
                 HouseId = Ulid.NewUlid().ToString(),
               owner=(Landlord)user
@@ -99,7 +102,6 @@ namespace semsary_backend.Controllers
             }
             
             var house = await apiContext.Houses
-                .Include(h => h.Address)
                 .Include(h => h.Rates)
                 .Include(h => h.HouseInspections)
                 .FirstOrDefaultAsync(h => h.HouseId == HouseId);

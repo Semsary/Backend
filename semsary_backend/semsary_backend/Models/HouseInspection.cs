@@ -36,7 +36,7 @@ namespace semsary_backend.Models
         [JsonIgnore]
         public CustomerService Inspector { get; set; } //customer service
         public string? InspectionReport { get; set; } //json file
-
+        
 
     }
 }
