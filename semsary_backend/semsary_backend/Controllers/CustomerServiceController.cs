@@ -160,7 +160,7 @@ namespace semsary_backend.Controllers
                 return NotFound("Complaint not found");
 
             complaint.status = ComplainStatus.Bending;
-            complaint.VerifiedBy = user as CustomerService;
+            complaint.VerifiedBy = user.Username;
             await apiContext.SaveChangesAsync();
 
             return Ok($"Complaint status updated to \"{complaint.status}\" successfully");
@@ -187,7 +187,7 @@ namespace semsary_backend.Controllers
             {
                 return NotFound("Complaint not found");
             }
-            complaint.VerifiedBy = user as CustomerService;
+            complaint.VerifiedBy = user.Username;
             complaint.ComplaintReview = complaintReviewDTO.ComplaintReview;
             complaint.ReviewDate = DateTime.UtcNow;
 

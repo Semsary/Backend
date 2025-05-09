@@ -22,6 +22,15 @@ namespace semsary_backend.ModelsConfigurations
             builder.Property(r => r.RentalId)
                 .IsRequired();
 
+            builder.HasOne(c => c.CustomerService)
+               .WithMany(c => c.Complaints)
+               .HasForeignKey(c => c.VerifiedBy);
+
+            builder.HasOne(c => c.Tenant)
+               .WithMany(c => c.Complaints)
+               .HasForeignKey(c => c.SubmittedBy);
+
         }
+
     }
 }

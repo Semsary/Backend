@@ -59,22 +59,6 @@
   },
   {
     "ContainingType": "semsary_backend.Controllers.AuthController",
-    "Method": "GetFiles",
-    "RelativePath": "api/Auth/GetFile",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "Url",
-        "Type": "System.String",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "semsary_backend.Controllers.AuthController",
     "Method": "GetIdentity",
     "RelativePath": "api/Auth/GetIdentity",
     "HttpMethod": "GET",
@@ -197,7 +181,7 @@
     "ContainingType": "semsary_backend.Controllers.AuthController",
     "Method": "SubmitIdentity",
     "RelativePath": "api/Auth/SubmitIdentity",
-    "HttpMethod": "GET",
+    "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -270,7 +254,7 @@
   {
     "ContainingType": "semsary_backend.Controllers.CustomerServiceController",
     "Method": "ComplaintStatus",
-    "RelativePath": "api/CustomerService/ComplaintStatus/{complaintId}",
+    "RelativePath": "api/CustomerService/Complaint/acknowledge/{complaintId}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -278,11 +262,6 @@
       {
         "Name": "complaintId",
         "Type": "System.String",
-        "IsRequired": true
-      },
-      {
-        "Name": "complaintStatusDTO",
-        "Type": "semsary_backend.DTO.ComplaintStatusDTO",
         "IsRequired": true
       }
     ],
@@ -312,7 +291,7 @@
   {
     "ContainingType": "semsary_backend.Controllers.CustomerServiceController",
     "Method": "EditInspectionStatus",
-    "RelativePath": "api/CustomerService/InspectionStatus/{houseInspectionId}",
+    "RelativePath": "api/CustomerService/Inspection/acknowledge/{houseInspectionId}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -320,11 +299,6 @@
       {
         "Name": "houseInspectionId",
         "Type": "System.String",
-        "IsRequired": true
-      },
-      {
-        "Name": "inspectionStatusDTO",
-        "Type": "semsary_backend.DTO.InspectionStatusDTO",
         "IsRequired": true
       }
     ],
@@ -361,6 +335,54 @@
     "Parameters": [
       {
         "Name": "complaintId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "semsary_backend.Controllers.LandLordController",
+    "Method": "CreateHouse",
+    "RelativePath": "api/LandLord/create/house",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "houseDTO",
+        "Type": "semsary_backend.DTO.HouseDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "semsary_backend.Controllers.LandLordController",
+    "Method": "GetHouse",
+    "RelativePath": "api/LandLord/get/house/{HouseId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "HouseId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "semsary_backend.Controllers.LandLordController",
+    "Method": "requestInspection",
+    "RelativePath": "api/LandLord/inspection/request/{HouseId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "HouseId",
         "Type": "System.String",
         "IsRequired": true
       }

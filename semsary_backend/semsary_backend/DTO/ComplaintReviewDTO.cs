@@ -5,7 +5,7 @@ namespace semsary_backend.DTO
 {
     public class ComplaintReviewDTO
     {
-        public CustomerService VerifiedBy { get; set; }
+        public string VerifiedBy { get; set; }
         public string ComplaintReview { get; set; }
         public DateTime ReviewDate { get; set; }
     }
