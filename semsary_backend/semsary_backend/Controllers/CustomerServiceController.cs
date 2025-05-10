@@ -12,19 +12,8 @@ namespace semsary_backend.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class CustomerServiceController : ControllerBase
+    public class CustomerServiceController(TokenService tokenGenertor, ApiContext apiContext, R2StorageService r2StorageService) : ControllerBase
     {
-        private readonly TokenService tokenGenertor;
-        private readonly ApiContext apiContext;
-        private readonly R2StorageService r2StorageService;
-
-        public CustomerServiceController(TokenService TokenGenertor, ApiContext apiContext,R2StorageService r2StorageService)
-        {
-            tokenGenertor = TokenGenertor;
-            this.apiContext = apiContext;
-            this.r2StorageService = r2StorageService;
-        }
-
         [HttpPost("HouseInspection/create/{houseId}")]
         public async Task<IActionResult> MakeHouseInspection(string houseId, [FromBody] HouseInspectionDTO HouseInspectionDTO)
         {
@@ -89,7 +78,7 @@ namespace semsary_backend.Controllers
 
             if (user == null || user.UserType != UserType.Customerservice)
             {
-                return Forbid("User not found.");
+                return Forbid();
             }
             
             
@@ -114,7 +103,7 @@ namespace semsary_backend.Controllers
 
             if (user == null || user.UserType != UserType.Customerservice)
             {
-                return NotFound("User not found.");
+                return Forbid();
             }
 
             var complaints = await apiContext.Complaints.Where(c => c.status == ComplainStatus.Bending)
@@ -142,7 +131,6 @@ namespace semsary_backend.Controllers
             {
                 return Forbid();
             }
-
             
             int id;
             if (!int.TryParse(complaintId, out id))
@@ -169,7 +157,7 @@ namespace semsary_backend.Controllers
 
             if (user == null || user.UserType != UserType.Customerservice)
             {
-                return NotFound(new { message = "User not found." });
+                return Forbid();
             }
             int id;
             if (!int.TryParse(complaintId, out id))

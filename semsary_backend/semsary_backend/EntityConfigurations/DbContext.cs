@@ -32,5 +32,6 @@ namespace semsary_backend.EntityConfigurations
         public DbSet<Complaint> Complaints { get; set; }
         public DbSet<Rental> Rentals { get; set; }
         public DbSet<RentalUnit> RentalUnits { get; set; }
+        public DbSet<Rate> Rates { get; set; }
     }
 }

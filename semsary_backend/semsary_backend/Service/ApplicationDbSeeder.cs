@@ -159,20 +159,21 @@ namespace semsary_backend.Service
             {
                 var house2 = new House
                 {
-                    HouseId = "H1",
-                    
-                       governorate = Governorate.Cairo,
-                       city = "Cairo",
-                       street = "Street 1",
-
+                       HouseId = "H1",
+                       LandlordUsername = "landlord1",
+                };
+                var house3 = new House
+                {
+                    HouseId = "H2",
                     LandlordUsername = "landlord1",
                 };
                 dbContext.Houses.Add(house2);
+                dbContext.Houses.Add(house3);
                 dbContext.SaveChanges();
             }
-#endregion
+            #endregion
 
-#region RenalUnit
+            #region RenalUnit
             //var rentalUnit = dbContext.RentalUnits.FirstOrDefault(h => h.RentalUnitId == "RentalUnit1");
             //if (rentalUnit == null)
             //{
@@ -183,23 +184,24 @@ namespace semsary_backend.Service
             //    dbContext.RentalUnits.Add(rentalUnit2);
             //    dbContext.SaveChanges();
             //}
-#endregion
+            #endregion
 
-#region Rental
+            #region Rental
             var rental = dbContext.Rentals.FirstOrDefault(h => h.RentalId == 1);
             if (rental == null)
             {
                 var renatal2 = new Rental
                 {
+                    HouseId = "H1",
                     TenantUsername = "tenant1",
                     StartDate = DateTime.UtcNow,
                     RentalUnitId = "RentalUnit1"
                 };
-          
+
                 dbContext.Rentals.Add(renatal2);
                 dbContext.SaveChanges();
             }
-#endregion
+            #endregion
 
         }
     }

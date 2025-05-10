@@ -7,6 +7,86 @@
       "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\controllers\\customerservicecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|c:\\users\\city tech\\desktop\\backend\\semsary_backend\\semsary_backend\\controllers\\tenantcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\controllers\\tenantcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|c:\\users\\city tech\\desktop\\backend\\semsary_backend\\semsary_backend\\service\\applicationdbseeder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\service\\applicationdbseeder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|c:\\users\\city tech\\desktop\\backend\\semsary_backend\\semsary_backend\\modelsconfigurations\\rentalconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\modelsconfigurations\\rentalconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|c:\\users\\city tech\\desktop\\backend\\semsary_backend\\semsary_backend\\models\\rental.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\models\\rental.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|c:\\users\\city tech\\desktop\\backend\\semsary_backend\\semsary_backend\\dto\\ratedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\dto\\ratedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|c:\\users\\city tech\\desktop\\backend\\semsary_backend\\semsary_backend\\entityconfigurations\\dbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\entityconfigurations\\dbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|c:\\users\\city tech\\desktop\\backend\\semsary_backend\\semsary_backend\\models\\houseinspection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\models\\houseinspection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|c:\\users\\city tech\\desktop\\backend\\semsary_backend\\semsary_backend\\enums\\service.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\enums\\service.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|c:\\users\\city tech\\desktop\\backend\\semsary_backend\\semsary_backend\\enums\\rentalstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\enums\\rentalstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|c:\\users\\city tech\\desktop\\backend\\semsary_backend\\semsary_backend\\enums\\usertype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\enums\\usertype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|c:\\users\\city tech\\desktop\\backend\\semsary_backend\\semsary_backend\\enums\\status.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\enums\\status.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|c:\\users\\city tech\\desktop\\backend\\semsary_backend\\semsary_backend\\enums\\identitystatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\enums\\identitystatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|c:\\users\\city tech\\desktop\\backend\\semsary_backend\\semsary_backend\\enums\\inspectionstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\enums\\inspectionstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|c:\\users\\city tech\\desktop\\backend\\semsary_backend\\semsary_backend\\enums\\governorate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\enums\\governorate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|c:\\users\\city tech\\desktop\\backend\\semsary_backend\\semsary_backend\\enums\\complainstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\enums\\complainstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|c:\\users\\city tech\\desktop\\backend\\semsary_backend\\semsary_backend\\enums\\address.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\enums\\address.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|c:\\users\\city tech\\desktop\\backend\\semsary_backend\\semsary_backend\\controllers\\landlordcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\controllers\\landlordcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|c:\\users\\city tech\\desktop\\backend\\semsary_backend\\semsary_backend\\models\\landlord.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\models\\landlord.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|c:\\users\\city tech\\desktop\\backend\\semsary_backend\\semsary_backend\\models\\rate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\models\\rate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|c:\\users\\city tech\\desktop\\backend\\semsary_backend\\semsary_backend\\dto\\housedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\dto\\housedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|c:\\users\\city tech\\desktop\\backend\\semsary_backend\\semsary_backend\\dto\\complaintrequestfortentatdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\dto\\complaintrequestfortentatdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -15,24 +95,8 @@
       "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\dto\\complaintrequestforcustomerdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|c:\\users\\city tech\\desktop\\backend\\semsary_backend\\semsary_backend\\entityconfigurations\\dbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\entityconfigurations\\dbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|c:\\users\\city tech\\desktop\\backend\\semsary_backend\\semsary_backend\\dto\\complaintreviewdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\dto\\complaintreviewdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|c:\\users\\city tech\\desktop\\backend\\semsary_backend\\semsary_backend\\controllers\\tenantcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\controllers\\tenantcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|c:\\users\\city tech\\desktop\\backend\\semsary_backend\\semsary_backend\\controllers\\landlordcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\controllers\\landlordcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|c:\\users\\city tech\\desktop\\backend\\semsary_backend\\semsary_backend\\service\\applicationdbseeder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\service\\applicationdbseeder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|c:\\users\\city tech\\desktop\\backend\\semsary_backend\\semsary_backend\\models\\complaint.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -45,10 +109,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|c:\\users\\city tech\\desktop\\backend\\semsary_backend\\semsary_backend\\modelsconfigurations\\complaintconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\modelsconfigurations\\complaintconfiguration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|c:\\users\\city tech\\desktop\\backend\\semsary_backend\\semsary_backend\\models\\rental.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\models\\rental.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|c:\\users\\city tech\\desktop\\backend\\semsary_backend\\semsary_backend\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -65,22 +125,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|c:\\users\\city tech\\desktop\\backend\\semsary_backend\\semsary_backend\\models\\tenant.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\models\\tenant.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|c:\\users\\city tech\\desktop\\backend\\semsary_backend\\semsary_backend\\models\\house.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\models\\house.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|c:\\users\\city tech\\desktop\\backend\\semsary_backend\\semsary_backend\\enums\\address.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\enums\\address.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|c:\\users\\city tech\\desktop\\backend\\semsary_backend\\semsary_backend\\enums\\governorate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\enums\\governorate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|c:\\users\\city tech\\desktop\\backend\\semsary_backend\\semsary_backend\\models\\houseinspection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\models\\houseinspection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -90,7 +134,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 194,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Bookmark",
@@ -102,15 +146,81 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
+              "Title": "RateDTO.cs",
+              "DocumentMoniker": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\DTO\\RateDTO.cs",
+              "RelativeDocumentMoniker": "semsary_backend\\DTO\\RateDTO.cs",
+              "ToolTip": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\DTO\\RateDTO.cs",
+              "RelativeToolTip": "semsary_backend\\DTO\\RateDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-09T22:20:33.263Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "DbContext.cs",
               "DocumentMoniker": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\EntityConfigurations\\DbContext.cs",
               "RelativeDocumentMoniker": "semsary_backend\\EntityConfigurations\\DbContext.cs",
               "ToolTip": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\EntityConfigurations\\DbContext.cs",
               "RelativeToolTip": "semsary_backend\\EntityConfigurations\\DbContext.cs",
-              "ViewState": "AgIAABYAAAAAAAAAAAA5wBwAAABFAAAAAAAAAA==",
+              "ViewState": "AgIAABcAAAAAAAAAAAA3wCIAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-09T21:41:05.908Z"
+              "WhenOpened": "2025-05-09T21:41:05.908Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "RentalStatus.cs",
+              "DocumentMoniker": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Enums\\RentalStatus.cs",
+              "RelativeDocumentMoniker": "semsary_backend\\Enums\\RentalStatus.cs",
+              "ToolTip": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Enums\\RentalStatus.cs",
+              "RelativeToolTip": "semsary_backend\\Enums\\RentalStatus.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-09T23:37:28.397Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "UserType.cs",
+              "DocumentMoniker": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Enums\\UserType.cs",
+              "RelativeDocumentMoniker": "semsary_backend\\Enums\\UserType.cs",
+              "ToolTip": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Enums\\UserType.cs",
+              "RelativeToolTip": "semsary_backend\\Enums\\UserType.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-09T23:37:34.5Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ApplicationDbSeeder.cs",
+              "DocumentMoniker": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Service\\ApplicationDbSeeder.cs",
+              "RelativeDocumentMoniker": "semsary_backend\\Service\\ApplicationDbSeeder.cs",
+              "ToolTip": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Service\\ApplicationDbSeeder.cs",
+              "RelativeToolTip": "semsary_backend\\Service\\ApplicationDbSeeder.cs",
+              "ViewState": "AgIAAIUAAAAAAAAAAAAmwKMAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-09T18:11:18.497Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "HouseInspection.cs",
+              "DocumentMoniker": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Models\\HouseInspection.cs",
+              "RelativeDocumentMoniker": "semsary_backend\\Models\\HouseInspection.cs",
+              "ToolTip": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Models\\HouseInspection.cs",
+              "RelativeToolTip": "semsary_backend\\Models\\HouseInspection.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAuwBYAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-09T16:10:18.696Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -120,38 +230,196 @@
               "RelativeDocumentMoniker": "semsary_backend\\Controllers\\CustomerServiceController.cs",
               "ToolTip": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Controllers\\CustomerServiceController.cs",
               "RelativeToolTip": "semsary_backend\\Controllers\\CustomerServiceController.cs",
-              "ViewState": "AgIAAGkAAAAAAAAAAAAgwGwAAAA3AAAAAAAAAA==",
+              "ViewState": "AgIAADoAAAAAAAAAAAAQwEsAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-09T19:28:12.199Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ComplaintReviewDTO.cs",
-              "DocumentMoniker": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\DTO\\ComplaintReviewDTO.cs",
-              "RelativeDocumentMoniker": "semsary_backend\\DTO\\ComplaintReviewDTO.cs",
-              "ToolTip": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\DTO\\ComplaintReviewDTO.cs",
-              "RelativeToolTip": "semsary_backend\\DTO\\ComplaintReviewDTO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAeAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-09T19:51:58.823Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "ComplaintRequestForTentatDTO.cs",
-              "DocumentMoniker": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\DTO\\ComplaintRequestForTentatDTO.cs",
-              "RelativeDocumentMoniker": "semsary_backend\\DTO\\ComplaintRequestForTentatDTO.cs",
-              "ToolTip": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\DTO\\ComplaintRequestForTentatDTO.cs",
-              "RelativeToolTip": "semsary_backend\\DTO\\ComplaintRequestForTentatDTO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAFAAAAAAAAAA==",
+              "Title": "TenantController.cs",
+              "DocumentMoniker": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Controllers\\TenantController.cs",
+              "RelativeDocumentMoniker": "semsary_backend\\Controllers\\TenantController.cs",
+              "ToolTip": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Controllers\\TenantController.cs",
+              "RelativeToolTip": "semsary_backend\\Controllers\\TenantController.cs",
+              "ViewState": "AgIAABEAAAAAAAAAAAAiwCAAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-09T20:13:55.695Z"
+              "WhenOpened": "2025-05-09T19:24:57.229Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
+              "Title": "Rental.cs",
+              "DocumentMoniker": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Models\\Rental.cs",
+              "RelativeDocumentMoniker": "semsary_backend\\Models\\Rental.cs",
+              "ToolTip": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Models\\Rental.cs",
+              "RelativeToolTip": "semsary_backend\\Models\\Rental.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-09T20:40:27.678Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "RentalConfiguration.cs",
+              "DocumentMoniker": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\ModelsConfigurations\\RentalConfiguration.cs",
+              "RelativeDocumentMoniker": "semsary_backend\\ModelsConfigurations\\RentalConfiguration.cs",
+              "ToolTip": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\ModelsConfigurations\\RentalConfiguration.cs",
+              "RelativeToolTip": "semsary_backend\\ModelsConfigurations\\RentalConfiguration.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-10T00:31:23.489Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Service.cs",
+              "DocumentMoniker": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Enums\\Service.cs",
+              "RelativeDocumentMoniker": "semsary_backend\\Enums\\Service.cs",
+              "ToolTip": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Enums\\Service.cs",
+              "RelativeToolTip": "semsary_backend\\Enums\\Service.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-09T23:37:30.848Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Status.cs",
+              "DocumentMoniker": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Enums\\Status.cs",
+              "RelativeDocumentMoniker": "semsary_backend\\Enums\\Status.cs",
+              "ToolTip": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Enums\\Status.cs",
+              "RelativeToolTip": "semsary_backend\\Enums\\Status.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-09T23:37:32.93Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "IdentityStatus.cs",
+              "DocumentMoniker": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Enums\\IdentityStatus.cs",
+              "RelativeDocumentMoniker": "semsary_backend\\Enums\\IdentityStatus.cs",
+              "ToolTip": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Enums\\IdentityStatus.cs",
+              "RelativeToolTip": "semsary_backend\\Enums\\IdentityStatus.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-09T23:37:21.778Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "InspectionStatus.cs",
+              "DocumentMoniker": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Enums\\InspectionStatus.cs",
+              "RelativeDocumentMoniker": "semsary_backend\\Enums\\InspectionStatus.cs",
+              "ToolTip": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Enums\\InspectionStatus.cs",
+              "RelativeToolTip": "semsary_backend\\Enums\\InspectionStatus.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-09T23:37:23.949Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "ComplainStatus.cs",
+              "DocumentMoniker": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Enums\\ComplainStatus.cs",
+              "RelativeDocumentMoniker": "semsary_backend\\Enums\\ComplainStatus.cs",
+              "ToolTip": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Enums\\ComplainStatus.cs",
+              "RelativeToolTip": "semsary_backend\\Enums\\ComplainStatus.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-09T23:37:00.257Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "Landlord.cs",
+              "DocumentMoniker": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Models\\Landlord.cs",
+              "RelativeDocumentMoniker": "semsary_backend\\Models\\Landlord.cs",
+              "ToolTip": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Models\\Landlord.cs",
+              "RelativeToolTip": "semsary_backend\\Models\\Landlord.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAzwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-09T22:36:34.13Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "Rate.cs",
+              "DocumentMoniker": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Models\\Rate.cs",
+              "RelativeDocumentMoniker": "semsary_backend\\Models\\Rate.cs",
+              "ToolTip": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Models\\Rate.cs",
+              "RelativeToolTip": "semsary_backend\\Models\\Rate.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-09T22:20:10.145Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "LandLordController.cs",
+              "DocumentMoniker": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Controllers\\LandLordController.cs",
+              "RelativeDocumentMoniker": "semsary_backend\\Controllers\\LandLordController.cs",
+              "ToolTip": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Controllers\\LandLordController.cs",
+              "RelativeToolTip": "semsary_backend\\Controllers\\LandLordController.cs",
+              "ViewState": "AgIAAFQAAAAAAAAAAAAYwBMAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-09T15:47:33.473Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "governorate.cs",
+              "DocumentMoniker": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Enums\\governorate.cs",
+              "RelativeDocumentMoniker": "semsary_backend\\Enums\\governorate.cs",
+              "ToolTip": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Enums\\governorate.cs",
+              "RelativeToolTip": "semsary_backend\\Enums\\governorate.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-09T18:21:39.136Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "HouseDTO.cs",
+              "DocumentMoniker": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\DTO\\HouseDTO.cs",
+              "RelativeDocumentMoniker": "semsary_backend\\DTO\\HouseDTO.cs",
+              "ToolTip": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\DTO\\HouseDTO.cs",
+              "RelativeToolTip": "semsary_backend\\DTO\\HouseDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-09T22:19:20.128Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Address.cs",
+              "DocumentMoniker": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Enums\\Address.cs",
+              "RelativeDocumentMoniker": "semsary_backend\\Enums\\Address.cs",
+              "ToolTip": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Enums\\Address.cs",
+              "RelativeToolTip": "semsary_backend\\Enums\\Address.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-09T18:17:50.739Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
               "Title": "ComplaintRequestForCustomerDTO.cs",
               "DocumentMoniker": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\DTO\\ComplaintRequestForCustomerDTO.cs",
               "RelativeDocumentMoniker": "semsary_backend\\DTO\\ComplaintRequestForCustomerDTO.cs",
@@ -163,19 +431,31 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "ApplicationDbSeeder.cs",
-              "DocumentMoniker": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Service\\ApplicationDbSeeder.cs",
-              "RelativeDocumentMoniker": "semsary_backend\\Service\\ApplicationDbSeeder.cs",
-              "ToolTip": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Service\\ApplicationDbSeeder.cs",
-              "RelativeToolTip": "semsary_backend\\Service\\ApplicationDbSeeder.cs",
-              "ViewState": "AgIAAJoAAAAAAAAAAAAcwK4AAAAAAAAAAAAAAA==",
+              "DocumentIndex": 21,
+              "Title": "ComplaintRequestForTentatDTO.cs",
+              "DocumentMoniker": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\DTO\\ComplaintRequestForTentatDTO.cs",
+              "RelativeDocumentMoniker": "semsary_backend\\DTO\\ComplaintRequestForTentatDTO.cs",
+              "ToolTip": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\DTO\\ComplaintRequestForTentatDTO.cs",
+              "RelativeToolTip": "semsary_backend\\DTO\\ComplaintRequestForTentatDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-09T18:11:18.497Z"
+              "WhenOpened": "2025-05-09T20:13:55.695Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 23,
+              "Title": "ComplaintReviewDTO.cs",
+              "DocumentMoniker": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\DTO\\ComplaintReviewDTO.cs",
+              "RelativeDocumentMoniker": "semsary_backend\\DTO\\ComplaintReviewDTO.cs",
+              "ToolTip": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\DTO\\ComplaintReviewDTO.cs",
+              "RelativeToolTip": "semsary_backend\\DTO\\ComplaintReviewDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-09T19:51:58.823Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
               "Title": "TokenService.cs",
               "DocumentMoniker": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Service\\TokenService.cs",
               "RelativeDocumentMoniker": "semsary_backend\\Service\\TokenService.cs",
@@ -187,31 +467,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "TenantController.cs",
-              "DocumentMoniker": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Controllers\\TenantController.cs",
-              "RelativeDocumentMoniker": "semsary_backend\\Controllers\\TenantController.cs",
-              "ToolTip": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Controllers\\TenantController.cs",
-              "RelativeToolTip": "semsary_backend\\Controllers\\TenantController.cs",
-              "ViewState": "AgIAABcAAAAAAAAAAAAgwDIAAAA8AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-09T19:24:57.229Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "LandLordController.cs",
-              "DocumentMoniker": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Controllers\\LandLordController.cs",
-              "RelativeDocumentMoniker": "semsary_backend\\Controllers\\LandLordController.cs",
-              "ToolTip": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Controllers\\LandLordController.cs",
-              "RelativeToolTip": "semsary_backend\\Controllers\\LandLordController.cs",
-              "ViewState": "AgIAADkAAAAAAAAAAAAYwGgAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-09T15:47:33.473Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 26,
               "Title": "ComplaintConfiguration.cs",
               "DocumentMoniker": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\ModelsConfigurations\\ComplaintConfiguration.cs",
               "RelativeDocumentMoniker": "semsary_backend\\ModelsConfigurations\\ComplaintConfiguration.cs",
@@ -223,7 +479,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 24,
               "Title": "Complaint.cs",
               "DocumentMoniker": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Models\\Complaint.cs",
               "RelativeDocumentMoniker": "semsary_backend\\Models\\Complaint.cs",
@@ -235,7 +491,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 27,
               "Title": "AuthController.cs",
               "DocumentMoniker": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Controllers\\AuthController.cs",
               "RelativeDocumentMoniker": "semsary_backend\\Controllers\\AuthController.cs",
@@ -247,19 +503,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "Rental.cs",
-              "DocumentMoniker": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Models\\Rental.cs",
-              "RelativeDocumentMoniker": "semsary_backend\\Models\\Rental.cs",
-              "ToolTip": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Models\\Rental.cs",
-              "RelativeToolTip": "semsary_backend\\Models\\Rental.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-09T20:40:27.678Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 29,
               "Title": "GenerateOtp.cs",
               "DocumentMoniker": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Service\\GenerateOtp.cs",
               "RelativeDocumentMoniker": "semsary_backend\\Service\\GenerateOtp.cs",
@@ -271,7 +515,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 28,
               "Title": "PasswordHelper.cs",
               "DocumentMoniker": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Service\\PasswordHelper.cs",
               "RelativeDocumentMoniker": "semsary_backend\\Service\\PasswordHelper.cs",
@@ -283,7 +527,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 30,
               "Title": "Tenant.cs",
               "DocumentMoniker": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Models\\Tenant.cs",
               "RelativeDocumentMoniker": "semsary_backend\\Models\\Tenant.cs",
@@ -292,54 +536,6 @@
               "ViewState": "AgIAABIAAAAAAAAAAAD4vx8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-09T18:22:07.105Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "governorate.cs",
-              "DocumentMoniker": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Enums\\governorate.cs",
-              "RelativeDocumentMoniker": "semsary_backend\\Enums\\governorate.cs",
-              "ToolTip": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Enums\\governorate.cs",
-              "RelativeToolTip": "semsary_backend\\Enums\\governorate.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAATAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-09T18:21:39.136Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "Address.cs",
-              "DocumentMoniker": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Enums\\Address.cs",
-              "RelativeDocumentMoniker": "semsary_backend\\Enums\\Address.cs",
-              "ToolTip": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Enums\\Address.cs",
-              "RelativeToolTip": "semsary_backend\\Enums\\Address.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-09T18:17:50.739Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "HouseInspection.cs",
-              "DocumentMoniker": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Models\\HouseInspection.cs",
-              "RelativeDocumentMoniker": "semsary_backend\\Models\\HouseInspection.cs",
-              "ToolTip": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Models\\HouseInspection.cs",
-              "RelativeToolTip": "semsary_backend\\Models\\HouseInspection.cs",
-              "ViewState": "AQIAAAEAAAAAAAAAAAAqwCYAAAAIAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-09T16:10:18.696Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "House.cs",
-              "DocumentMoniker": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Models\\House.cs",
-              "RelativeDocumentMoniker": "semsary_backend\\Models\\House.cs",
-              "ToolTip": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Models\\House.cs",
-              "RelativeToolTip": "semsary_backend\\Models\\House.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAA1wBMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-09T15:48:42.625Z"
             }
           ]
         }

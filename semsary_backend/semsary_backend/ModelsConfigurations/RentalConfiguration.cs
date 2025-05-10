@@ -24,6 +24,10 @@ namespace semsary_backend.ModelsConfigurations
                 .WithOne(r => r.Rental)
                 .HasForeignKey<Complaint>(r => r.RentalId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasOne(r => r.House)
+                .WithMany(r => r.Rentals)
+                .HasForeignKey(r => r.HouseId);
         }
     }
 

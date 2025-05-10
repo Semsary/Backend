@@ -12,19 +12,8 @@ namespace semsary_backend.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class TenantController : ControllerBase
+    public class TenantController(TokenService tokenGenertor, ApiContext apiContext) : ControllerBase
     {
-        private readonly TokenService tokenGenertor;
-        private readonly ApiContext apiContext;
-        private readonly R2StorageService r2StorageService;
-
-        public TenantController(TokenService TokenGenertor, ApiContext apiContext, R2StorageService r2StorageService)
-        {
-            tokenGenertor = TokenGenertor;
-            this.apiContext = apiContext;
-            this.r2StorageService = r2StorageService;
-        }
-
         [HttpPost("MakeComplaint/{rentalId}")]
         public async Task<IActionResult> MakeComplaint(string rentalId, [FromBody] ComplaintRequestForTentatDTO complaintRequestDTO)
         {
@@ -32,7 +21,11 @@ namespace semsary_backend.Controllers
             var user = await apiContext.SermsaryUsers
                 .FirstOrDefaultAsync(e => e.Username == username);
 
-            if (user == null || user.UserType != Enums.UserType.Tenant)
+            if(user ==null)
+            {
+                return Unauthorized();
+            }   
+            if (user.UserType != Enums.UserType.Tenant)
             {
                 return Forbid();
             }
@@ -58,7 +51,7 @@ namespace semsary_backend.Controllers
             }
             if (rental.TenantUsername != user.Username)
             {
-                return Forbid("You are not the current tenant of this house" );
+                return Forbid();
             }
 
             var complaint = new Complaint
@@ -75,5 +68,52 @@ namespace semsary_backend.Controllers
             return Ok(new { message = "Complaint submitted successfully" });
         }
 
+        [HttpPost("SetRate/{houseId}")]
+        public async Task<IActionResult> SetRate(string houseId , [FromBody] RateDTO rateDTO)
+        {
+            var username = tokenGenertor.GetCurUser();
+            var user = await apiContext.SermsaryUsers
+                .FirstOrDefaultAsync(e => e.Username == username);
+
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+            if (user.UserType != Enums.UserType.Tenant)
+            {
+                return Forbid();
+            }
+            if (rateDTO == null)
+            {
+                return BadRequest(new { message = "Invalid data." });
+            }
+            if (ModelState.IsValid == false)
+            {
+                return BadRequest(ModelState);
+            }
+            var house = await apiContext.Houses
+                .Include(r => r.Rentals)
+                .FirstOrDefaultAsync(h => h.HouseId == houseId);
+            if (house == null)
+            {
+                return NotFound(new { message = "There is no house found with this id" });
+            }
+            var rental = house.Rentals.FirstOrDefault(r => r.TenantUsername == user.Username);
+            if(rental == null)
+            {
+                return Forbid();
+            }
+            var rate = new Rate
+            {
+                HouseId = houseId,
+                TenantUsername = user.Username,
+                RateDate = DateTime.UtcNow,
+                StarsNumber = rateDTO.StarsNumber,
+                RateDetails = rateDTO.RateDetails,
+            };
+            await apiContext.Rates.AddAsync(rate);
+            await apiContext.SaveChangesAsync();
+            return Ok(new { message = "Rate submitted successfully" });
+        }
     }
 }

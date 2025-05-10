@@ -413,5 +413,26 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "semsary_backend.Controllers.TenantController",
+    "Method": "SetRate",
+    "RelativePath": "api/Tenant/SetRate/{houseId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "houseId",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "rateDTO",
+        "Type": "semsary_backend.DTO.RateDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   }
 ]

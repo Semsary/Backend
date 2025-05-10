@@ -15,5 +15,6 @@ namespace semsary_backend.Models
         public List<Advertisement> Advertisements { get; set; } 
         
         public Landlord owner { get; set; }
+        public List<Rental> Rentals { get; set; }
     }
 }
