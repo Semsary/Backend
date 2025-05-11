@@ -107,8 +107,10 @@ namespace semsary_backend.Controllers
             }
 
             var complaints = await apiContext.Complaints.Where(c => c.status == ComplainStatus.Bending)
-                .Select(c => new ComplaintRequestForCustomerDTO
+                .Select(c => new 
                 {
+                    ownerFirstName = c.Tenant.Firstname,
+                    ownerLastName = c.Tenant.Lastname,
                     ComplaintId = c.ComplaintId,
                     ComplaintDetails = c.ComplaintDetails,
                     SubmittedBy = c.SubmittedBy,
@@ -121,6 +123,7 @@ namespace semsary_backend.Controllers
             return Ok(complaints);
         }
         [HttpPut("Complaint/acknowledge/{complaintId}")]
+
         public async Task<IActionResult> ComplaintStatus(string complaintId)
         {
             var username = tokenGenertor.GetCurUser();
@@ -196,6 +199,8 @@ namespace semsary_backend.Controllers
                     HouseInspectionId = h.HouseInspectionId,
                     HouseId = h.HouseId,
                     ownerId = h.House.LandlordUsername,
+                    ownerFirstName=h.House.owner.Firstname,
+                    ownerLastName=h.House.owner.Lastname,
                     SubmitedAt=h.InspectionRequestDate,
                     Governorate=h.House.governorate,
                     city=h.House.city,

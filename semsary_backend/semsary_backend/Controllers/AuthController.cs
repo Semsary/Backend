@@ -461,9 +461,21 @@ namespace semsary_backend.Controllers
             if (user.UserType != UserType.Customerservice)
                 return Unauthorized("you are not authorized to get all identity");
 
-            var identities = await apiContext.identityDocuments.Where(e=>e.Status==IdentityStatus.Pending).ToListAsync();
+            var identities = await apiContext.identityDocuments.Where(e=>e.Status==IdentityStatus.Pending)
+                .Select(d=> new
+                {
+                    ownerUsername= d.OwnerUsername,
+                    Id = d.Id,
+                    ownerFirstName = d.Owner.Firstname,
+                    ownerLastName = d.Owner.Lastname,
+
+                    imageURLS = d.ImageURLS,
+                    SubmitedAt=d.SubmitedAt,
+                })
+                .ToListAsync();
             if (identities.Count == 0)
-                return NotFound("there is no identity submitted");
+                return NoContent();
+
             return Ok(identities);
 
         }
