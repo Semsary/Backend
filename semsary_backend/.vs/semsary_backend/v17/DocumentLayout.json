@@ -1,14 +1,58 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\",
+  "WorkspaceRootPath": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|f:\\fci\\projects\\semsary back\\backend\\semsary_backend\\semsary_backend\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|c:\\users\\city tech\\desktop\\backend\\semsary_backend\\semsary_backend\\service\\notificationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\service\\notificationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|c:\\users\\city tech\\desktop\\backend\\semsary_backend\\semsary_backend\\service\\applicationdbseeder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\service\\applicationdbseeder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|c:\\users\\city tech\\desktop\\backend\\semsary_backend\\semsary_backend\\models\\landlord.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\models\\landlord.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|c:\\users\\city tech\\desktop\\backend\\semsary_backend\\semsary_backend\\models\\tenant.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\models\\tenant.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|c:\\users\\city tech\\desktop\\backend\\semsary_backend\\semsary_backend\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|f:\\fci\\projects\\semsary back\\backend\\semsary_backend\\semsary_backend\\controllers\\customerservicecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\controllers\\customerservicecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|c:\\users\\city tech\\desktop\\backend\\semsary_backend\\semsary_backend\\service\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\service\\emailservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|c:\\users\\city tech\\desktop\\backend\\semsary_backend\\semsary_backend\\service\\tokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\service\\tokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|c:\\users\\city tech\\desktop\\backend\\semsary_backend\\semsary_backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|c:\\users\\city tech\\desktop\\backend\\semsary_backend\\semsary_backend\\controllers\\tenantcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\controllers\\tenantcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|c:\\users\\city tech\\desktop\\backend\\semsary_backend\\semsary_backend\\controllers\\landlordcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\controllers\\landlordcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|c:\\users\\city tech\\desktop\\backend\\semsary_backend\\semsary_backend\\service\\r2storageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\service\\r2storageservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|c:\\users\\city tech\\desktop\\backend\\semsary_backend\\semsary_backend\\service\\cloudflarer2settings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\service\\cloudflarer2settings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|c:\\users\\city tech\\desktop\\backend\\semsary_backend\\semsary_backend\\service\\generateotp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C83852BA-CD01-4F10-8575-F5AF6A1E1CA6}|semsary_backend\\semsary_backend.csproj|solutionrelative:semsary_backend\\service\\generateotp.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,36 +62,184 @@
       "DocumentGroups": [
         {
           "DockedWidth": 194,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 7,
           "Children": [
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ApplicationDbSeeder.cs",
+              "DocumentMoniker": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Service\\ApplicationDbSeeder.cs",
+              "RelativeDocumentMoniker": "semsary_backend\\Service\\ApplicationDbSeeder.cs",
+              "ToolTip": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Service\\ApplicationDbSeeder.cs",
+              "RelativeToolTip": "semsary_backend\\Service\\ApplicationDbSeeder.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAQwGgAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-11T22:02:42.78Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Program.cs",
+              "RelativeDocumentMoniker": "semsary_backend\\Program.cs",
+              "ToolTip": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Program.cs",
+              "RelativeToolTip": "semsary_backend\\Program.cs",
+              "ViewState": "AgIAAGcAAAAAAAAAAAAQwHoAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-11T19:54:50.201Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Tenant.cs",
+              "DocumentMoniker": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Models\\Tenant.cs",
+              "RelativeDocumentMoniker": "semsary_backend\\Models\\Tenant.cs",
+              "ToolTip": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Models\\Tenant.cs",
+              "RelativeToolTip": "semsary_backend\\Models\\Tenant.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAAwA4AAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-11T19:25:28.252Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Landlord.cs",
+              "DocumentMoniker": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Models\\Landlord.cs",
+              "RelativeDocumentMoniker": "semsary_backend\\Models\\Landlord.cs",
+              "ToolTip": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Models\\Landlord.cs",
+              "RelativeToolTip": "semsary_backend\\Models\\Landlord.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-11T19:24:51.161Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "TenantController.cs",
+              "DocumentMoniker": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Controllers\\TenantController.cs",
+              "RelativeDocumentMoniker": "semsary_backend\\Controllers\\TenantController.cs",
+              "ToolTip": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Controllers\\TenantController.cs",
+              "RelativeToolTip": "semsary_backend\\Controllers\\TenantController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-11T19:24:45.766Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "NotificationService.cs",
+              "DocumentMoniker": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Service\\NotificationService.cs",
+              "RelativeDocumentMoniker": "semsary_backend\\Service\\NotificationService.cs",
+              "ToolTip": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Service\\NotificationService.cs",
+              "RelativeToolTip": "semsary_backend\\Service\\NotificationService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-11T19:21:31.515Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "TokenService.cs",
+              "DocumentMoniker": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Service\\TokenService.cs",
+              "RelativeDocumentMoniker": "semsary_backend\\Service\\TokenService.cs",
+              "ToolTip": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Service\\TokenService.cs",
+              "RelativeToolTip": "semsary_backend\\Service\\TokenService.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAqwB8AAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-11T18:57:32.867Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "AuthController.cs",
-              "DocumentMoniker": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\semsary_backend\\Controllers\\AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Controllers\\AuthController.cs",
               "RelativeDocumentMoniker": "semsary_backend\\Controllers\\AuthController.cs",
-              "ToolTip": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\semsary_backend\\Controllers\\AuthController.cs",
+              "ToolTip": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Controllers\\AuthController.cs",
               "RelativeToolTip": "semsary_backend\\Controllers\\AuthController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAATAAAA",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACwAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-11T13:32:59.252Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "CustomerServiceController.cs",
-              "DocumentMoniker": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\semsary_backend\\Controllers\\CustomerServiceController.cs",
-              "RelativeDocumentMoniker": "semsary_backend\\Controllers\\CustomerServiceController.cs",
-              "ToolTip": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\semsary_backend\\Controllers\\CustomerServiceController.cs",
-              "RelativeToolTip": "semsary_backend\\Controllers\\CustomerServiceController.cs",
-              "ViewState": "AQIAAL4AAAAAAAAAAAAswMoAAAA5AAAA",
+              "DocumentIndex": 5,
+              "Title": "EmailService.cs",
+              "DocumentMoniker": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Service\\EmailService.cs",
+              "RelativeDocumentMoniker": "semsary_backend\\Service\\EmailService.cs",
+              "ToolTip": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Service\\EmailService.cs",
+              "RelativeToolTip": "semsary_backend\\Service\\EmailService.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAmwBQAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-11T13:26:53.1Z"
+              "WhenOpened": "2025-05-11T18:57:26.54Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "LandLordController.cs",
+              "DocumentMoniker": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Controllers\\LandLordController.cs",
+              "RelativeDocumentMoniker": "semsary_backend\\Controllers\\LandLordController.cs",
+              "ToolTip": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Controllers\\LandLordController.cs",
+              "RelativeToolTip": "semsary_backend\\Controllers\\LandLordController.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-11T19:23:55.44Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "R2StorageService.cs",
+              "DocumentMoniker": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Service\\R2StorageService.cs",
+              "RelativeDocumentMoniker": "semsary_backend\\Service\\R2StorageService.cs",
+              "ToolTip": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Service\\R2StorageService.cs",
+              "RelativeToolTip": "semsary_backend\\Service\\R2StorageService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-11T18:57:34.111Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "CloudflareR2Settings.cs",
+              "DocumentMoniker": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Service\\CloudflareR2Settings.cs",
+              "RelativeDocumentMoniker": "semsary_backend\\Service\\CloudflareR2Settings.cs",
+              "ToolTip": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Service\\CloudflareR2Settings.cs",
+              "RelativeToolTip": "semsary_backend\\Service\\CloudflareR2Settings.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-11T18:57:23.69Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "GenerateOtp.cs",
+              "DocumentMoniker": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Service\\GenerateOtp.cs",
+              "RelativeDocumentMoniker": "semsary_backend\\Service\\GenerateOtp.cs",
+              "ToolTip": "C:\\Users\\City Tech\\Desktop\\Backend\\semsary_backend\\semsary_backend\\Service\\GenerateOtp.cs",
+              "RelativeToolTip": "semsary_backend\\Service\\GenerateOtp.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-11T18:33:13.783Z",
+              "EditorCaption": ""
             }
           ]
         }

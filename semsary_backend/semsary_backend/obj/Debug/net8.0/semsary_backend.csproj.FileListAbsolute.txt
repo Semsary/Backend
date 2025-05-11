@@ -708,3 +708,12 @@ F:\FCI\Projects\Semsary back\Backend\semsary_backend\semsary_backend\bin\Debug\n
 C:\Users\City Tech\Desktop\Backend\semsary_backend\semsary_backend\bin\Debug\net8.0\AWSSDK.Core.dll
 C:\Users\City Tech\Desktop\Backend\semsary_backend\semsary_backend\bin\Debug\net8.0\AWSSDK.S3.dll
 C:\Users\City Tech\Desktop\Backend\semsary_backend\semsary_backend\bin\Debug\net8.0\Microsoft.Extensions.Configuration.dll
+C:\Users\City Tech\Desktop\Backend\semsary_backend\semsary_backend\bin\Debug\net8.0\FirebaseAdmin.dll
+C:\Users\City Tech\Desktop\Backend\semsary_backend\semsary_backend\bin\Debug\net8.0\Google.Api.Gax.dll
+C:\Users\City Tech\Desktop\Backend\semsary_backend\semsary_backend\bin\Debug\net8.0\Google.Api.Gax.Rest.dll
+C:\Users\City Tech\Desktop\Backend\semsary_backend\semsary_backend\bin\Debug\net8.0\Google.Apis.dll
+C:\Users\City Tech\Desktop\Backend\semsary_backend\semsary_backend\bin\Debug\net8.0\Google.Apis.Auth.dll
+C:\Users\City Tech\Desktop\Backend\semsary_backend\semsary_backend\bin\Debug\net8.0\Google.Apis.Core.dll
+C:\Users\City Tech\Desktop\Backend\semsary_backend\semsary_backend\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Users\City Tech\Desktop\Backend\semsary_backend\semsary_backend\bin\Debug\net8.0\System.Management.dll
+C:\Users\City Tech\Desktop\Backend\semsary_backend\semsary_backend\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Management.dll

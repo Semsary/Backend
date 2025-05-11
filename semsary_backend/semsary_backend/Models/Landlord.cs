@@ -6,10 +6,12 @@
         {
             isVerified = false;
             isBlocked = false;
+            DeviceTokens = new List<string>();
 
         }
         public int Balance { get; set; } = 1000000000;
         public string ?ImageUrl { get; set; }
+        public List<string> DeviceTokens { get; set; }
         public List<House> ?Houses { get; set; }
         public List<Message> ?SentMessages { get; set; }
         public List<Message>? ReceivedMessages { get; set; }
