@@ -18,6 +18,7 @@ namespace semsary_backend.Models
         public string Firstname {  get; set; }
         public string Lastname { get; set; }
         public Address Address { get; set; }
+
         public UserType UserType { get; set; }
         [InverseProperty(nameof(Message.sender))]
         public ICollection<Message>? SentMessages { get; set; }

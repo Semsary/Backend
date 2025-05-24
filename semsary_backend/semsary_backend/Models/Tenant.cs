@@ -10,11 +10,6 @@ namespace semsary_backend.Models
     
     public class Tenant:UnverifiedUser
     {
-        public Tenant() 
-        {
-            DeviceTokens = new List<string>();
-        }
-
         public int Balance { get; set; }
         public string ?ImageUrl { get; set;}
         public int height {  get; set; }

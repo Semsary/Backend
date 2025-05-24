@@ -6,7 +6,6 @@
         {
             isVerified = false;
             isBlocked = false;
-            DeviceTokens = new List<string>();
 
         }
         public int Balance { get; set; } = 1000000000;

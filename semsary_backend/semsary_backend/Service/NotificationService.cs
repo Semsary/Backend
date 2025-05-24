@@ -1,6 +1,11 @@
 ﻿using FirebaseAdmin;
 using FirebaseAdmin.Messaging;
+using Google;
 using Google.Apis.Auth.OAuth2;
+using Microsoft.EntityFrameworkCore;
+using semsary_backend.EntityConfigurations;
+using semsary_backend.Models;
+using System;
 
 namespace semsary_backend.Service
 {
@@ -8,11 +13,12 @@ namespace semsary_backend.Service
     {
         private static bool _isInitialized = false;
         private static readonly object _lock = new();
+        private readonly ApiContext context;
 
-
-        public NotificationService()
+        public NotificationService(ApiContext apiContext)
         {
             InitializeFirebase();
+            context = apiContext;
         }
 
         private void InitializeFirebase()
@@ -26,20 +32,27 @@ namespace semsary_backend.Service
                 {
                     FirebaseApp.Create(new AppOptions
                     {
-                        Credential = GoogleCredential.FromFile("firebase_key.json")
+                        Credential = GoogleCredential.FromFile("private_key.json")
                     });
                     _isInitialized = true;
                 }
             }
         }
-        public void AddDeviceToken(string deviceToken , List<string> deviceTokens)
-        {
-            if (!deviceTokens.Contains(deviceToken))
-                deviceTokens.Add(deviceToken);
-        }
 
-        public async Task SendNotificationAsync(string title , string message, List<string> deviceTokens)
+        public async Task SendNotificationAsync(string title, string message, SermsaryUser user)
         {
+            List<string> deviceTokens ;
+            if (user is Tenant tenant)
+            {
+                deviceTokens = tenant.DeviceTokens;
+            }
+            else if (user is Landlord landlord)
+            {
+                deviceTokens = landlord.DeviceTokens;
+            }
+            else
+                return;
+
             if (deviceTokens == null || deviceTokens.Count == 0)
                 return;
 
@@ -55,6 +68,12 @@ namespace semsary_backend.Service
 
             var response = await FirebaseMessaging.DefaultInstance.SendEachForMulticastAsync(multicastMessage);
 
+            await RemoveInvalidDeviceTokens(user, response, deviceTokens);
+        }
+        public async Task RemoveInvalidDeviceTokens(SermsaryUser user, BatchResponse response , List<string> deviceTokens) 
+        {
+            var tokensToRemove = new List<string>();
+
             for (int i = 0; i < response.Responses.Count; i++)
             {
                 var result = response.Responses[i];
@@ -65,12 +84,28 @@ namespace semsary_backend.Service
 
                     if (errorCode.Contains("registration-token-not-registered") || errorCode.Contains("invalid-argument"))
                     {
-                         deviceTokens.Remove(failedToken); 
+                        tokensToRemove.Add(failedToken);
                     }
                 }
             }
-        }
 
+            foreach (var token in tokensToRemove)
+            {
+                deviceTokens.Remove(token);
+            }
+
+            if (user is Tenant tenant)
+            {
+                tenant.DeviceTokens = deviceTokens;
+                context.Tenant.Update(tenant); 
+            }
+            else if (user is Landlord landlord)
+            {
+                landlord.DeviceTokens = deviceTokens;
+                context.Landlords.Update(landlord);
+            }
+            await context.SaveChangesAsync();
+        }
 
     }
 }

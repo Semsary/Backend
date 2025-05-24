@@ -2,12 +2,15 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
 using Org.BouncyCastle.Crypto.Generators;
 using semsary_backend.DTO;
 using semsary_backend.EntityConfigurations;
 using semsary_backend.Enums;
 using semsary_backend.Models;
 using semsary_backend.Service;
+using System.Linq;
+using System.Security.Claims;
 using System.Security.Cryptography;
 namespace semsary_backend.Controllers
 {
@@ -26,7 +29,6 @@ namespace semsary_backend.Controllers
             tokenGenertor = TokenGenertor;
             this.apiContext = apiContext;
             this.storageService = storageService;
-            
         }
 
 
@@ -62,9 +64,7 @@ namespace semsary_backend.Controllers
                 password = PasswordHelper.HashPassword(landlordDTO.Password),
                 UserType = UserType.landlord
 
-
             };
-
             UserEmail.owner = landlord;
             UserEmail.ownerUsername = landlord.Username;
             landlord.Emails = new List<Email>();
@@ -75,8 +75,6 @@ namespace semsary_backend.Controllers
             apiContext.SermsaryUsers.Add(landlord);
             await apiContext.SaveChangesAsync();
             return Ok("Registration successful. Please check your email for verification.");
-
-
 
         }
 
@@ -116,7 +114,6 @@ namespace semsary_backend.Controllers
 
 
             };
-
             UserEmail.owner = Tenant;
             UserEmail.ownerUsername = Tenant.Username;
             Tenant.Emails = new List<Email>();
@@ -127,8 +124,6 @@ namespace semsary_backend.Controllers
             apiContext.SermsaryUsers.Add(Tenant);
             await apiContext.SaveChangesAsync();
             return Ok("Registration successful. Please check your email for verification.");
-
-
 
         }
 
@@ -199,9 +194,76 @@ namespace semsary_backend.Controllers
             var user = email.owner;
             if (PasswordHelper.VerifyPassword(loginDTO.Password, user.password) == false)
                 return BadRequest("invalid email or password");
-            return Ok(tokenGenertor.GenerateToken(user));
 
+            var token = tokenGenertor.GenerateToken(user);
+
+            bool askForNotificationPermission = false;
+            if (user.UserType == UserType.Tenant)
+            {
+                Tenant tenant = (Tenant)user;
+                askForNotificationPermission =  tenant.DeviceTokens == null
+                                                || !tenant.DeviceTokens.Contains(loginDTO.deviceToken);
+            }
+            else if(user.UserType == UserType.landlord)
+            {
+                Landlord landlord = (Landlord)user;
+                askForNotificationPermission =  landlord.DeviceTokens == null 
+                                                || !landlord.DeviceTokens.Contains(loginDTO.deviceToken);
+            }
+            var response = new 
+            {
+                Token = token,
+                AskForNotificationPermission = askForNotificationPermission
+            };
+            return Ok(response);
         }
+
+        [Authorize] 
+        [HttpPost("AllowNotifications")]
+        public async Task<IActionResult> SaveDeviceToken([FromBody] DeviceTokenDTO deviceToken)
+        {
+            if (string.IsNullOrWhiteSpace(deviceToken.DeviceToken))
+                return BadRequest("Device token is required.");
+
+            var username = tokenGenertor.GetCurUser();
+            var user = await apiContext.SermsaryUsers
+                .FirstOrDefaultAsync(e => e.Username == username);
+
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+
+            if (user.UserType == UserType.Tenant)
+            {
+                Tenant tenant = (Tenant)user;
+                if (tenant.DeviceTokens == null)
+                    tenant.DeviceTokens = new List<string>();
+                if (!tenant.DeviceTokens.Contains(deviceToken.DeviceToken))
+                {
+                    tenant.DeviceTokens.Add(deviceToken.DeviceToken);
+                    await apiContext.SaveChangesAsync();
+                }
+            }
+            else if (user.UserType == UserType.landlord)
+            {
+                Landlord landlord = (Landlord)user;
+                if (landlord.DeviceTokens == null)
+                    landlord.DeviceTokens = new List<string>();
+
+                if (!landlord.DeviceTokens.Contains(deviceToken.DeviceToken))
+                {
+                    landlord.DeviceTokens.Add(deviceToken.DeviceToken);
+                    await apiContext.SaveChangesAsync();
+                }
+            }
+            else
+            {
+                return Forbid("This user type doesn't support notifications.");
+            }
+            return Ok("Sending notifications is allowed successfully.");
+        }
+
 
         [Authorize]
         [HttpGet("GetUserInfo")]

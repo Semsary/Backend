@@ -15,6 +15,5 @@ namespace semsary_backend.DTO
         [EmailAddress(ErrorMessage ="invalid email")]
         public string Email { get; set; }
 
-        
     }
 }

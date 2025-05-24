@@ -110,6 +110,7 @@ namespace semsary_backend.Service
                     UserType = Enums.UserType.landlord,
 
                 };
+                LandlordUser2.DeviceTokens = new List<string> { "emuyK_OBTO1FbT1qiCuahf:APA91bECm-AVmGgbL75lHgX13u3xtAmx44TTcwdjtTp4WLRvDdJHEMs5NlAO5j8erEdyDVKJg0bCcyKkGcaEzOfkGJhJo7LcZZ326QptG-6THDSw21y37pk" };
                 LandlordUser2.Emails = new List<Email> { email };
                 email.owner = LandlordUser2;
                 email.ownerUsername = LandlordUser2.Username;
@@ -145,6 +146,7 @@ namespace semsary_backend.Service
 
                 };
                 Tenant2.Emails = new List<Email> { email };
+                Tenant2.DeviceTokens = new List<string> { "emuyK_OBTO1FbT1qiCuahf:APA91bECm-AVmGgbL75lHgX13u3xtAmx44TTcwdjtTp4WLRvDdJHEMs5NlAO5j8erEdyDVKJg0bCcyKkGcaEzOfkGJhJo7LcZZ326QptG-6THDSw21y37pk" };
                 email.owner = Tenant2;
                 email.ownerUsername = Tenant2.Username;
 

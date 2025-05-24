@@ -26,7 +26,8 @@ namespace semsary_backend
             builder.Services.AddSwaggerGen();
             builder.Services.AddSingleton<Service.EmailService>();
             builder.Services.AddSingleton<Service.TokenService>();
-            
+            builder.Services.AddScoped<NotificationService>();
+
             builder.Services.AddHttpContextAccessor();
             builder.Services.AddDbContext<EntityConfigurations.ApiContext>(options=>options.UseInMemoryDatabase("semsary_db"));
 

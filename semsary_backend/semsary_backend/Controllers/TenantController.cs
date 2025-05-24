@@ -12,7 +12,7 @@ namespace semsary_backend.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class TenantController(TokenService tokenGenertor, ApiContext apiContext) : ControllerBase
+    public class TenantController(TokenService tokenGenertor, ApiContext apiContext , NotificationService notificationService) : ControllerBase
     {
         [HttpPost("MakeComplaint/{rentalId}")]
         public async Task<IActionResult> MakeComplaint(string rentalId, [FromBody] ComplaintRequestForTentatDTO complaintRequestDTO)
@@ -114,6 +114,32 @@ namespace semsary_backend.Controllers
             await apiContext.Rates.AddAsync(rate);
             await apiContext.SaveChangesAsync();
             return Ok(new { message = "Rate submitted successfully" });
+        }
+
+        // temporary function to check notifications, it is not the final version of MakeRentalRequest function
+        [HttpPost("MakeRentalRequest/{houseId}")]
+        public async Task<IActionResult> MakeRentalRequest(string houseId)
+        {
+            var username = tokenGenertor.GetCurUser();
+            var user = await apiContext.SermsaryUsers
+                .FirstOrDefaultAsync(e => e.Username == username);
+
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+            if (user.UserType != Enums.UserType.Tenant)
+            {
+                return Forbid();
+            }
+            var house = await apiContext.Houses.Include(h => h.owner).FirstOrDefaultAsync(h => h.HouseId == houseId);
+            if (house == null)
+            {
+                return NotFound(new { message = "There is no house found with this id" });
+            }
+            Landlord lanlord = house.owner;
+            await notificationService.SendNotificationAsync("test", "first message", lanlord);
+            return Ok(new { message = "Rental request submitted successfully" });
         }
     }
 }

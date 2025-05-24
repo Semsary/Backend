@@ -1,6 +1,22 @@
 [
   {
     "ContainingType": "semsary_backend.Controllers.AuthController",
+    "Method": "SaveDeviceToken",
+    "RelativePath": "api/Auth/AllowNotifications",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "deviceToken",
+        "Type": "semsary_backend.DTO.DeviceTokenDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "semsary_backend.Controllers.AuthController",
     "Method": "Add",
     "RelativePath": "api/Auth/Customerservice/Add",
     "HttpMethod": "POST",
@@ -409,6 +425,22 @@
       {
         "Name": "complaintRequestDTO",
         "Type": "semsary_backend.DTO.ComplaintRequestForTentatDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "semsary_backend.Controllers.TenantController",
+    "Method": "MakeRentalRequest",
+    "RelativePath": "api/Tenant/MakeRentalRequest/{houseId}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "houseId",
+        "Type": "System.String",
         "IsRequired": true
       }
     ],
