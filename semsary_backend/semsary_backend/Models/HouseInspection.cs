@@ -34,6 +34,7 @@ namespace semsary_backend.Models
         
         public InspectionStatus inspectionStatus { get; set; }
         public List<string> HouseImages { get; set; }
+        [JsonIgnore]
         public House House { get; set; }
         [JsonIgnore]
         public CustomerService Inspector { get; set; } //customer service

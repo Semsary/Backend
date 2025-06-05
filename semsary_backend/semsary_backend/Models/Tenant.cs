@@ -28,8 +28,6 @@ namespace semsary_backend.Models
              
         public List<Rental> ?Rentals { get; set; }   
         public List<Rate> ?Rates { get; set; }     
-        public List<Message> ?SentMessages { get; set; }
-        public List<Message> ?ReceivedMessages { get; set; }
 
         public List<Complaint> Complaints { get; set; }
 

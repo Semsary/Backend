@@ -162,21 +162,7 @@ namespace semsary_backend.Controllers
         }
 
 
-        [HttpGet("getLandlord")]
-        public async Task<IActionResult> GetLandlord()
-        {
-            var landlords = await apiContext.SermsaryUsers
-                .OfType<Landlord>()
-                .ToListAsync();
-
-            if (landlords == null || landlords.Count == 0)
-            {
-                return NotFound("No landlords found.");
-            }
-
-            return Ok(landlords);
-        }
-
+        
 
         [HttpPost("Login")]
         public async Task<IActionResult> Login(LoginDTO loginDTO)

@@ -718,3 +718,13 @@ C:\Users\City Tech\Desktop\Backend\semsary_backend\semsary_backend\bin\Debug\net
 C:\Users\City Tech\Desktop\Backend\semsary_backend\semsary_backend\bin\Debug\net8.0\System.Management.dll
 C:\Users\City Tech\Desktop\Backend\semsary_backend\semsary_backend\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Management.dll
 C:\Users\City Tech\Desktop\Backend\semsary_backend\semsary_backend\bin\Debug\net8.0\private_key.json
+F:\FCI\Projects\Semsary back\Backend\semsary_backend\semsary_backend\bin\Debug\net8.0\private_key.json
+F:\FCI\Projects\Semsary back\Backend\semsary_backend\semsary_backend\bin\Debug\net8.0\FirebaseAdmin.dll
+F:\FCI\Projects\Semsary back\Backend\semsary_backend\semsary_backend\bin\Debug\net8.0\Google.Api.Gax.dll
+F:\FCI\Projects\Semsary back\Backend\semsary_backend\semsary_backend\bin\Debug\net8.0\Google.Api.Gax.Rest.dll
+F:\FCI\Projects\Semsary back\Backend\semsary_backend\semsary_backend\bin\Debug\net8.0\Google.Apis.dll
+F:\FCI\Projects\Semsary back\Backend\semsary_backend\semsary_backend\bin\Debug\net8.0\Google.Apis.Auth.dll
+F:\FCI\Projects\Semsary back\Backend\semsary_backend\semsary_backend\bin\Debug\net8.0\Google.Apis.Core.dll
+F:\FCI\Projects\Semsary back\Backend\semsary_backend\semsary_backend\bin\Debug\net8.0\Newtonsoft.Json.dll
+F:\FCI\Projects\Semsary back\Backend\semsary_backend\semsary_backend\bin\Debug\net8.0\System.Management.dll
+F:\FCI\Projects\Semsary back\Backend\semsary_backend\semsary_backend\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Management.dll

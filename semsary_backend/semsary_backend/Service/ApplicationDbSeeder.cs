@@ -2,6 +2,7 @@
 using semsary_backend.EntityConfigurations;
 using semsary_backend.Enums;
 using semsary_backend.Models;
+using System.Net;
 
 namespace semsary_backend.Service
 {
@@ -161,20 +162,39 @@ namespace semsary_backend.Service
             {
                 var house2 = new House
                 {
-                       HouseId = "H1",
-                       LandlordUsername = "landlord1",
+                    HouseId = "H1",
+                    LandlordUsername = "landlord1",
+                    HouseInspections = new()
                 };
                 var house3 = new House
                 {
                     HouseId = "H2",
                     LandlordUsername = "landlord1",
+                    HouseInspections=new()
                 };
                 dbContext.Houses.Add(house2);
                 dbContext.Houses.Add(house3);
                 dbContext.SaveChanges();
             }
             #endregion
+            #region indpiction
+            var indpect = new HouseInspection()
+            {
+                HouseId="H1",
+                HouseImages=new(),
+                HouseInspectionId="In1",
+                inspectionStatus= InspectionStatus.Aproved,
+                price=0,
+                NumberOfBeds=5,
+                InspectorId= "CustomerService1",
+                InspectionRequestDate=DateTime.UtcNow,
+                InspectionDate=DateTime.UtcNow,
+                
+            };
+            dbContext.HouseInspections.Add(indpect);
+            dbContext.SaveChanges();
 
+            #endregion
             #region RenalUnit
             //var rentalUnit = dbContext.RentalUnits.FirstOrDefault(h => h.RentalUnitId == "RentalUnit1");
             //if (rentalUnit == null)
@@ -189,20 +209,7 @@ namespace semsary_backend.Service
             #endregion
 
             #region Rental
-            var rental = dbContext.Rentals.FirstOrDefault(h => h.RentalId == 1);
-            if (rental == null)
-            {
-                var renatal2 = new Rental
-                {
-                    HouseId = "H1",
-                    TenantUsername = "tenant1",
-                    StartDate = DateTime.UtcNow,
-                    RentalUnitId = "RentalUnit1"
-                };
 
-                dbContext.Rentals.Add(renatal2);
-                dbContext.SaveChanges();
-            }
             #endregion
 
         }

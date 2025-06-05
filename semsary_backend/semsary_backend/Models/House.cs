@@ -1,4 +1,5 @@
 ﻿using semsary_backend.Enums;
+using System.Text.Json.Serialization;
 
 namespace semsary_backend.Models
 {
@@ -12,8 +13,8 @@ namespace semsary_backend.Models
 
         public List<Rate> ?Rates { get; set; } 
         public List<HouseInspection> HouseInspections { get; set; }
-        public List<Advertisement> Advertisements { get; set; } 
-        
+        public List<Advertisement> Advertisements { get; set; }
+        [JsonIgnore]
         public Landlord owner { get; set; }
         public List<Rental> Rentals { get; set; }
     }

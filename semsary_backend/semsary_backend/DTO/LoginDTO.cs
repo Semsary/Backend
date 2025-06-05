@@ -9,6 +9,6 @@ namespace semsary_backend.DTO
         [MaxLength(100)]
         [MinLength(8)]
         public required string Password { get; set; }
-        public string deviceToken { get; set; }
+        public string? deviceToken { get; set; }
     }
 }

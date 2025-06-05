@@ -7,6 +7,7 @@ using semsary_backend.EntityConfigurations;
 using semsary_backend.Service;
 using semsary_backend.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
 namespace semsary_backend.Controllers
 {
     [Route("api/[controller]")]
@@ -28,7 +29,7 @@ namespace semsary_backend.Controllers
             {
                 return Forbid();
             }
-            
+
             var house = new House
             {
                 governorate = houseDTO.address._gover,
@@ -37,7 +38,8 @@ namespace semsary_backend.Controllers
 
                 LandlordUsername = user.Username,
                 HouseId = Ulid.NewUlid().ToString(),
-              owner=(Landlord)user
+                owner = (Landlord)user,
+                HouseInspections = new()
 
             };
             await apiContext.Houses.AddAsync(house);
@@ -104,6 +106,7 @@ namespace semsary_backend.Controllers
             var house = await apiContext.Houses
                 .Include(h => h.Rates)
                 .Include(h => h.HouseInspections)
+                .Include(h=>h.Advertisements)
                 .FirstOrDefaultAsync(h => h.HouseId == HouseId);
             
             if (house == null)
@@ -117,7 +120,63 @@ namespace semsary_backend.Controllers
 
             return Ok(house);
         }
+        [Authorize]
+        [HttpPost("CreateAdvertisement")]
+        public async Task<IActionResult> CreateAdv(AdvDTO dto)
+        {
+            var username=tokenHandler.GetCurUser();
+            var user= await apiContext.Landlords.Where(r=>r.Username == username).FirstOrDefaultAsync();
+            if (user == null)
+                return Unauthorized();
+            var house = apiContext.Houses.Include(h => h.owner).Where(h => h.HouseId == dto.HouseId).FirstOrDefault();
+            if (house == null)
+                return NotFound();
+            if (house.owner.Username != username)
+                return Forbid();
+            var LastInspiction=apiContext.HouseInspections.Where(hin=>hin.HouseId == dto.HouseId && hin.inspectionStatus== Enums.InspectionStatus.Aproved).OrderByDescending(t=>t.InspectionDate).FirstOrDefault();
+            if (LastInspiction == null)
+                return BadRequest("house must have at least one inspiction");
+
+            var adv = new Advertisement()
+            {
+                AdvertisementId = Ulid.NewUlid().ToString(),
+                HouseId = dto.HouseId,
+                PublishDate = DateTime.Now,
+                RentalUnits = new()
+
+            };
+
+            if(dto.RentalType==Enums.RentalType.ByHouse)
+            {
+                var rentunit = new RentalUnit();
+                rentunit.RentalUnitId = Ulid.NewUlid().ToString();
+                rentunit.AdvertisementId=adv.AdvertisementId;
+                rentunit.MonthlyCost=dto.MonthlyCost;
+                rentunit.DailyCost=dto.DailyCost;
+                rentunit.Advertisement = adv;
+                adv.RentalUnits.Add(rentunit);
+                
+            }
+            else
+            {
+                for(int i=1;i<= LastInspiction.NumberOfBeds;i++)
+                {
+                    var rentunit = new RentalUnit();
+
+                    rentunit.RentalUnitId = Ulid.NewUlid().ToString();
+                    rentunit.AdvertisementId = adv.AdvertisementId;
+                    rentunit.MonthlyCost = dto.MonthlyCost;
+                    rentunit.DailyCost = dto.DailyCost;
+                    rentunit.Advertisement = adv;
+                    adv.RentalUnits.Add(rentunit);
+                }
+            }
+            apiContext.Advertisements.Add(adv);
+            apiContext.SaveChanges();
+            return Created();
+        }
         
 
     }
 }
+//w s

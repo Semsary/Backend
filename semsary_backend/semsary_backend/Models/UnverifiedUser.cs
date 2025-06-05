@@ -1,4 +1,5 @@
-﻿using semsary_backend.DTO;
+﻿using Org.BouncyCastle.Crypto;
+using semsary_backend.DTO;
 
 namespace semsary_backend.Models
 {
@@ -6,10 +7,14 @@ namespace semsary_backend.Models
     {
         public List<IdentityDocument>Identity { get; set; }
         public bool IsVerified { get; set; }
+        public bool IsBlocked {  get; set; }
+        public int Balance {  get; set; }
         public UnverifiedUser()
         {
+            Balance = 10000000;
             IsVerified = false;
-            Identity= new List<IdentityDocument>();
+            IsBlocked = false;
+            Identity = new List<IdentityDocument>();
         }
 
 

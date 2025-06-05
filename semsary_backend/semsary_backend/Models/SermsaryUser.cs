@@ -20,10 +20,6 @@ namespace semsary_backend.Models
         public Address Address { get; set; }
 
         public UserType UserType { get; set; }
-        [InverseProperty(nameof(Message.sender))]
-        public ICollection<Message>? SentMessages { get; set; }
-        [InverseProperty(nameof(Message.reciever))]
-        public ICollection<Message>? ReceivedMessages { get; set; }
 
 
 
