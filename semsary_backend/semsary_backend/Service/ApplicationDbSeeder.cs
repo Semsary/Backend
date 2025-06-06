@@ -177,7 +177,8 @@ namespace semsary_backend.Service
                 dbContext.SaveChanges();
             }
             #endregion
-            #region indpiction
+
+#region indpiction
             var indpect = new HouseInspection()
             {
                 HouseId="H1",
@@ -193,25 +194,58 @@ namespace semsary_backend.Service
             };
             dbContext.HouseInspections.Add(indpect);
             dbContext.SaveChanges();
+#endregion
 
-            #endregion
-            #region RenalUnit
-            //var rentalUnit = dbContext.RentalUnits.FirstOrDefault(h => h.RentalUnitId == "RentalUnit1");
-            //if (rentalUnit == null)
-            //{
-            //    var rentalUnit2 = new RentalUnit
-            //    {
-            //        RentalUnitId = "RentalUnit1",
-            //    };
-            //    dbContext.RentalUnits.Add(rentalUnit2);
-            //    dbContext.SaveChanges();
-            //}
-            #endregion
+#region Rental
+            var rental = dbContext.Rentals.FirstOrDefault(r => r.RentalId == 1);
+            Rental rental2 = null;
+            if (rental == null)
+            {
+                 rental2 = new Rental
+                {
+                    RentalId = 1,
+                    StartDate = DateTime.UtcNow.AddDays(1),
+                    EndDate = DateTime.UtcNow.AddDays(30),
+                    StartArrivalDate = DateTime.UtcNow.AddDays(1),
+                    EndArrivalDate = DateTime.UtcNow.AddDays(30),
+                    TenantUsername = "tenant1",
+                    HouseId = "H1",
+                    CreationDate = DateTime.UtcNow,
+                    status = RentalStatus.Bending,
+                    RentalType = RentalType.ByHouse,
+                    RentalUnitIds = new List<string> { "RentalUnit1" }
+                };
+                dbContext.Rentals.Add(rental2);
+                dbContext.SaveChanges();
+            }
+#endregion
 
-            #region Rental
+#region RenalUnit
+            var rentalUnit = dbContext.RentalUnits.FirstOrDefault(h => h.RentalUnitId == "RentalUnit1");
+            if (rentalUnit == null)
+            {
+                var rentalUnit1 = new RentalUnit
+                {
+                    RentalUnitId = "RentalUnit1",
+                    AdvertisementId = "Adv1",
+                    MonthlyCost = 1000,
+                    DailyCost = 100,
 
-            #endregion
+                };
+                var rentalUnit2 = new RentalUnit
+                {
+                    RentalUnitId = "RentalUnit2",
+                    AdvertisementId = "Adv1",
+                    MonthlyCost = 1000,
+                    DailyCost = 100,
+                };
+                rentalUnit1.Rentals = new List<Rental> {rental2 };
+                dbContext.RentalUnits.Add(rentalUnit1);
+                dbContext.RentalUnits.Add(rentalUnit2);
+                dbContext.SaveChanges();
+            }
 
+#endregion
         }
     }
 

@@ -16,7 +16,7 @@ namespace semsary_backend.Models
         public Gender gender { get; set; }
         public Governorate governorate { get; set; }
         public List<IdentityDocument> documents { get; set; }
-        public List<string> DeviceTokens { get; set; }
+        public List<string>? DeviceTokens { get; set; }
 
 
         public int age { get; set; }

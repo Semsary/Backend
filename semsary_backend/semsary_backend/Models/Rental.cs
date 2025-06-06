@@ -7,14 +7,15 @@ namespace semsary_backend.Models
     {
         public int RentalId { get; set; }
         public DateTime StartDate { get; set; }
-        public int Duration { get; set; } 
-        public string RentalUnitId { get; set; } 
-        public int RentalType { get; set; } 
+        public DateTime EndDate { get; set; } 
+        public RentalType RentalType { get; set; } 
         public string TenantUsername { get; set; }  
         public string HouseId { get; set; }
         public DateTime CreationDate { get; set; } 
-        public DateTime InspectionDate { get; set; }
+        public DateTime StartArrivalDate { get; set; }
+        public DateTime EndArrivalDate { get; set; }
         public RentalStatus status { get; set; }
+        public List<string> RentalUnitIds { get; set; } 
 
         public Complaint Complaint { get; set; }
         [JsonIgnore]

@@ -1,11 +1,14 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Org.BouncyCastle.Asn1.Esf;
 using semsary_backend.DTO;
 using semsary_backend.EntityConfigurations;
 using semsary_backend.Models;
 using semsary_backend.Service;
+using System.Data;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace semsary_backend.Controllers
 {
@@ -116,9 +119,82 @@ namespace semsary_backend.Controllers
             return Ok(new { message = "Rate submitted successfully" });
         }
 
-        // temporary function to check notifications, it is not the final version of MakeRentalRequest function
-        [HttpPost("MakeRentalRequest/{houseId}")]
-        public async Task<IActionResult> MakeRentalRequest(string houseId)
+        [HttpPost("Make/Rental/Request/")]
+        public async Task<IActionResult> MakeRentalRequest(RentalDTO rentalDTO)
+        {
+            var username = tokenGenertor.GetCurUser();
+            var user = await apiContext.Tenant.Where(r => r.Username == username).FirstOrDefaultAsync();
+            if (user == null)
+                return Unauthorized();
+
+            var house = apiContext.Houses.Include(h => h.owner).Where(h => h.HouseId == rentalDTO.HouseId).FirstOrDefault();
+            if (house == null)
+                return NotFound();
+
+            var rentalUnits = await apiContext.RentalUnits
+                .Where(u => rentalDTO.RentalUnitIds.Contains(u.RentalUnitId))
+                .Include(u => u.Rentals)
+                .ToListAsync();
+
+            if (rentalUnits.Count != rentalDTO.RentalUnitIds.Count || rentalDTO.RentalUnitIds.Count == 0)
+                return BadRequest(new { message = "Please enter valid rental unit IDs." });
+            
+            string advId = rentalUnits[0].AdvertisementId;
+            if (rentalUnits.Any(u => u.AdvertisementId != advId))
+                return BadRequest(new { message = "All rental units must belong to the same advertisement." });
+
+            DateTime currentDate = DateTime.UtcNow;
+            if (rentalDTO.StartDate < currentDate || rentalDTO.EndDate < currentDate)
+                return BadRequest(new { message = "The rental period must be in the future." });
+            
+            if (rentalDTO.StartDate > rentalDTO.EndDate )
+                return BadRequest(new { message = "The beginning of rental period cannot be after its end." });
+
+            var allRentals = rentalUnits.SelectMany(u => u.Rentals).ToList();
+
+            bool hasConflict = allRentals.Any(rent =>
+                 (rentalDTO.StartDate < rent.EndDate && rentalDTO.StartDate >= rent.StartDate) ||
+                 (rentalDTO.EndDate > rent.StartDate && rentalDTO.EndDate <= rent.EndDate));
+
+            if (hasConflict)
+                return BadRequest(new { message = "This rental unit is already rented during the requested period." });
+            
+            if (rentalDTO.StartArrivalDate > rentalDTO.EndDate || rentalDTO.EndArrivalDate > rentalDTO.EndDate)
+                return BadRequest(new { message = "Invalid arrival period, you cannot arrive after your rental period ends."});
+
+            if(rentalDTO.StartArrivalDate < currentDate || rentalDTO.EndArrivalDate < currentDate )
+                return BadRequest(new { message = "The arrival period must be in the future." });
+
+            if (rentalDTO.StartArrivalDate > rentalDTO.EndArrivalDate)
+                return BadRequest(new { message = "The beginning of arrival period cannot be after its end." });
+
+            if(rentalDTO.RentalUnitIds == null || rentalDTO.RentalUnitIds.Count == 0)
+                return BadRequest(new { message = "Rental units cannot be empty." });
+
+
+            var rental = new Rental
+            {
+                StartDate = rentalDTO.StartDate,
+                EndDate = rentalDTO.EndDate,
+                StartArrivalDate = rentalDTO.StartArrivalDate,
+                EndArrivalDate = rentalDTO.EndArrivalDate,
+                HouseId = rentalDTO.HouseId,
+                RentalType = rentalDTO.RentalType,
+                RentalUnitIds = rentalDTO.RentalUnitIds,
+                TenantUsername = user.Username,
+                CreationDate = DateTime.UtcNow,
+                status = Enums.RentalStatus.Bending
+            };
+
+            Landlord lanlord = house.owner;
+            await notificationService.SendNotificationAsync("New Rental Request", "There is a new ", lanlord);
+            return Ok(new { message = "Rental request submitted successfully" });
+
+        }
+
+        // temporary function to check notifications
+        [HttpPost("TestNotifications/{houseId}")]
+        public async Task<IActionResult> MakeRentalRequestt(string houseId)
         {
             var username = tokenGenertor.GetCurUser();
             var user = await apiContext.SermsaryUsers
