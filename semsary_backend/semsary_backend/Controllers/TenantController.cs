@@ -186,9 +186,12 @@ namespace semsary_backend.Controllers
                 status = Enums.RentalStatus.Bending
             };
 
+            await apiContext.Rentals.AddAsync(rental);
+            await apiContext.SaveChangesAsync();
+
             Landlord lanlord = house.owner;
             await notificationService.SendNotificationAsync("New Rental Request", "There is a new ", lanlord);
-            return Ok(new { message = "Rental request submitted successfully" });
+            return Ok(rental.RentalId);
 
         }
 
