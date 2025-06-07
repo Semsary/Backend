@@ -264,6 +264,40 @@ namespace semsary_backend.Controllers
             return BadRequest();
         }
 
+        [HttpPost("Confirm/Arrival/Request/{rentId}")]
+        public async Task<IActionResult> ConfirmArrival(string rentId)
+        {
+            var username = tokenGenertor.GetCurUser();
+            var user = await apiContext.Tenant.Where(r => r.Username == username).FirstOrDefaultAsync();
+            if (user == null)
+                return Unauthorized();
+
+            if (ModelState.IsValid == false)
+                return BadRequest(ModelState);
+
+            int rentalId;
+            if (!int.TryParse(rentId, out rentalId))
+                return BadRequest(new { message = "Invalid rental ID format." });
+
+            var rental = await apiContext.Rentals.FindAsync(rentalId);
+            if (rental == null)
+                return NotFound(new { message = "There is no rental found with this id" });
+
+            if (rental.TenantUsername != user.Username)
+                return Forbid();
+
+            if(rental.status == Enums.RentalStatus.Accepted)
+            {
+                rental.status = Enums.RentalStatus.ArrivalRequest;
+                var house = await apiContext.Houses.FindAsync(rental.HouseId);
+                if (house == null)
+                    return NotFound(new { message = "There is no house found with this id" });
+                var lanlord = house.owner;
+                await notificationService.SendNotificationAsync("طلب تأكيد الوصول", $"قام {user.Firstname} {user.Lastname}\nبطلب تأكيد الوصول قم لتأكيد أو رفض العملية فم بزيارة الموقع", lanlord);
+                return Ok(new { message = "Arrival request sent successfully" });
+            }
+            return BadRequest();
+        }
 
         // temporary function to check notifications
         [HttpPost("TestNotifications/{houseId}")]
