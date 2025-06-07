@@ -6,8 +6,14 @@ namespace semsary_backend.Models
 {
     public class Rental
     {
+        public Rental()
+        {
+            NumOfComments = 0;
+        }
+
         public int RentalId { get; set; }
         public int WarrantyMoney { get; set; }
+        public int NumOfComments { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; } 
         public RentalType RentalType { get; set; } 

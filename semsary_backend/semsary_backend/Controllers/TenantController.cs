@@ -85,12 +85,12 @@ namespace semsary_backend.Controllers
                 .FirstOrDefaultAsync(h => h.HouseId == houseId);
             if (house == null)
                 return NotFound(new { message = "There is no house found with this id" });
-            
-            var rental = house.Rentals.FirstOrDefault(r => r.TenantUsername == user.Username);
-            if(rental == null)
-                return Forbid();
 
-            if (rental.status != Enums.RentalStatus.ArrivalAccept)
+            var rental = house.Rentals
+                .Where(r => r.status == Enums.RentalStatus.ArrivalAccept)
+                .FirstOrDefault(r => r.TenantUsername == user.Username);
+
+            if (rental == null)
                 return Forbid();
 
             if (rateDTO.StarsNumber > 5 || rateDTO.StarsNumber < 0)
@@ -145,15 +145,20 @@ namespace semsary_backend.Controllers
             var house = await apiContext.Houses
                 .Include(r => r.Rentals)
                 .FirstOrDefaultAsync(h => h.HouseId == houseId);
+
             if (house == null)
                 return NotFound(new { message = "There is no house found with this id" });
 
-            var rental = house.Rentals.FirstOrDefault(r => r.TenantUsername == user.Username);
+            var rental = house.Rentals
+                .Where(r => r.status == Enums.RentalStatus.ArrivalAccept)
+                .FirstOrDefault(r => r.TenantUsername == user.Username);
+
             if (rental == null)
                 return Forbid();
 
-            if (rental.status != Enums.RentalStatus.ArrivalAccept)
-                return Forbid();
+            if(rental.NumOfComments > 10)
+                return BadRequest(new { message = "You cannot add more than 10 comments for the same rental." });
+
 
             var Comment = new Comment
             {
@@ -164,6 +169,7 @@ namespace semsary_backend.Controllers
             };
             await apiContext.AddAsync(Comment);
             await apiContext.SaveChangesAsync();
+            rental.NumOfComments++;
             return Ok(new { message = "Comment added successfully" });
         }
 
