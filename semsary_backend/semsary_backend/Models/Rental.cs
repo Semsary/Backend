@@ -1,4 +1,5 @@
 ﻿using semsary_backend.Enums;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
 namespace semsary_backend.Models
@@ -6,11 +7,13 @@ namespace semsary_backend.Models
     public class Rental
     {
         public int RentalId { get; set; }
+        public int WarrantyMoney { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; } 
         public RentalType RentalType { get; set; } 
         public string TenantUsername { get; set; }  
         public string HouseId { get; set; }
+        public DateTime ResponseDate { get; set; }
         public DateTime CreationDate { get; set; } 
         public DateTime StartArrivalDate { get; set; }
         public DateTime EndArrivalDate { get; set; }
@@ -18,6 +21,8 @@ namespace semsary_backend.Models
         public List<string> RentalUnitIds { get; set; } 
 
         public Complaint Complaint { get; set; }
+        [NotMapped]
+        public static readonly double OurPercentage = 0.05; 
         [JsonIgnore]
         public Tenant Tenant { get; set; }
         [JsonIgnore]

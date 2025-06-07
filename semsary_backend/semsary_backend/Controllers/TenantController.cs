@@ -17,7 +17,7 @@ namespace semsary_backend.Controllers
     [Authorize]
     public class TenantController(TokenService tokenGenertor, ApiContext apiContext , NotificationService notificationService) : ControllerBase
     {
-        [HttpPost("MakeComplaint/{rentalId}")]
+        [HttpPost("Make/Complaint/{rentalId}")]
         public async Task<IActionResult> MakeComplaint(string rentalId, [FromBody] ComplaintRequestForTentatDTO complaintRequestDTO)
         {
             var username = tokenGenertor.GetCurUser();
@@ -25,37 +25,27 @@ namespace semsary_backend.Controllers
                 .FirstOrDefaultAsync(e => e.Username == username);
 
             if(user ==null)
-            {
                 return Unauthorized();
-            }   
+              
             if (user.UserType != Enums.UserType.Tenant)
-            {
                 return Forbid();
-            }
+           
             if (complaintRequestDTO == null)
-            {
                 return BadRequest(new { message = "Invalid data." });
-            }
+            
             if (ModelState.IsValid == false)
-            {
                 return BadRequest(ModelState);
-            }
 
             int id;
             if(!int.TryParse(rentalId , out id))
-            {
                 return BadRequest(new { message = "Invalid data format." });
-            }
-
+            
             var rental = await apiContext.Rentals.FindAsync(id);
             if (rental == null)
-            {
                 return NotFound(new { message = "There is no rental found with this id" });
-            }
+
             if (rental.TenantUsername != user.Username)
-            {
                 return Forbid();
-            }
 
             var complaint = new Complaint
             {
@@ -71,7 +61,7 @@ namespace semsary_backend.Controllers
             return Ok(new { message = "Complaint submitted successfully" });
         }
 
-        [HttpPost("SetRate/{houseId}")]
+        [HttpPost("Set/Rate/{houseId}")]
         public async Task<IActionResult> SetRate(string houseId , [FromBody] RateDTO rateDTO)
         {
             var username = tokenGenertor.GetCurUser();
@@ -79,33 +69,27 @@ namespace semsary_backend.Controllers
                 .FirstOrDefaultAsync(e => e.Username == username);
 
             if (user == null)
-            {
                 return Unauthorized();
-            }
+            
             if (user.UserType != Enums.UserType.Tenant)
-            {
                 return Forbid();
-            }
+            
             if (rateDTO == null)
-            {
                 return BadRequest(new { message = "Invalid data." });
-            }
+            
             if (ModelState.IsValid == false)
-            {
                 return BadRequest(ModelState);
-            }
+            
             var house = await apiContext.Houses
                 .Include(r => r.Rentals)
                 .FirstOrDefaultAsync(h => h.HouseId == houseId);
             if (house == null)
-            {
                 return NotFound(new { message = "There is no house found with this id" });
-            }
+            
             var rental = house.Rentals.FirstOrDefault(r => r.TenantUsername == user.Username);
             if(rental == null)
-            {
                 return Forbid();
-            }
+            
             var rate = new Rate
             {
                 HouseId = houseId,
@@ -126,6 +110,12 @@ namespace semsary_backend.Controllers
             var user = await apiContext.Tenant.Where(r => r.Username == username).FirstOrDefaultAsync();
             if (user == null)
                 return Unauthorized();
+
+            if (rentalDTO == null)
+                return BadRequest(new { message = "Invalid data." });
+
+            if (ModelState.IsValid == false)
+                return BadRequest(ModelState);
 
             var house = apiContext.Houses.Include(h => h.owner).Where(h => h.HouseId == rentalDTO.HouseId).FirstOrDefault();
             if (house == null)
@@ -171,6 +161,28 @@ namespace semsary_backend.Controllers
             if(rentalDTO.RentalUnitIds == null || rentalDTO.RentalUnitIds.Count == 0)
                 return BadRequest(new { message = "Rental units cannot be empty." });
 
+            TimeSpan difference = rentalDTO.EndDate - rentalDTO.StartDate;
+
+            int WarrantyCost = 0;
+            if (difference.Days >= 30)
+            {
+                foreach (var rent in rentalUnits)
+                    WarrantyCost += rent.MonthlyCost/2;
+            }
+            else
+            {
+                int numOfWarrantyDays = 0;
+
+                if (difference.Days<=10)
+                    numOfWarrantyDays = 1;
+                else if (difference.Days <= 20)
+                    numOfWarrantyDays = 2;
+                else
+                    numOfWarrantyDays = 3;
+
+                foreach (var rent in rentalUnits)
+                    WarrantyCost += rent.DailyCost * numOfWarrantyDays;
+            }
 
             var rental = new Rental
             {
@@ -181,19 +193,77 @@ namespace semsary_backend.Controllers
                 HouseId = rentalDTO.HouseId,
                 RentalType = rentalDTO.RentalType,
                 RentalUnitIds = rentalDTO.RentalUnitIds,
+                WarrantyMoney = WarrantyCost,
                 TenantUsername = user.Username,
                 CreationDate = DateTime.UtcNow,
                 status = Enums.RentalStatus.Bending
-            };
+            };    
 
             await apiContext.Rentals.AddAsync(rental);
             await apiContext.SaveChangesAsync();
 
             Landlord lanlord = house.owner;
-            await notificationService.SendNotificationAsync("New Rental Request", "There is a new ", lanlord);
-            return Ok(rental.RentalId);
+            await notificationService.SendNotificationAsync("طلب تأجير جديد", $"لقد حصلت علي طلب تأجير جديد من {user.Firstname} {user.Lastname}\nللمزيد من التفاصيل قم بزيارة الموقع.", lanlord);
 
+            return Ok(new
+            {
+                message = "Rental request was done successfully",
+                rentalId = rental.RentalId
+            });
         }
+
+        [HttpPost("Cancel/rental/Request/{rentId}")]
+        public async Task<IActionResult> CancelRentalRequest(string rentId)
+        {
+            var username = tokenGenertor.GetCurUser();
+            var user = await apiContext.Tenant.Where(r => r.Username == username).FirstOrDefaultAsync();
+            if (user == null)
+                return Unauthorized();
+
+            if (ModelState.IsValid == false)
+                return BadRequest(ModelState);
+
+            int rentalId;
+            if (!int.TryParse(rentId, out rentalId))
+                return BadRequest(new { message = "Invalid rental ID format." });
+
+            var rental = await apiContext.Rentals.FindAsync(rentalId);
+            if (rental == null)
+                return NotFound(new { message = "There is no rental found with this id" });
+            
+            if (rental.TenantUsername != user.Username)
+                return Forbid();
+
+            var house = await apiContext.Houses.FindAsync(rental.HouseId);
+            if (house == null)
+                return NotFound(new { message = "There is no house found with this id" });
+            var lanlord = house.owner;
+
+            if (rental.status == Enums.RentalStatus.Bending)
+            {
+                apiContext.Rentals.Remove(rental);
+                await apiContext.SaveChangesAsync();
+                return Ok(new { message = "Rental request cancelled successfully" });
+            }
+            if(rental.status == Enums.RentalStatus.Accepted && rental.ResponseDate.AddDays(2) < DateTime.UtcNow)
+            {
+                lanlord.Balance += rental.WarrantyMoney;
+                apiContext.Remove(rental);
+                await apiContext.SaveChangesAsync();
+                await notificationService.SendNotificationAsync("تم الغاء طلب حجز", $"قام {user.Firstname} {user.Lastname}\nبإلغاء الحجز بعد الفترة المسموحة\n و قد تم تحويل فلوس الضمان لحسابك.", lanlord);
+                return Ok(new { message = "Rental request cancelled successfully" });
+            }
+            if (rental.status == Enums.RentalStatus.Accepted && rental.ResponseDate.AddDays(2) >= DateTime.UtcNow)
+            {
+                user.Balance += (int)(rental.WarrantyMoney - rental.WarrantyMoney * Rental.OurPercentage);
+                apiContext.Remove(rental);
+                await apiContext.SaveChangesAsync();
+                await notificationService.SendNotificationAsync("تم الغاء طلب حجز", $"قام {user.Firstname} {user.Lastname}\n بإلغاء الحجز خلال الفترة المسموحة\nتستطيع الآن القيام بعملية التأجير للآخرين في هذه الفترة", lanlord);
+                return Ok(new { message = "Rental request cancelled successfully" });
+            }
+            return BadRequest();
+        }
+
 
         // temporary function to check notifications
         [HttpPost("TestNotifications/{houseId}")]
@@ -217,7 +287,7 @@ namespace semsary_backend.Controllers
                 return NotFound(new { message = "There is no house found with this id" });
             }
             Landlord lanlord = house.owner;
-            await notificationService.SendNotificationAsync("test", "first message", lanlord);
+            await notificationService.SendNotificationAsync("تم الغاء طلب حجز", $"قام {user.Firstname} {user.Lastname}\n بإلغاء الحجز خلال الفترة المسموحة\nتستطيع الآن القيام بعملية التأجير للآخرين في هذه الفترة", lanlord);
             return Ok(new { message = "Rental request submitted successfully" });
         }
     }
