@@ -66,7 +66,11 @@ namespace semsary_backend.Controllers
             apiContext.HouseInspections.Add(inspection);
             await apiContext.SaveChangesAsync();
 
-            return Ok(new { message = $"House Inespection created successfully with id {inspection.HouseInspectionId}" });
+            return Ok(new
+            {
+                message = $"House Inespection created successfully",
+                InspectionId = inspection.HouseId
+            });
         }
 
         [HttpPut("HouseInspection/acknowledge/{houseInspectionId}")]

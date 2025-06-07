@@ -89,18 +89,82 @@ namespace semsary_backend.Controllers
             var rental = house.Rentals.FirstOrDefault(r => r.TenantUsername == user.Username);
             if(rental == null)
                 return Forbid();
-            
-            var rate = new Rate
+
+            if (rental.status != Enums.RentalStatus.ArrivalAccept)
+                return Forbid();
+
+            if (rateDTO.StarsNumber > 5 || rateDTO.StarsNumber < 0)
+                return BadRequest(new { message = "Number of stars." });
+
+
+            var pastRate = await apiContext.Rates
+                .Where(r => r.HouseId == houseId && r.TenantUsername == user.Username)
+                .FirstOrDefaultAsync();
+
+            if(pastRate == null)
+            {
+                var rate = new Rate
+                {
+                    HouseId = houseId,
+                    TenantUsername = user.Username,
+                    RateDate = DateTime.UtcNow,
+                    StarsNumber = rateDTO.StarsNumber,
+                };
+                await apiContext.Rates.AddAsync(rate);
+                await apiContext.SaveChangesAsync();
+            }
+            else
+            {
+                pastRate.StarsNumber = rateDTO.StarsNumber;
+                pastRate.RateDate = DateTime.UtcNow;
+                apiContext.Rates.Update(pastRate);
+                await apiContext.SaveChangesAsync();
+            }
+            return Ok(new { message = "Rate submitted successfully" });
+        }
+
+        [HttpPost("Add/Comment/{houseId}")]
+        public async Task<IActionResult> AddComment(string houseId, [FromBody] CommentDTO rateDTO)
+        {
+            var username = tokenGenertor.GetCurUser();
+            var user = await apiContext.SermsaryUsers
+                .FirstOrDefaultAsync(e => e.Username == username);
+
+            if (user == null)
+                return Unauthorized();
+
+            if (user.UserType != Enums.UserType.Tenant)
+                return Forbid();
+
+            if (rateDTO == null)
+                return BadRequest(new { message = "Invalid data." });
+
+            if (ModelState.IsValid == false)
+                return BadRequest(ModelState);
+
+            var house = await apiContext.Houses
+                .Include(r => r.Rentals)
+                .FirstOrDefaultAsync(h => h.HouseId == houseId);
+            if (house == null)
+                return NotFound(new { message = "There is no house found with this id" });
+
+            var rental = house.Rentals.FirstOrDefault(r => r.TenantUsername == user.Username);
+            if (rental == null)
+                return Forbid();
+
+            if (rental.status != Enums.RentalStatus.ArrivalAccept)
+                return Forbid();
+
+            var Comment = new Comment
             {
                 HouseId = houseId,
                 TenantUsername = user.Username,
-                RateDate = DateTime.UtcNow,
-                StarsNumber = rateDTO.StarsNumber,
-                RateDetails = rateDTO.RateDetails,
+                CommentDate = DateTime.UtcNow,
+                CommentDetails = rateDTO.CommentDetails,
             };
-            await apiContext.Rates.AddAsync(rate);
+            await apiContext.AddAsync(Comment);
             await apiContext.SaveChangesAsync();
-            return Ok(new { message = "Rate submitted successfully" });
+            return Ok(new { message = "Comment added successfully" });
         }
 
         [HttpPost("Make/Rental/Request/")]

@@ -27,7 +27,8 @@ namespace semsary_backend.Models
         public bool NeedNearVitalPlaces {  get; set; }
              
         public List<Rental> ?Rentals { get; set; }   
-        public List<Rate> ?Rates { get; set; }     
+        public List<Rate> ?Rates { get; set; }
+        public List<Comment>? Comments { get; set; }
 
         public List<Complaint> Complaints { get; set; }
 

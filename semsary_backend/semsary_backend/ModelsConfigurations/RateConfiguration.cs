@@ -27,8 +27,6 @@ namespace semsary_backend.ModelsConfigurations
             builder.Property(r => r.StarsNumber)
                 .IsRequired();
 
-            builder.Property(r => r.RateDetails)
-                .HasMaxLength(1000);
         }
     }
 }

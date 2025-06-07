@@ -11,7 +11,8 @@ namespace semsary_backend.Models
         public string? city { get; set; }
         public string? street { get; set; }
 
-        public List<Rate> ?Rates { get; set; } 
+        public List<Rate> ?Rates { get; set; }
+        public List<Comment>? Comments { get; set; }
         public List<HouseInspection> HouseInspections { get; set; }
         public List<Advertisement> Advertisements { get; set; }
         [JsonIgnore]

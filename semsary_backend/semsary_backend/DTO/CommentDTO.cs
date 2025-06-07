@@ -2,9 +2,9 @@
 
 namespace semsary_backend.DTO
 {
-    public class RateDTO
+    public class CommentDTO
     {
         [Required]
-        public byte StarsNumber { get; set; }
+        public string CommentDetails { get; set; }
     }
 }

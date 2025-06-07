@@ -10,7 +10,6 @@ namespace semsary_backend.Models
         public string TenantUsername { get; set; }
         public DateTime RateDate { get; set; }
         public byte StarsNumber { get; set; }
-        public string ?RateDetails { get; set; }
         [JsonIgnore]
         public Tenant Tenant { get; set; }
         [JsonIgnore]
