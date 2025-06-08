@@ -277,7 +277,7 @@ namespace semsary_backend.Controllers
 
             return Ok(new
             {
-                message = "Rental request was done successfully",
+                warrantyMoney = rental.WarrantyMoney,
                 rentalId = rental.RentalId
             });
         }
