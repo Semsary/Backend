@@ -47,6 +47,50 @@ namespace semsary_backend.Controllers
             return Ok(new { message = "House created successfully", houseId = house.HouseId });
 
         }
+
+        [HttpGet("Houses/GetAll")]
+        public async Task<IActionResult> GetAllHouses()
+        {
+            var userid = tokenHandler.GetCurUser();
+            var user = apiContext.SermsaryUsers.FirstOrDefault(x => x.Username == userid);
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+            if (user.UserType != Enums.UserType.landlord)
+            {
+                return Forbid();
+            }
+
+            var notInspectedHouses = await apiContext.Houses
+                .Where(h => h.LandlordUsername == user.Username && (h.HouseInspections == null || !h.HouseInspections.Any()))
+                .Select(h => new
+                {
+                    h.HouseId,
+                    h.governorate,
+                    h.city,
+                    h.street
+                })
+                .ToListAsync();
+
+            var inspectedHouses = await apiContext.Houses
+                .Where(h => h.LandlordUsername == user.Username && h.HouseInspections.Any())
+                .Select(h => new
+                {
+                    h.HouseId,
+                    h.governorate,
+                    h.city,
+                    h.street,
+                    LastInspectionStatus = h.HouseInspections
+                        .OrderByDescending(i => i.InspectionDate)
+                        .Select(i => i.inspectionStatus)
+                        .FirstOrDefault()
+                })
+                .ToListAsync();
+
+            return Ok(new { notInspectedHouses , inspectedHouses});
+        }
+
         [HttpPost("inspection/request/{HouseId}")]
         public async Task<IActionResult> requestInspection(string HouseId)
         {
