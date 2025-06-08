@@ -2,8 +2,9 @@
 {
     public enum InspectionStatus
     {
-        Bending,
+        Bending = 1 ,
         InProgress,
+        Completed,
         Aproved        
     }
 }

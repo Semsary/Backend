@@ -12,9 +12,9 @@ namespace semsary_backend.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class CustomerServiceController(TokenService tokenGenertor, ApiContext apiContext, R2StorageService r2StorageService) : ControllerBase
+    public class CustomerServiceController(TokenService tokenGenertor, ApiContext apiContext, R2StorageService r2StorageService , NotificationService notificationService) : ControllerBase
     {
-        [HttpPost("HouseInspection/create/{houseId}")]
+        [HttpPut("HouseInspection/create/{houseId}")]
         public async Task<IActionResult> MakeHouseInspection(string houseId, [FromBody] HouseInspectionDTO HouseInspectionDTO)
         {
             var username = tokenGenertor.GetCurUser();
@@ -38,39 +38,43 @@ namespace semsary_backend.Controllers
             if (house == null)
                 return NotFound(new { message = "House not found" });
 
-            var inspection = new HouseInspection
-            {
-                HouseInspectionId = Guid.NewGuid().ToString(),  // unique random value
-                HouseId = houseId,
-                InspectorId = user.Username,
-                InspectionDate = DateTime.UtcNow,
-                inspectionStatus = InspectionStatus.Aproved,
+            var inspection = await apiContext.HouseInspections
+                .Where(i => i.HouseId == houseId && i.inspectionStatus == Enums.InspectionStatus.InProgress)
+                .OrderByDescending(i => i.InspectionDate)
+                .FirstOrDefaultAsync();
 
-                FloorNumber = HouseInspectionDTO.FloorNumber,
-                NumberOfAirConditionnar = HouseInspectionDTO.NumberOfAirConditionnar,
-                NumberOfPathRooms = HouseInspectionDTO.NumberOfPathRooms,
-                NumberOfBedRooms = HouseInspectionDTO.NumberOfBedRooms,
-                NumberOfBeds = HouseInspectionDTO.NumberOfBeds,
-                NumberOfBalacons = HouseInspectionDTO.NumberOfBalacons,
-                NumberOfTables = HouseInspectionDTO.NumberOfTables,
-                NumberOfChairs = HouseInspectionDTO.NumberOfChairs,
-                HouseFeature=HouseInspectionDTO.HouseFeature,
-            };
+            if(inspection == null)
+                return BadRequest(new { message = "There is no inspection in progress for this house." });
+
+            var landlord = await apiContext.Landlords
+                .FirstOrDefaultAsync(l => l.Username == house.LandlordUsername);
+
+            if (landlord == null)
+                return NotFound(new { message = "Landlord not found" });
+
+            inspection.HouseInspectionId = Ulid.NewUlid().ToString(); 
+            inspection.InspectorId = user.Username;
+            inspection.InspectionDate = DateTime.UtcNow;
+            inspection.inspectionStatus = InspectionStatus.Completed;
+            inspection.FloorNumber = HouseInspectionDTO.FloorNumber;
+            inspection.NumberOfAirConditionnar = HouseInspectionDTO.NumberOfAirConditionnar;
+            inspection.NumberOfPathRooms = HouseInspectionDTO.NumberOfPathRooms;
+            inspection.NumberOfBedRooms = HouseInspectionDTO.NumberOfBedRooms;
+            inspection.NumberOfBeds = HouseInspectionDTO.NumberOfBeds;
+            inspection.NumberOfBalacons = HouseInspectionDTO.NumberOfBalacons;
+            inspection.NumberOfTables = HouseInspectionDTO.NumberOfTables;
+            inspection.NumberOfChairs = HouseInspectionDTO.NumberOfChairs;
+            inspection.HouseFeature = HouseInspectionDTO.HouseFeature;
+
             foreach(var img in HouseInspectionDTO.HouseImages)
             {
                 var url= await r2StorageService.UploadFileAsync(img);
                 inspection.HouseImages.Add(url);
-
             }
-            
-            apiContext.HouseInspections.Add(inspection);
             await apiContext.SaveChangesAsync();
 
-            return Ok(new
-            {
-                message = $"House Inespection created successfully",
-                InspectionId = inspection.HouseId
-            });
+            await notificationService.SendNotificationAsync("طلب تأكيد للمعاينة", $"قام {user.Firstname} {user.Lastname}\n من خدمة العملاء بادخال البيانات المطلوبة, قم بزيارة ملفك الشخصي لتأكيد بيانات المعاينة.", landlord);
+            return Ok(new{  message = $"House Inespection completed successfully"});
         }
 
         [HttpPut("HouseInspection/acknowledge/{houseInspectionId}")]
@@ -81,21 +85,23 @@ namespace semsary_backend.Controllers
                 .FirstOrDefaultAsync(e => e.Username == username);
 
             if (user == null || user.UserType != UserType.Customerservice)
-            {
                 return Forbid();
-            }
-            
             
             var houseInspection = await apiContext.FindAsync<HouseInspection>(houseInspectionId);
             if (houseInspection == null)
                 return NotFound(new { message = "House inspection not found" });
 
+            var landlord = await apiContext.Landlords
+                .FirstOrDefaultAsync(l => l.Username == houseInspection.House.LandlordUsername);
+            if (landlord == null)
+                return NotFound(new { message = "Landlord not found" });
+
             houseInspection.inspectionStatus = InspectionStatus.InProgress;
             houseInspection.InspectorId = user.Username;
 
+            await notificationService.SendNotificationAsync("طلب المعاينة قد التقدم", $"قام {user.Firstname} {user.Lastname}\nمن خدمة العملاء بتولي عملية معاينة المنزل\nتستطيع الآن التواصل معه عبر الدردشة الخاصة بالموقع لتحديد ميعاد المعاينة", landlord);
             await apiContext.SaveChangesAsync();
-
-            return Ok(new { message = $"House inspection status updated to \"{InspectionStatus.InProgress}\" successfully" });
+            return Ok(new { message = $"House inspection status updated to \"{InspectionStatus.InProgress}\" successfully" , InspectorId = user.Username });
         }
 
         [HttpGet("Complaint/GetAll")]
@@ -149,13 +155,15 @@ namespace semsary_backend.Controllers
             if (complaint == null)
                 return NotFound(new { message = "Complaint not found" });
 
-            complaint.status = ComplainStatus.Bending;
+            complaint.status = ComplainStatus.InProgress;
             complaint.VerifiedBy = user.Username;
             await apiContext.SaveChangesAsync();
 
-            return Ok(new { message = $"Complaint status updated to \"{complaint.status}\" successfully" });
+            await notificationService.SendNotificationAsync("تم استلام الشكوى", $"قام {user.Firstname} {user.Lastname}\nمن خدمة العملاء باستلام الشكوى الخاصة بك, تستطيع الآن التواصل معه عبر الدردشة الخاصة بالموقع.", complaint.Tenant);
+            return Ok(new { message = $"Complaint status updated to \"{complaint.status}\" successfully" , InspectorId = user.Username });
         }
-        [HttpPost("Complaint/Review/{complaintId}")]
+
+        [HttpPut("Complaint/Review/{complaintId}")]
         public async Task<IActionResult> ReviewComplaint(string complaintId , [FromBody] ComplaintReviewDTO complaintReviewDTO)
         {
             var username = tokenGenertor.GetCurUser();
@@ -180,6 +188,7 @@ namespace semsary_backend.Controllers
             complaint.VerifiedBy = user.Username;
             complaint.ComplaintReview = complaintReviewDTO.ComplaintReview;
             complaint.ReviewDate = DateTime.UtcNow;
+            await apiContext.SaveChangesAsync();
 
             return Ok(new { message = "Complaint review added successfully" });
            

@@ -1,4 +1,6 @@
-﻿namespace semsary_backend.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace semsary_backend.Models
 {
     public class Landlord:UnverifiedUser
     {
@@ -9,9 +11,6 @@
         public string ?ImageUrl { get; set; }
         public List<string> ?DeviceTokens { get; set; }
         public List<House> ?Houses { get; set; }
-        
-
-        
 
 
     }

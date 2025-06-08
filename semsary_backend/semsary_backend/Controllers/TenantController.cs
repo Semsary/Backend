@@ -232,27 +232,12 @@ namespace semsary_backend.Controllers
                 return BadRequest(new { message = "Rental units cannot be empty." });
 
             TimeSpan difference = rentalDTO.EndDate - rentalDTO.StartDate;
+            int months = (int)(difference.Days / 30);
+            int days = difference.Days % 30;
 
             int WarrantyCost = 0;
-            if (difference.Days >= 30)
-            {
-                foreach (var rent in rentalUnits)
-                    WarrantyCost += rent.MonthlyCost/2;
-            }
-            else
-            {
-                int numOfWarrantyDays = 0;
-
-                if (difference.Days<=10)
-                    numOfWarrantyDays = 1;
-                else if (difference.Days <= 20)
-                    numOfWarrantyDays = 2;
-                else
-                    numOfWarrantyDays = 3;
-
-                foreach (var rent in rentalUnits)
-                    WarrantyCost += rent.DailyCost * numOfWarrantyDays;
-            }
+            foreach(var rent in rentalUnits)
+                WarrantyCost += (int)((rent.MonthlyCost * months + rent.DailyCost * days) * Rental.OurPercentage);
 
             var rental = new Rental
             {
