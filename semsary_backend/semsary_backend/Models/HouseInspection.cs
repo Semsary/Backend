@@ -1,4 +1,5 @@
 ﻿using semsary_backend.Enums;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
 namespace semsary_backend.Models
@@ -29,7 +30,8 @@ namespace semsary_backend.Models
         public DateTime? InspectionDate { get; set; }
         public DateTime? InspectionRequestDate { get; set; }
 
-        public string InspectorId { get; set; }     //customer service
+        
+        public string? InspectorId { get; set; }     //customer service
         public string HouseId { get; set; }
         
         public InspectionStatus inspectionStatus { get; set; }
@@ -37,6 +39,7 @@ namespace semsary_backend.Models
         [JsonIgnore]
         public House House { get; set; }
         [JsonIgnore]
+        [ForeignKey("InspectorId")]
         public CustomerService Inspector { get; set; } //customer service
         public string? InspectionReport { get; set; } //json file
         
