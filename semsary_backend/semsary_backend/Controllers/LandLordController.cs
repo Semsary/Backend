@@ -13,15 +13,15 @@ namespace semsary_backend.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class LandLordController(TokenService tokenHandler,ApiContext apiContext) : ControllerBase
+    public class LandLordController(TokenService tokenHandler, ApiContext apiContext) : ControllerBase
     {
         [HttpPost("create/house")]
-        public async Task<IActionResult> CreateHouse([FromBody]  HouseDTO houseDTO)
+        public async Task<IActionResult> CreateHouse([FromBody] HouseDTO houseDTO)
         {
             var userid = tokenHandler.GetCurUser();
-            
-            var user=apiContext.SermsaryUsers.FirstOrDefault(x => x.Username == userid);
-            if(user == null)
+
+            var user = apiContext.SermsaryUsers.FirstOrDefault(x => x.Username == userid);
+            if (user == null)
             {
                 return Unauthorized();
             }
@@ -61,7 +61,6 @@ namespace semsary_backend.Controllers
             {
                 return Forbid();
             }
-
             var notInspectedHouses = await apiContext.Houses
                 .Where(h => h.LandlordUsername == user.Username && (h.HouseInspections == null || !h.HouseInspections.Any()))
                 .Select(h => new
@@ -88,7 +87,7 @@ namespace semsary_backend.Controllers
                 })
                 .ToListAsync();
 
-            return Ok(new { notInspectedHouses , inspectedHouses});
+            return Ok(new { notInspectedHouses, inspectedHouses });
         }
 
         [HttpPost("inspection/request/{HouseId}")]
@@ -133,6 +132,44 @@ namespace semsary_backend.Controllers
             
             return Ok(new { message = "Inspection requested successfully" });
         }
+
+        [HttpPut("inspection/approve/{HouseId}")]
+        public async Task<IActionResult> inspectionApprove(string HouseId)
+        {
+            var userid = tokenHandler.GetCurUser();
+            var user = apiContext.SermsaryUsers.FirstOrDefault(x => x.Username == userid);
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+            if (user.UserType != Enums.UserType.landlord)
+            {
+                return Forbid();
+            }
+            var house = await apiContext.Houses.FindAsync(HouseId);
+            if (house == null)
+            {
+                return NotFound(new { message = "House not found" });
+            }
+            if (house.LandlordUsername != user.Username)
+            {
+                return Forbid("You are not the owner of this house");
+            }
+
+            var lastInspection = await apiContext.HouseInspections
+                .Where(i => i.HouseId == HouseId && i.inspectionStatus == Enums.InspectionStatus.InProgress)
+                .OrderByDescending(i => i.InspectionDate)
+                .FirstOrDefaultAsync();
+
+            if (lastInspection == null)
+                return NotFound(new { message = "No inspections need to be approved found for this house" });
+
+            lastInspection.inspectionStatus = Enums.InspectionStatus.Aproved;
+            await apiContext.SaveChangesAsync();
+
+            return Ok(new { message = "Inspection approved successfully" });
+        }
+
         [HttpGet("get/house/{HouseId}")]
         public async Task<IActionResult> GetHouse(string HouseId)
         {
