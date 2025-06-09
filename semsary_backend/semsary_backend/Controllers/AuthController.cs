@@ -196,6 +196,13 @@ namespace semsary_backend.Controllers
                 askForNotificationPermission =  landlord.DeviceTokens == null 
                                                 || !landlord.DeviceTokens.Contains(loginDTO.deviceToken);
             }
+            else if(user.UserType == UserType.Customerservice)
+            {
+                CustomerService customer = (CustomerService)user;
+                askForNotificationPermission = customer.DeviceTokens == null
+                                                || !customer.DeviceTokens.Contains(loginDTO.deviceToken);
+            }
+           
             var response = new 
             {
                 Token = token,

@@ -50,6 +50,10 @@ namespace semsary_backend.Service
             {
                 deviceTokens = landlord.DeviceTokens;
             }
+            else if (user is CustomerService customerService)
+            {
+                deviceTokens = customerService.DeviceTokens;
+            }
             else
                 return;
 
