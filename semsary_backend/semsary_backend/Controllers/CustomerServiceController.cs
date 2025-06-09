@@ -224,5 +224,79 @@ namespace semsary_backend.Controllers
 
             return Ok(houseInspections);
         }
+
+        [HttpPut("Return/WarrantyMoney/Tenant/{complaintId}")]
+        public async Task<IActionResult> ReturnWarrantyMoneyToTenant(string complaintId)
+        {
+            var username = tokenGenertor.GetCurUser();
+            var user = await apiContext.SermsaryUsers
+                .FirstOrDefaultAsync(e => e.Username == username);
+
+            if (user == null || user.UserType != UserType.Customerservice)
+            {
+                return Forbid();
+            }
+
+            int id;
+            if (!int.TryParse(complaintId, out id))
+            {
+                return BadRequest(new { message = "Invalid data format." });
+            }
+
+            var complaint = await apiContext.Complaints
+                .Include(c => c.Rental)
+                .ThenInclude(r => r.Tenant)
+                .FirstOrDefaultAsync(c => c.ComplaintId == id);
+
+            if (complaint == null)
+                return NotFound(new { message = "Complaint not found" });
+
+            var tenant = complaint.Rental.Tenant;
+            if (tenant == null)
+                return NotFound(new { message = "Tenant not found" });
+
+            tenant.Balance += (int)(complaint.Rental.WarrantyMoney - complaint.Rental.WarrantyMoney * Rental.OurPercentage);
+            await apiContext.SaveChangesAsync();
+
+            await notificationService.SendNotificationAsync("تم استرداد مبلغ الضمان", $"تم استرداد مبلغ الضمان الخاص بك بنجاح, يمكنك الآن استخدامه في عمليات أخرى.", tenant);
+            return Ok(new { message = "Warranty money returned successfully" });
+        }
+
+        [HttpPut("Return/WarrantyMoney/Lanlord/{complaintId}")]
+        public async Task<IActionResult> ReturnWarrantyMoneyToLanlord(string complaintId)
+        {
+            var username = tokenGenertor.GetCurUser();
+            var user = await apiContext.SermsaryUsers
+                .FirstOrDefaultAsync(e => e.Username == username);
+
+            if (user == null || user.UserType != UserType.Customerservice)
+            {
+                return Forbid();
+            }
+
+            int id;
+            if (!int.TryParse(complaintId, out id))
+            {
+                return BadRequest(new { message = "Invalid data format." });
+            }
+
+            var complaint = await apiContext.FindAsync<Complaint>(id);
+            if (complaint == null)
+                return NotFound(new { message = "Complaint not found" });
+
+            var landlord = await apiContext.Rentals
+                 .Where(r => r.RentalId == complaint.RentalId)
+                 .Select(r => r.House.owner)
+                 .FirstOrDefaultAsync();
+
+            if (landlord == null)
+                return NotFound(new { message = "Landlord not found" });
+
+            landlord.Balance += (int)(complaint.Rental.WarrantyMoney * Rental.OurPercentage);
+            await apiContext.SaveChangesAsync();
+            await notificationService.SendNotificationAsync("تم استلام مبلغ ضمان", $"تم تحويل مبلغ الضمان الخاص بك بنجاح, لمعرفة رصيدك الحالي قم بزيارة ملفك الشخصي علي الموقع.", landlord);
+            return Ok(new { message = "Warranty money transformed to landlord successfully" });
+        }
+
     }
 }

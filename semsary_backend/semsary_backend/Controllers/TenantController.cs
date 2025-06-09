@@ -232,13 +232,26 @@ namespace semsary_backend.Controllers
                 return BadRequest(new { message = "Rental units cannot be empty." });
 
             TimeSpan difference = rentalDTO.EndDate - rentalDTO.StartDate;
-            int months = (int)(difference.Days / 30);
-            int days = difference.Days % 30;
-
             int WarrantyCost = 0;
-            foreach(var rent in rentalUnits)
-                WarrantyCost += (int)((rent.MonthlyCost * months + rent.DailyCost * days) * Rental.OurPercentage);
+            if (difference.Days >= 30)
+            {
+                foreach (var rent in rentalUnits)
+                    WarrantyCost += rent.MonthlyCost / 2;
+            }
+            else
+            {
+                int numOfWarrantyDays = 0;
 
+                if (difference.Days <= 10)
+                    numOfWarrantyDays = 1;
+                else if (difference.Days <= 20)
+                    numOfWarrantyDays = 2;
+                else
+                    numOfWarrantyDays = 3;
+
+                foreach (var rent in rentalUnits)
+                    WarrantyCost += rent.DailyCost * numOfWarrantyDays;
+            }
             var rental = new Rental
             {
                 StartDate = rentalDTO.StartDate,
@@ -354,30 +367,5 @@ namespace semsary_backend.Controllers
             return BadRequest();
         }
 
-        // temporary function to check notifications
-        [HttpPost("TestNotifications/{houseId}")]
-        public async Task<IActionResult> MakeRentalRequestt(string houseId)
-        {
-            var username = tokenGenertor.GetCurUser();
-            var user = await apiContext.SermsaryUsers
-                .FirstOrDefaultAsync(e => e.Username == username);
-
-            if (user == null)
-            {
-                return Unauthorized();
-            }
-            if (user.UserType != Enums.UserType.Tenant)
-            {
-                return Forbid();
-            }
-            var house = await apiContext.Houses.Include(h => h.owner).FirstOrDefaultAsync(h => h.HouseId == houseId);
-            if (house == null)
-            {
-                return NotFound(new { message = "There is no house found with this id" });
-            }
-            Landlord lanlord = house.owner;
-            await notificationService.SendNotificationAsync("تم الغاء طلب حجز", $"قام {user.Firstname} {user.Lastname}\n بإلغاء الحجز خلال الفترة المسموحة\nتستطيع الآن القيام بعملية التأجير للآخرين في هذه الفترة", lanlord);
-            return Ok(new { message = "Rental request submitted successfully" });
-        }
     }
 }
