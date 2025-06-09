@@ -250,13 +250,24 @@ namespace semsary_backend.Controllers
                     await apiContext.SaveChangesAsync();
                 }
             }
+            else if(user.UserType == UserType.Customerservice)
+            {
+                CustomerService customer = (CustomerService)user;
+                if (customer.DeviceTokens == null)
+                    customer.DeviceTokens = new List<string>();
+                if (!customer.DeviceTokens.Contains(deviceToken.DeviceToken))
+                {
+                   customer.DeviceTokens.Add(deviceToken.DeviceToken);
+                    await apiContext.SaveChangesAsync();
+                }
+            }
             else
             {
                 return Forbid("This user type doesn't support notifications.");
             }
             return Ok("Sending notifications is allowed successfully.");
         }
-
+    
 
         [Authorize]
         [HttpGet("GetUserInfo")]
