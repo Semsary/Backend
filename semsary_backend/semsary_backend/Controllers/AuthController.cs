@@ -267,7 +267,7 @@ namespace semsary_backend.Controllers
             }
             return Ok("Sending notifications is allowed successfully.");
         }
-    
+        
 
         [Authorize]
         [HttpGet("GetUserInfo")]
@@ -570,5 +570,93 @@ namespace semsary_backend.Controllers
             return Ok("identity was reviewed successfully");
 
         }
+        [Authorize]
+        [HttpPut("Edit/Profile")]
+        public async Task<IActionResult> EditProfile(EditProfileDTO edit)
+        {
+            var username = tokenGenertor.GetCurUser();
+            var user = await apiContext.SermsaryUsers
+                .Include(e => e.Emails)
+                .FirstOrDefaultAsync(e => e.Username == username);
+
+            if (user == null)
+                return NotFound("User not found.");
+
+            if (edit == null)
+                return BadRequest("Invalid input data.");
+
+            user.Firstname = edit.Firstname;
+            user.Lastname = edit.Lastname;
+            user.Address = edit.Address;
+            user.ProfileImageUrl = edit.ProfileImageUrl;
+
+            if (user.UserType == UserType.Tenant)
+            {
+                Tenant tenant = (Tenant)user;
+                tenant.height = edit.height;
+                tenant.age = edit.age;
+                tenant.gender = edit.gender;
+                tenant.NeedNearUniversity = edit.NeedNearUniversity;
+                tenant.NeedNearVitalPlaces = edit.NeedNearVitalPlaces;
+                tenant.NeedPublicService = edit.NeedPublicService;
+                tenant.NeedPublicTransportation = edit.NeedPublicTransportation;
+            }
+            return Ok("Profile updated successfully.");
+        }
+
+
+        [Authorize]
+        [HttpGet("Auth/Me/")]
+        public async Task<IActionResult> GetCurrentUserInfo()
+        {
+            var username = tokenGenertor.GetCurUser();
+            var user = await apiContext.SermsaryUsers
+                .Include(e => e.Emails)
+                .FirstOrDefaultAsync(e => e.Username == username);
+
+            if (user == null)
+                return NotFound("User not found.");
+
+            object otherTenantData = null;
+            object otherLanlordData = null;
+            var basicUserInfo = new
+            {
+                user.Firstname,
+                user.Lastname,
+                user.ProfileImageUrl,
+                Emails = user.Emails.Select(e => e.email).ToList(),
+                Address = user.Address,
+                userType = user.UserType
+            };
+            if (user.UserType == UserType.Tenant)
+            {
+                Tenant tenant = (Tenant)user;
+                otherTenantData = new
+                {
+                    isSmoker = tenant.IsSmoker,
+                    gender = tenant.gender,
+                    age = tenant.age,
+                    tenant.height,
+                    tenant.Balance,
+                    needPublicService = tenant.NeedPublicService,
+                    needPublicTransportation = tenant.NeedPublicTransportation,
+                    needNearUniversity = tenant.NeedNearUniversity,
+                    needNearVitalPlaces = tenant.NeedNearVitalPlaces,
+                    isVerified = tenant.IsVerified
+                };
+            }
+            else if (user.UserType == UserType.landlord)
+            {
+                Landlord landlord = (Landlord)user;
+                otherLanlordData = new
+                {
+                    landlord.Balance,
+                    landlord.IsVerified,
+                    landlord.ImageUrl
+                };
+            }
+            return Ok(new { basicUserInfo, otherTenantData, otherLanlordData });
+        }
+
     }
 }
