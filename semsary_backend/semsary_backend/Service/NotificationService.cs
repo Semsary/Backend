@@ -58,16 +58,15 @@ namespace semsary_backend.Service
 
             var multicastMessage = new MulticastMessage
             {
-                Notification = new Notification
+                Data = new Dictionary<string, string>
                 {
-                    Title = title,
-                    Body = message
+                    { "title", title },
+                    { "body", message }
                 },
                 Tokens = deviceTokens
             };
 
             var response = await FirebaseMessaging.DefaultInstance.SendEachForMulticastAsync(multicastMessage);
-
             await RemoveInvalidDeviceTokens(user, response, deviceTokens);
         }
         public async Task RemoveInvalidDeviceTokens(SermsaryUser user, BatchResponse response , List<string> deviceTokens) 

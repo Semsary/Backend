@@ -298,5 +298,56 @@ namespace semsary_backend.Controllers
             return Ok(new { message = "Warranty money transformed to landlord successfully" });
         }
 
+        [HttpPost("BlockLandlord/{complaintId}")]
+        public async Task<IActionResult> BlockLandlord(string complaintId , [FromBody] BlockIeddDTO blockIeddDTO)
+        {
+            var username = tokenGenertor.GetCurUser();
+            var user = await apiContext.SermsaryUsers
+                .FirstOrDefaultAsync(e => e.Username == username);
+
+            if (user == null || user.UserType != UserType.Customerservice)
+            {
+                return Forbid();
+            }
+
+            int id;
+            if (!int.TryParse(complaintId, out id))
+            {
+                return BadRequest(new { message = "Invalid data format." });
+            }
+            if (ModelState.IsValid == false)
+                return BadRequest(ModelState);
+
+            var complaint = await apiContext.FindAsync<Complaint>(id);
+            if (complaint == null)
+                return NotFound(new { message = "Complaint not found" });
+
+            var landlord = await apiContext.Rentals
+                 .Where(r => r.RentalId == complaint.RentalId)
+                 .Select(r => r.House.owner)
+                 .FirstOrDefaultAsync();
+
+            if (landlord == null)
+                return NotFound(new { message = "Landlord not found" });
+
+            var isBlocked = await apiContext.BlockedIds.FindAsync(landlord.SocialId);
+            if (isBlocked != null)
+                return BadRequest(new { message = "Landlord is already blocked." });
+
+            if(landlord.IsVerified == false)
+                return BadRequest(new { message = "Landlord is not verified, cannot be blocked." });
+
+            landlord.IsBlocked = true;
+            var blockedId = new BlockedId
+            {
+                SocialId = landlord.SocialId,
+                BlockedBy = user.Username,
+                BlockedDate = DateTime.UtcNow,
+                Reason = blockIeddDTO.Reason
+            };
+            await apiContext.BlockedIds.AddAsync(blockedId);
+            await apiContext.SaveChangesAsync();
+            return Ok(new { message = "Landlord blocked successfully" });
+        }
     }
 }

@@ -366,6 +366,29 @@ namespace semsary_backend.Controllers
             }
             return BadRequest();
         }
+        [HttpPost("TestNotifications/{houseId}")]
+        public async Task<IActionResult> TestNotifications(string houseId)
+        {
+            var username = tokenGenertor.GetCurUser();
+            var user = await apiContext.SermsaryUsers
+                .FirstOrDefaultAsync(e => e.Username == username);
 
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+            if (user.UserType != Enums.UserType.Tenant)
+            {
+                return Forbid();
+            }
+            var house = await apiContext.Houses.Include(h => h.owner).FirstOrDefaultAsync(h => h.HouseId == houseId);
+            if (house == null)
+            {
+                return NotFound(new { message = "There is no house found with this id" });
+            }
+            Landlord lanlord = house.owner;
+            await notificationService.SendNotificationAsync("تم الغاء طلب حجز", $"قام {user.Firstname} {user.Lastname}\n بإلغاء الحجز خلال الفترة المسموحة\nتستطيع الآن القيام بعملية التأجير للآخرين في هذه الفترة", lanlord);
+            return Ok(new { message = "Rental request submitted successfully" });
+        }
     }
 }
