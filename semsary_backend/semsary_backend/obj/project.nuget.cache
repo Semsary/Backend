@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "zZDcuLS1IWg=",
+  "dgSpecHash": "E1jxqjwe710=",
   "success": true,
   "projectFilePath": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\semsary_backend\\semsary_backend.csproj",
   "expectedPackageFiles": [
@@ -58,6 +58,8 @@
     "C:\\Users\\mahmoud\\.nuget\\packages\\microsoft.identitymodel.protocols\\7.1.2\\microsoft.identitymodel.protocols.7.1.2.nupkg.sha512",
     "C:\\Users\\mahmoud\\.nuget\\packages\\microsoft.identitymodel.protocols.openidconnect\\7.1.2\\microsoft.identitymodel.protocols.openidconnect.7.1.2.nupkg.sha512",
     "C:\\Users\\mahmoud\\.nuget\\packages\\microsoft.identitymodel.tokens\\8.9.0\\microsoft.identitymodel.tokens.8.9.0.nupkg.sha512",
+    "C:\\Users\\mahmoud\\.nuget\\packages\\microsoft.ml.onnxruntime\\1.16.3\\microsoft.ml.onnxruntime.1.16.3.nupkg.sha512",
+    "C:\\Users\\mahmoud\\.nuget\\packages\\microsoft.ml.onnxruntime.managed\\1.16.3\\microsoft.ml.onnxruntime.managed.1.16.3.nupkg.sha512",
     "C:\\Users\\mahmoud\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
     "C:\\Users\\mahmoud\\.nuget\\packages\\microsoft.sqlserver.server\\1.0.0\\microsoft.sqlserver.server.1.0.0.nupkg.sha512",
     "C:\\Users\\mahmoud\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
@@ -86,7 +88,7 @@
     "C:\\Users\\mahmoud\\.nuget\\packages\\system.identitymodel.tokens.jwt\\8.9.0\\system.identitymodel.tokens.jwt.8.9.0.nupkg.sha512",
     "C:\\Users\\mahmoud\\.nuget\\packages\\system.io.pipelines\\9.0.4\\system.io.pipelines.9.0.4.nupkg.sha512",
     "C:\\Users\\mahmoud\\.nuget\\packages\\system.management\\7.0.2\\system.management.7.0.2.nupkg.sha512",
-    "C:\\Users\\mahmoud\\.nuget\\packages\\system.memory\\4.5.4\\system.memory.4.5.4.nupkg.sha512",
+    "C:\\Users\\mahmoud\\.nuget\\packages\\system.memory\\4.5.5\\system.memory.4.5.5.nupkg.sha512",
     "C:\\Users\\mahmoud\\.nuget\\packages\\system.memory.data\\1.0.2\\system.memory.data.1.0.2.nupkg.sha512",
     "C:\\Users\\mahmoud\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
     "C:\\Users\\mahmoud\\.nuget\\packages\\system.reflection.metadata\\7.0.0\\system.reflection.metadata.7.0.0.nupkg.sha512",

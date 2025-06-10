@@ -30,7 +30,8 @@ namespace semsary_backend
 
             builder.Services.AddHttpContextAccessor();
             builder.Services.AddDbContext<EntityConfigurations.ApiContext>(options=>options.UseInMemoryDatabase("semsary_db"));
-
+            builder.Services.AddSingleton<PriceEstimator>();
+            builder.Services.AddSingleton<RecommendationSystem>();
 
             builder.Services.Configure<CloudflareR2Settings>(builder.Configuration.GetSection("CloudflareR2"));
 

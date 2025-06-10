@@ -8,12 +8,13 @@ using semsary_backend.Service;
 using semsary_backend.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Net;
+using semsary_backend.Enums;
 namespace semsary_backend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class LandLordController(TokenService tokenHandler, ApiContext apiContext) : ControllerBase
+    public class LandLordController(TokenService tokenHandler, ApiContext apiContext, NotificationService notificationService,PriceEstimator priceEstimator) : ControllerBase
     {
         [HttpPost("create/house")]
         public async Task<IActionResult> CreateHouse([FromBody] HouseDTO houseDTO)
@@ -83,7 +84,8 @@ namespace semsary_backend.Controllers
                     LastInspectionStatus = h.HouseInspections
                         .OrderByDescending(i => i.InspectionDate)
                         .Select(i => i.inspectionStatus)
-                        .FirstOrDefault()
+                        .FirstOrDefault(),
+                    estimated_Price= priceEstimator.EstimatePrice(h.HouseInspections.OrderByDescending(i => i.InspectionDate).FirstOrDefault(),h.governorate)
                 })
                 .ToListAsync();
 
@@ -94,8 +96,8 @@ namespace semsary_backend.Controllers
         public async Task<IActionResult> requestInspection(string HouseId)
         {
             var userid = tokenHandler.GetCurUser();
-            var user=apiContext.SermsaryUsers.FirstOrDefault(x => x.Username == userid);
-            if(user == null)
+            var user = apiContext.SermsaryUsers.FirstOrDefault(x => x.Username == userid);
+            if (user == null)
             {
                 return Unauthorized();
             }
@@ -103,7 +105,7 @@ namespace semsary_backend.Controllers
             {
                 return Forbid();
             }
-            
+
             var house = await apiContext.Houses.FindAsync(HouseId);
             if (house == null)
             {
@@ -112,10 +114,10 @@ namespace semsary_backend.Controllers
             if (house.LandlordUsername != user.Username)
             {
 
-                return Forbid( "You are not the owner of this house");
+                return Forbid("You are not the owner of this house");
             }
-            var landlord=(Landlord)user;
-            if(landlord.Balance<50)
+            var landlord = (Landlord)user;
+            if (landlord.Balance < 50)
             {
                 return BadRequest(new { message = "You don't have enough balance to request an inspection" });
             }
@@ -124,12 +126,12 @@ namespace semsary_backend.Controllers
             var inspection = new HouseInspection
             {
                 HouseId = house.HouseId,
-                InspectionRequestDate= DateTime.UtcNow,
+                InspectionRequestDate = DateTime.UtcNow,
             };
-            
+
             await apiContext.HouseInspections.AddAsync(inspection);
             await apiContext.SaveChangesAsync();
-            
+
             return Ok(new { message = "Inspection requested successfully" });
         }
 
@@ -174,8 +176,8 @@ namespace semsary_backend.Controllers
         public async Task<IActionResult> GetHouse(string HouseId)
         {
             var userid = tokenHandler.GetCurUser();
-            var user=apiContext.SermsaryUsers.FirstOrDefault(x => x.Username == userid);
-            if(user == null)
+            var user = apiContext.SermsaryUsers.FirstOrDefault(x => x.Username == userid);
+            if (user == null)
             {
                 return Unauthorized();
             }
@@ -183,20 +185,20 @@ namespace semsary_backend.Controllers
             {
                 return Forbid();
             }
-            
+
             var house = await apiContext.Houses
                 .Include(h => h.Rates)
                 .Include(h => h.HouseInspections)
-                .Include(h=>h.Advertisements)
+                .Include(h => h.Advertisements)
                 .FirstOrDefaultAsync(h => h.HouseId == HouseId);
-            
+
             if (house == null)
             {
                 return NotFound(new { message = "House not found" });
             }
-            if(house.LandlordUsername != user.Username)
+            if (house.LandlordUsername != user.Username)
             {
-                return Forbid( "You are not the owner of this house");
+                return Forbid("You are not the owner of this house");
             }
 
             return Ok(house);
@@ -205,8 +207,8 @@ namespace semsary_backend.Controllers
         [HttpPost("CreateAdvertisement")]
         public async Task<IActionResult> CreateAdv(AdvDTO dto)
         {
-            var username=tokenHandler.GetCurUser();
-            var user= await apiContext.Landlords.Where(r=>r.Username == username).FirstOrDefaultAsync();
+            var username = tokenHandler.GetCurUser();
+            var user = await apiContext.Landlords.Where(r => r.Username == username).FirstOrDefaultAsync();
             if (user == null)
                 return Unauthorized();
             var house = apiContext.Houses.Include(h => h.owner).Where(h => h.HouseId == dto.HouseId).FirstOrDefault();
@@ -214,7 +216,7 @@ namespace semsary_backend.Controllers
                 return NotFound();
             if (house.owner.Username != username)
                 return Forbid();
-            var LastInspiction=apiContext.HouseInspections.Where(hin=>hin.HouseId == dto.HouseId && hin.inspectionStatus== Enums.InspectionStatus.Aproved).OrderByDescending(t=>t.InspectionDate).FirstOrDefault();
+            var LastInspiction = apiContext.HouseInspections.Where(hin => hin.HouseId == dto.HouseId && hin.inspectionStatus == Enums.InspectionStatus.Aproved).OrderByDescending(t => t.InspectionDate).FirstOrDefault();
             if (LastInspiction == null)
                 return BadRequest("house must have at least one inspiction");
 
@@ -227,20 +229,20 @@ namespace semsary_backend.Controllers
 
             };
 
-            if(dto.RentalType==Enums.RentalType.ByHouse)
+            if (dto.RentalType == Enums.RentalType.ByHouse)
             {
                 var rentunit = new RentalUnit();
                 rentunit.RentalUnitId = Ulid.NewUlid().ToString();
-                rentunit.AdvertisementId=adv.AdvertisementId;
-                rentunit.MonthlyCost=dto.MonthlyCost;
-                rentunit.DailyCost=dto.DailyCost;
+                rentunit.AdvertisementId = adv.AdvertisementId;
+                rentunit.MonthlyCost = dto.MonthlyCost;
+                rentunit.DailyCost = dto.DailyCost;
                 rentunit.Advertisement = adv;
                 adv.RentalUnits.Add(rentunit);
-                
+
             }
             else
             {
-                for(int i=1;i<= LastInspiction.NumberOfBeds;i++)
+                for (int i = 1; i <= LastInspiction.NumberOfBeds; i++)
                 {
                     var rentunit = new RentalUnit();
 
@@ -256,8 +258,121 @@ namespace semsary_backend.Controllers
             apiContext.SaveChanges();
             return Created();
         }
-        
+        [Authorize]
+        [HttpGet("rental/request")]
+        public async Task<IActionResult> GetRentalRequests()
+        {
+            var username = tokenHandler.GetCurUser();
+            var user = await apiContext.Landlords.Where(r => r.Username == username).FirstOrDefaultAsync();
+            if (user == null)
+                return Unauthorized();
+            var requests = await apiContext.Rentals.Include(r => r.RentalUnit).ThenInclude(r => r.Advertisement).ThenInclude(a => a.House)
+                .Where(r => r.RentalUnit[0].Advertisement.House.owner.Username == username && r.status == Enums.RentalStatus.Bending &&r.WarrantyMoney<=r.Tenant.Balance)
+                .ToListAsync();
+            return Ok(requests);
 
+
+
+
+
+        }
+        [Authorize]
+        [HttpPut("rentalrequest/{RentalId}")]
+        public async Task<IActionResult> reviewRentalRequest(int RentalId, RentalStatus status)
+        {
+            var username = tokenHandler.GetCurUser();
+            var user = await apiContext.Landlords.Where(r => r.Username == username).FirstOrDefaultAsync();
+            if (user == null)
+                return Unauthorized();
+
+            var rental = await apiContext.Rentals.Include(r => r.RentalUnit).ThenInclude(r => r.Advertisement).ThenInclude(a => a.House)
+                .Where(r => r.RentalId == RentalId && r.RentalUnit[0].Advertisement.House.owner.Username == username && r.status == Enums.RentalStatus.Bending)
+                .FirstOrDefaultAsync();
+            if (rental == null)
+                return NotFound();
+            if (status == RentalStatus.Accepted)
+            {
+                rental.status = Enums.RentalStatus.Accepted;
+                var message = "لقد تم الموافقة على طلب الايجار خاصتك و تم خصم التامين من رصيدك";
+                var title = "تم الموافقة على طلب الايجار";
+                var tenant = await apiContext.Tenant.Include(t => t.DeviceTokens).FirstOrDefaultAsync(r => r.Username == rental.TenantUsername);
+                if (tenant == null)
+                {
+                    return NotFound("Tenant not found");
+                }
+
+                if (tenant.Balance< rental.WarrantyMoney)
+                {
+                    rental.status= Enums.RentalStatus.Rejected;
+                    var message2 = "لقد تم رفض طلب الايجار خاصتك بسبب عدم كفاية الرصيد, يرجى المحاولة مرة اخرى لاحقا";
+                    var title2 = "رفض طلب الايجار";
+                    await notificationService.SendNotificationAsync(title2, message2, tenant);
+                    apiContext.SaveChanges();
+                    return BadRequest("Tenant does not have enough balance to accept the rental request");
+                }
+
+                tenant.Balance -= rental.WarrantyMoney;
+
+                await notificationService.SendNotificationAsync(title, message, tenant);
+                apiContext.SaveChanges();
+                return Ok(new { message = "Rental request accepted successfully" });
+
+
+
+            }
+            else if (status == RentalStatus.Rejected)
+            {
+                rental.status = Enums.RentalStatus.Rejected;
+                var message = "لقد تم رفض طلب الايجار خاصتك, لمزيد من التفاصيل عن سبب الرفض تواصل مع المؤجر ";
+                var title = "رفض طلب الايجار";
+                var tenant = await apiContext.Tenant.Include(t => t.DeviceTokens).FirstOrDefaultAsync(r => r.Username == rental.TenantUsername);
+                await notificationService.SendNotificationAsync(title, message, tenant);
+                apiContext.SaveChanges();
+                return Ok(new { message = "Rental request rejected successfully" });
+            }
+            else
+            {
+                return BadRequest("Invalid status");
+            }
+
+
+        }
+        [Authorize]
+        [HttpPut("arrivalrequest/{RentalId}")]
+        public async Task<IActionResult> ReviewArrivalRequest(int RentalId,RentalStatus rentalStatus)
+        {
+            var username = tokenHandler.GetCurUser();
+            var user = await apiContext.Landlords.Where(r => r.Username == username).FirstOrDefaultAsync();
+            if (user == null)
+                return Unauthorized();
+
+            var rental = await apiContext.Rentals.Include(r => r.RentalUnit).ThenInclude(r => r.Advertisement).ThenInclude(a => a.House)
+                .Where(r => r.RentalId == RentalId && r.RentalUnit[0].Advertisement.House.owner.Username == username && r.status == Enums.RentalStatus.ArrivalRequest)
+                .FirstOrDefaultAsync();
+            if (rental == null)
+                return NotFound();
+            var tenant= await apiContext.Tenant.Include(t => t.DeviceTokens).FirstOrDefaultAsync(r => r.Username == rental.TenantUsername);
+            if (rentalStatus == Enums.RentalStatus.ArrivalAccept)
+            {
+                tenant.Balance += (int)(.95 * rental.WarrantyMoney);
+                var message = "لقد تم الموافقة على طلب الوصول خاصتك, و تم اضافة التامين الى رصيدك";
+                var title = "تم الموافقة على طلب الوصول";
+                await notificationService.SendNotificationAsync(title, message, tenant);
+                rental.status = Enums.RentalStatus.ArrivalAccept;
+                apiContext.SaveChanges();
+                return Ok(new { message = "Arrival request approved successfully" });
+            }
+            else if (rentalStatus == Enums.RentalStatus.ArrivalReject)
+            {
+                var message = "لقد تم رفض طلب الوصول خاصتك, لمزيد من التفاصيل عن سبب الرفض تواصل مع المؤجر ";
+                var title = "رفض طلب الوصول";
+                await notificationService.SendNotificationAsync(title, message, tenant);
+            }
+            
+                return BadRequest("Invalid status");
+            
+        }
+        
     }
 }
 //w s

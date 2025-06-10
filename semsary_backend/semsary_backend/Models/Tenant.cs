@@ -12,6 +12,10 @@ namespace semsary_backend.Models
     {
         public int Balance { get; set; }
         public int height {  get; set; }
+        public float weight {  get; set; }
+        public int NumberOfPeople { get; set; }
+        public RentalType2 FavouriteRentalType { get; set; }
+
         public Gender gender { get; set; }
         public int age { get; set; }
         public bool IsSmoker {  get; set; }
