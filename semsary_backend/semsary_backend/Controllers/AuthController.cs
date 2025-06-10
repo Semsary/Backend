@@ -652,7 +652,7 @@ namespace semsary_backend.Controllers
                 {
                     landlord.Balance,
                     landlord.IsVerified,
-                    landlord.ImageUrl
+                    landlord.IsBlocked
                 };
             }
             return Ok(new { basicUserInfo, otherTenantData, otherLanlordData });
