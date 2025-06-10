@@ -568,8 +568,8 @@ namespace semsary_backend.Controllers
                 identity.Owner.IsVerified = true;
             await apiContext.SaveChangesAsync();
             return Ok("identity was reviewed successfully");
-
         }
+
         [Authorize]
         [HttpPut("Edit/Profile")]
         public async Task<IActionResult> EditProfile(EditProfileDTO edit)

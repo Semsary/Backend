@@ -134,6 +134,41 @@ namespace semsary_backend.Controllers
 
             return Ok(new { message = "Inspection requested successfully" });
         }
+        [HttpGet("inspection/get/{HouseId}")]
+        public async Task<IActionResult> GetInspection(string HouseId)
+        {
+            var userid = tokenHandler.GetCurUser();
+            var user = apiContext.SermsaryUsers.FirstOrDefault(x => x.Username == userid);
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+            if (user.UserType != Enums.UserType.landlord)
+            {
+                return Forbid();
+            }
+            var house = await apiContext.Houses.FindAsync(HouseId);
+            if (house == null)
+            {
+                return NotFound(new { message = "House not found" });
+            }
+            if (house.LandlordUsername != user.Username)
+            {
+                return Forbid("You are not the owner of this house");
+            }
+
+            var lastInspection = await apiContext.HouseInspections
+                .Where(i => i.HouseId == HouseId && i.inspectionStatus == Enums.InspectionStatus.Completed)
+                .OrderByDescending(i => i.InspectionRequestDate)
+                .FirstOrDefaultAsync();
+
+            if (lastInspection == null)
+            {
+                return NotFound(new { message = "No Completed inspections found for this house" });
+            }
+
+            return Ok(lastInspection);
+        }
 
         [HttpPut("inspection/approve/{HouseId}")]
         public async Task<IActionResult> inspectionApprove(string HouseId)
@@ -159,7 +194,7 @@ namespace semsary_backend.Controllers
             }
 
             var lastInspection = await apiContext.HouseInspections
-                .Where(i => i.HouseId == HouseId && i.inspectionStatus == Enums.InspectionStatus.InProgress)
+                .Where(i => i.HouseId == HouseId && i.inspectionStatus == Enums.InspectionStatus.Completed)
                 .OrderByDescending(i => i.InspectionDate)
                 .FirstOrDefaultAsync();
 
@@ -270,9 +305,6 @@ namespace semsary_backend.Controllers
                 .Where(r => r.RentalUnit[0].Advertisement.House.owner.Username == username && r.status == Enums.RentalStatus.Bending &&r.WarrantyMoney<=r.Tenant.Balance)
                 .ToListAsync();
             return Ok(requests);
-
-
-
 
 
         }

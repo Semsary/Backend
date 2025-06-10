@@ -86,13 +86,20 @@ namespace semsary_backend.Controllers
 
             if (user == null || user.UserType != UserType.Customerservice)
                 return Forbid();
-            
-            var houseInspection = await apiContext.FindAsync<HouseInspection>(houseInspectionId);
+
+            var houseInspection = await apiContext.HouseInspections
+                .Include(hi => hi.House)  
+                .FirstOrDefaultAsync(hi => hi.HouseInspectionId == houseInspectionId);
+
             if (houseInspection == null)
                 return NotFound(new { message = "House inspection not found" });
 
+            if (houseInspection.inspectionStatus != InspectionStatus.Bending)
+                return BadRequest(new { message = "House inspection is not in bending status" });
+
             var landlord = await apiContext.Landlords
                 .FirstOrDefaultAsync(l => l.Username == houseInspection.House.LandlordUsername);
+            
             if (landlord == null)
                 return NotFound(new { message = "Landlord not found" });
 

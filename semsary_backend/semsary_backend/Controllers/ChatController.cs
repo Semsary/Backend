@@ -9,12 +9,11 @@ namespace semsary_backend.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class ChatController(TokenService tokenGenertor, ApiContext apiContext) : ControllerBase
+    public class ChatController(ApiContext apiContext) : ControllerBase
     {
-        [HttpGet("User/Info")]
-        public async Task<IActionResult> UserInfo()
+        [HttpGet("User/Info/{username}")]
+        public async Task<IActionResult> UserInfo(string username)
         {
-            var username = tokenGenertor.GetCurUser();
             var user = await apiContext.SermsaryUsers
                 .FirstOrDefaultAsync(e => e.Username == username);
             if (user == null)

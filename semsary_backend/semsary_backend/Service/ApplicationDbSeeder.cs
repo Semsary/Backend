@@ -185,7 +185,7 @@ namespace semsary_backend.Service
                 HouseId="H1",
                 HouseImages=new(),
                 HouseInspectionId="In1",
-                inspectionStatus= InspectionStatus.Aproved,
+                inspectionStatus= InspectionStatus.Completed,
                 price=0,
                 NumberOfBeds=5,
                 InspectorId= "CustomerService1",
