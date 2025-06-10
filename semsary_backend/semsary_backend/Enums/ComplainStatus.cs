@@ -7,7 +7,6 @@
         Aproved,
 
         // judging
-        BlockTenant,
         BlockLandlord,
         NoBlock
     }

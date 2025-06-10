@@ -140,7 +140,6 @@ namespace semsary_backend.Controllers
             return Ok(complaints);
         }
         [HttpPut("Complaint/acknowledge/{complaintId}")]
-
         public async Task<IActionResult> ComplaintStatus(string complaintId)
         {
             var username = tokenGenertor.GetCurUser();
@@ -158,16 +157,21 @@ namespace semsary_backend.Controllers
                 return BadRequest(new { message = "Invalid data format." });
             }
 
-            var complaint = await apiContext.FindAsync<Complaint>(id);
+            var complaint = await apiContext.Complaints.Include(r => r.Tenant)
+                .FirstOrDefaultAsync(c => c.ComplaintId == id);
+
             if (complaint == null)
                 return NotFound(new { message = "Complaint not found" });
+
+            if(complaint.status != ComplainStatus.Bending)
+                return BadRequest(new { message = "Complaint is not in bending status" });
 
             complaint.status = ComplainStatus.InProgress;
             complaint.VerifiedBy = user.Username;
             await apiContext.SaveChangesAsync();
 
             await notificationService.SendNotificationAsync("تم استلام الشكوى", $"قام {user.Firstname} {user.Lastname}\nمن خدمة العملاء باستلام الشكوى الخاصة بك, تستطيع الآن التواصل معه عبر الدردشة الخاصة بالموقع.", complaint.Tenant);
-            return Ok(new { message = $"Complaint status updated to \"{complaint.status}\" successfully" , InspectorId = user.Username });
+            return Ok(new { message = $"Complaint status updated to {complaint.status} successfully" , InspectorId = user.Username });
         }
 
         [HttpPut("Complaint/Review/{complaintId}")]
@@ -258,11 +262,15 @@ namespace semsary_backend.Controllers
             if (complaint == null)
                 return NotFound(new { message = "Complaint not found" });
 
+            if(complaint.status != ComplainStatus.InProgress)
+                return BadRequest(new { message = "Complaint is not in progress status" });
+
             var tenant = complaint.Rental.Tenant;
             if (tenant == null)
                 return NotFound(new { message = "Tenant not found" });
 
             tenant.Balance += (int)(complaint.Rental.WarrantyMoney - complaint.Rental.WarrantyMoney * Rental.OurPercentage);
+            complaint.status = ComplainStatus.NoBlock;
             await apiContext.SaveChangesAsync();
 
             await notificationService.SendNotificationAsync("تم استرداد مبلغ الضمان", $"تم استرداد مبلغ الضمان الخاص بك بنجاح, يمكنك الآن استخدامه في عمليات أخرى.", tenant);
@@ -287,19 +295,26 @@ namespace semsary_backend.Controllers
                 return BadRequest(new { message = "Invalid data format." });
             }
 
-            var complaint = await apiContext.FindAsync<Complaint>(id);
+            var complaint = await apiContext.Complaints
+                .Include(r => r.Tenant)
+                .Include(r => r.Rental)
+                .ThenInclude(r => r.House)
+                .ThenInclude(h => h.owner)
+                .FirstOrDefaultAsync(c => c.ComplaintId == id);
+
             if (complaint == null)
                 return NotFound(new { message = "Complaint not found" });
 
-            var landlord = await apiContext.Rentals
-                 .Where(r => r.RentalId == complaint.RentalId)
-                 .Select(r => r.House.owner)
-                 .FirstOrDefaultAsync();
+            if (complaint.status != ComplainStatus.InProgress)
+                return BadRequest(new { message = "Complaint is not in progress status" });
+
+            var landlord = complaint.Rental.House.owner;
 
             if (landlord == null)
                 return NotFound(new { message = "Landlord not found" });
 
             landlord.Balance += (int)(complaint.Rental.WarrantyMoney * Rental.OurPercentage);
+            complaint.status = ComplainStatus.NoBlock;
             await apiContext.SaveChangesAsync();
             await notificationService.SendNotificationAsync("تم استلام مبلغ ضمان", $"تم تحويل مبلغ الضمان الخاص بك بنجاح, لمعرفة رصيدك الحالي قم بزيارة ملفك الشخصي علي الموقع.", landlord);
             return Ok(new { message = "Warranty money transformed to landlord successfully" });

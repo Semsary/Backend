@@ -245,8 +245,28 @@ namespace semsary_backend.Service
                 dbContext.RentalUnits.Add(rentalUnit2);
                 dbContext.SaveChanges();
             }
-
 #endregion
+
+#region Complaint
+        var complaint = dbContext.Complaints.FirstOrDefault(c => c.ComplaintId == 1);
+            if (complaint == null)
+            {
+                var complaint2 = new Complaint
+                {
+                    ComplaintDetails = "This is a test complaint",
+                    SubmittedBy = "tenant1",
+                    SubmittingDate = DateTime.UtcNow,
+                    status = ComplainStatus.InProgress,
+                    RentalId = 1
+                };
+                dbContext.Complaints.Add(complaint2);
+                dbContext.SaveChanges();
+            }
+
+
+
+            #endregion
+
         }
     }
 
