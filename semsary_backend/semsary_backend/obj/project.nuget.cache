@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "E1jxqjwe710=",
+  "dgSpecHash": "VEnniTWxevs=",
   "success": true,
-  "projectFilePath": "F:\\FCI\\Projects\\Semsary back\\Backend\\semsary_backend\\semsary_backend\\semsary_backend.csproj",
+  "projectFilePath": "F:\\FCI\\Projects\\semsary backend\\Backend\\semsary_backend\\semsary_backend\\semsary_backend.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mahmoud\\.nuget\\packages\\awssdk.core\\3.7.300\\awssdk.core.3.7.300.nupkg.sha512",
     "C:\\Users\\mahmoud\\.nuget\\packages\\awssdk.s3\\3.7.300\\awssdk.s3.3.7.300.nupkg.sha512",

@@ -22,13 +22,15 @@ namespace semsary_backend.Controllers
         private readonly TokenService tokenGenertor;
         private readonly ApiContext apiContext;
         private readonly R2StorageService storageService;
+        private readonly NotificationService notificationService;
 
-        public AuthController(EmailService emailService, TokenService TokenGenertor, ApiContext apiContext,R2StorageService storageService)
+        public AuthController(EmailService emailService, TokenService TokenGenertor, ApiContext apiContext,R2StorageService storageService,NotificationService notificationService)
         {
             _emailService = emailService;
             tokenGenertor = TokenGenertor;
             this.apiContext = apiContext;
             this.storageService = storageService;
+            this.notificationService = notificationService;
         }
 
 
@@ -508,8 +510,7 @@ namespace semsary_backend.Controllers
             var user = await apiContext.UnverifiedUsers.Include(e => e.Identity).FirstOrDefaultAsync(e => e.Username == username);
             if (user == null)
                 return NotFound("User not found.");
-            if (user.IsVerified)
-                return BadRequest("this user is already verified");
+            
             if (user.Identity.Count == 0)
                 return NotFound("this user didn't submit any identity");
             
@@ -566,6 +567,41 @@ namespace semsary_backend.Controllers
             identity.ReviewedAt = DateTime.UtcNow;
             if (status == IdentityStatus.Verified)
                 identity.Owner.IsVerified = true;
+            else if (status == IdentityStatus.Rejected)
+            {
+                identity.Owner.IsVerified = false;
+                identity.Owner.Identity.Clear(); // Clear the identity documents if rejected
+            }
+            else
+            {
+                return BadRequest("Invalid status. Only Verified or Rejected are allowed.");
+            }
+            
+            var message = status == IdentityStatus.Verified 
+                ? "Your identity has been verified successfully." 
+                : "Your identity verification has been rejected. Comment: " + comment;
+            var title= status == IdentityStatus.Verified 
+                ? "Identity Verified" 
+                : "Identity Rejected";
+
+            // Send notification to the user not email 
+            if (identity.Owner.UserType == UserType.Tenant)
+            {
+                Tenant? tenant = apiContext.Tenant.Where(r => r.Username == identity.Owner.Username).FirstOrDefault();
+                if (tenant.DeviceTokens != null && tenant.DeviceTokens.Count > 0)
+                {
+                    await notificationService.SendNotificationAsync(title, message,tenant);
+                }
+            }
+            else if (identity.Owner.UserType == UserType.landlord)
+            {
+                Landlord? landlord = apiContext.Landlords.Where(r => r.Username == identity.Owner.Username).FirstOrDefault();
+                if (landlord.DeviceTokens != null && landlord.DeviceTokens.Count > 0)
+                {
+                    await notificationService.SendNotificationAsync(title,message ,landlord);
+                }
+            }
+
             await apiContext.SaveChangesAsync();
             return Ok("identity was reviewed successfully");
         }
