@@ -610,7 +610,7 @@ namespace semsary_backend.Controllers
 
         [Authorize]
         [HttpPut("Edit/Profile")]
-        public async Task<IActionResult> EditProfile(EditProfileDTO edit)
+        public async Task<IActionResult> EditProfile([FromForm] EditProfileDTO edit)
         {
             var username = tokenGenertor.GetCurUser();
             var user = await apiContext.SermsaryUsers
@@ -626,7 +626,7 @@ namespace semsary_backend.Controllers
             user.Firstname = edit.Firstname;
             user.Lastname = edit.Lastname;
             user.Address = edit.Address;
-            user.ProfileImageUrl = edit.ProfileImageUrl;
+            user.ProfileImageUrl =edit.ProfileImage is null?null: await storageService.UploadFileAsync( edit.ProfileImage);
 
             if (user.UserType == UserType.Tenant)
             {
@@ -639,6 +639,8 @@ namespace semsary_backend.Controllers
                 tenant.NeedPublicService = edit.NeedPublicService;
                 tenant.NeedPublicTransportation = edit.NeedPublicTransportation;
             }
+            apiContext.SaveChanges();
+
             return Ok("Profile updated successfully.");
         }
 

@@ -9,7 +9,7 @@ namespace semsary_backend.DTO
         public string Firstname { get; set; }
         public string Lastname { get; set; }
         public Address Address { get; set; }
-        public string? ProfileImageUrl { get; set; }
+        public IFormFile? ProfileImage { get; set; }
 
         public int height { get; set; }
         public Gender gender { get; set; }
