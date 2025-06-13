@@ -623,21 +623,35 @@ namespace semsary_backend.Controllers
             if (edit == null)
                 return BadRequest("Invalid input data.");
 
-            user.Firstname = edit.Firstname;
-            user.Lastname = edit.Lastname;
-            user.Address = edit.Address;
+            if (edit.Firstname != null)
+                user.Firstname = edit.Firstname;
+
+            if (edit.Lastname != null)
+                user.Lastname = edit.Lastname;
+
+
+            if(edit.gover != null)
+            {
+                user.Address = new Address();
+                user.Address._gover = edit.gover.Value;
+                if (edit.city != null)
+                    user.Address._city = edit.city;
+                if (edit.street != null)
+                    user.Address.street = edit.street;
+            }
+
             user.ProfileImageUrl =edit.ProfileImage is null?null: await storageService.UploadFileAsync( edit.ProfileImage);
 
             if (user.UserType == UserType.Tenant)
             {
                 Tenant tenant = (Tenant)user;
-                tenant.height = edit.height;
-                tenant.age = edit.age;
-                tenant.gender = edit.gender;
-                tenant.NeedNearUniversity = edit.NeedNearUniversity;
-                tenant.NeedNearVitalPlaces = edit.NeedNearVitalPlaces;
-                tenant.NeedPublicService = edit.NeedPublicService;
-                tenant.NeedPublicTransportation = edit.NeedPublicTransportation;
+                tenant.height = edit.height == null ? 0 : edit.height.Value;
+                tenant.age = edit.age == null ? 0 : edit.age.Value;
+                tenant.gender = edit.gender == null ? 0 : edit.gender.Value;
+                tenant.NeedNearUniversity = edit.NeedNearUniversity == null ? false : edit.NeedNearUniversity.Value;
+                tenant.NeedNearVitalPlaces = edit.NeedNearVitalPlaces == null ? false : edit.NeedNearVitalPlaces.Value;
+                tenant.NeedPublicService = edit.NeedPublicService == null ? false : edit.NeedPublicService.Value;
+                tenant.NeedPublicTransportation = edit.NeedPublicTransportation == null ? false : edit.NeedPublicTransportation.Value;
             }
             apiContext.SaveChanges();
 
