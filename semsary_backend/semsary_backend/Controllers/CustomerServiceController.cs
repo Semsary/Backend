@@ -369,6 +369,13 @@ namespace semsary_backend.Controllers
                 BlockedDate = DateTime.UtcNow,
                 Reason = blockIeddDTO.Reason
             };
+            var advs = await apiContext.Advertisements
+                .Include(a => a.House)
+                .Where(a => a.House.owner.Username == landlord.Username)
+                .ToListAsync();
+
+            apiContext.Advertisements.RemoveRange(advs);
+
             await apiContext.BlockedIds.AddAsync(blockedId);
             await apiContext.SaveChangesAsync();
             return Ok(new { message = "Landlord blocked successfully" });

@@ -21,15 +21,13 @@ namespace semsary_backend.Controllers
         {
             var userid = tokenHandler.GetCurUser();
 
-            var user = apiContext.SermsaryUsers.FirstOrDefault(x => x.Username == userid);
+            var user = apiContext.Landlords.FirstOrDefault(x => x.Username == userid);
             if (user == null)
             {
                 return Unauthorized();
             }
-            if (user.UserType != Enums.UserType.landlord)
-            {
-                return Forbid();
-            }
+            if (user.IsBlocked == true)
+                return BadRequest("You are blocked so you can't perform this operation");
 
             var house = new House
             {
@@ -53,15 +51,14 @@ namespace semsary_backend.Controllers
         public async Task<IActionResult> GetAllHouses()
         {
             var userid = tokenHandler.GetCurUser();
-            var user = apiContext.SermsaryUsers.FirstOrDefault(x => x.Username == userid);
+            var user = apiContext.Landlords.FirstOrDefault(x => x.Username == userid);
             if (user == null)
             {
                 return Unauthorized();
             }
-            if (user.UserType != Enums.UserType.landlord)
-            {
-                return Forbid();
-            }
+            if (user.IsBlocked == true)
+                return BadRequest("You are blocked so you can't perform this operation");
+
             var notInspectedHouses = await apiContext.Houses
                 .Where(h => h.LandlordUsername == user.Username && (h.HouseInspections == null || h.HouseInspections.Count()==0))
                 .Select(h => new
@@ -96,15 +93,14 @@ namespace semsary_backend.Controllers
         public async Task<IActionResult> requestInspection(string HouseId)
         {
             var userid = tokenHandler.GetCurUser();
-            var user = apiContext.SermsaryUsers.FirstOrDefault(x => x.Username == userid);
+            var user = apiContext.Landlords.FirstOrDefault(x => x.Username == userid);
             if (user == null)
             {
                 return Unauthorized();
             }
-            if (user.UserType != Enums.UserType.landlord)
-            {
-                return Forbid();
-            }
+
+            if (user.IsBlocked == true)
+                return BadRequest("You are blocked so you can't perform this operation");
 
             var house = await apiContext.Houses.FindAsync(HouseId);
             if (house == null)
@@ -138,15 +134,12 @@ namespace semsary_backend.Controllers
         public async Task<IActionResult> GetInspection(string HouseId)
         {
             var userid = tokenHandler.GetCurUser();
-            var user = apiContext.SermsaryUsers.FirstOrDefault(x => x.Username == userid);
+            var user = apiContext.Landlords.FirstOrDefault(x => x.Username == userid);
             if (user == null)
             {
                 return Unauthorized();
             }
-            if (user.UserType != Enums.UserType.landlord)
-            {
-                return Forbid();
-            }
+
             var house = await apiContext.Houses.FindAsync(HouseId);
             if (house == null)
             {
@@ -174,15 +167,12 @@ namespace semsary_backend.Controllers
         public async Task<IActionResult> inspectionApprove(string HouseId)
         {
             var userid = tokenHandler.GetCurUser();
-            var user = apiContext.SermsaryUsers.FirstOrDefault(x => x.Username == userid);
+            var user = apiContext.Landlords.FirstOrDefault(x => x.Username == userid);
             if (user == null)
             {
                 return Unauthorized();
             }
-            if (user.UserType != Enums.UserType.landlord)
-            {
-                return Forbid();
-            }
+
             var house = await apiContext.Houses.FindAsync(HouseId);
             if (house == null)
             {
@@ -211,14 +201,10 @@ namespace semsary_backend.Controllers
         public async Task<IActionResult> GetHouse(string HouseId)
         {
             var userid = tokenHandler.GetCurUser();
-            var user = apiContext.SermsaryUsers.FirstOrDefault(x => x.Username == userid);
+            var user = apiContext.Landlords.FirstOrDefault(x => x.Username == userid);
             if (user == null)
             {
                 return Unauthorized();
-            }
-            if (user.UserType != Enums.UserType.landlord)
-            {
-                return Forbid();
             }
 
             var house = await apiContext.Houses
@@ -246,6 +232,8 @@ namespace semsary_backend.Controllers
             var user = await apiContext.Landlords.Where(r => r.Username == username).FirstOrDefaultAsync();
             if (user == null)
                 return Unauthorized();
+            if(user.IsBlocked == true)
+                return BadRequest("You are blocked so you can't perform this operation");
             var house = apiContext.Houses.Include(h => h.owner).Where(h => h.HouseId == dto.HouseId).FirstOrDefault();
             if (house == null)
                 return NotFound();
@@ -319,6 +307,9 @@ namespace semsary_backend.Controllers
             if (user == null)
                 return Unauthorized();
 
+            if (user.IsBlocked == true)
+                return BadRequest("You are blocked so you can't perform this operation");
+
             var rental = await apiContext.Rentals.Include(r => r.RentalUnit).ThenInclude(r => r.Advertisement).ThenInclude(a => a.House)
                 .Where(r => r.RentalId == RentalId && r.RentalUnit[0].Advertisement.House.owner.Username == username && r.status == Enums.RentalStatus.Bending)
                 .FirstOrDefaultAsync();
@@ -379,7 +370,6 @@ namespace semsary_backend.Controllers
             var user = await apiContext.Landlords.Where(r => r.Username == username).FirstOrDefaultAsync();
             if (user == null)
                 return Unauthorized();
-
             var rental = await apiContext.Rentals.Include(r => r.RentalUnit).ThenInclude(r => r.Advertisement).ThenInclude(a => a.House)
                 .Where(r => r.RentalId == RentalId && r.RentalUnit[0].Advertisement.House.owner.Username == username && r.status == Enums.RentalStatus.ArrivalRequest)
                 .FirstOrDefaultAsync();
