@@ -639,8 +639,7 @@ namespace semsary_backend.Controllers
                 if (edit.street != null)
                     user.Address.street = edit.street;
             }
-
-            user.ProfileImageUrl =edit.ProfileImage is null?null: await storageService.UploadFileAsync( edit.ProfileImage);
+            user.ProfileImageUrl =edit.ProfileImage is null?user.ProfileImageUrl: await storageService.UploadFileAsync( edit.ProfileImage);
 
             if (user.UserType == UserType.Tenant)
             {
