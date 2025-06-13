@@ -63,7 +63,7 @@ namespace semsary_backend.Controllers
                 return Forbid();
             }
             var notInspectedHouses = await apiContext.Houses
-                .Where(h => h.LandlordUsername == user.Username && (h.HouseInspections == null || !h.HouseInspections.Any()))
+                .Where(h => h.LandlordUsername == user.Username && (h.HouseInspections == null || h.HouseInspections.Count()==0))
                 .Select(h => new
                 {
                     h.HouseId,
@@ -74,7 +74,7 @@ namespace semsary_backend.Controllers
                 .ToListAsync();
 
             var inspectedHouses = await apiContext.Houses
-                .Where(h => h.LandlordUsername == user.Username && h.HouseInspections.Any())
+                .Where(h => h.LandlordUsername == user.Username && h.HouseInspections.Count()>0)
                 .Select(h => new
                 {
                     h.HouseId,

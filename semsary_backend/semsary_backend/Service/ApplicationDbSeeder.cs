@@ -51,22 +51,43 @@ namespace semsary_backend.Service
 #endregion
 
 #region Customer Service
-            string CustomerServiceEmail = "CustomerService@gmail.com";
+            string CustomerServiceEmail1 = "CustomerService1@gmail.com";
+            string CustomerServiceEmail2 = "CustomerService2@gmail.com";
+            string CustomerServiceEmail3 = "CustomerService3@gmail.com";
             string CustomerServicePassword = "jhg765*&JHy";
 
             var CustomerServiceUser = dbContext.SermsaryUsers
-                .FirstOrDefault(u => u.Emails.Any(m => m.email == CustomerServiceEmail));
+                .FirstOrDefault(u => u.Emails.Any(m => m.email == CustomerServiceEmail1));
             if (CustomerServiceUser == null)
             {
                 // Hash the password (don't store plain text)
                 var passwordHash = PasswordHelper.HashPassword(CustomerServicePassword);
 
-                var email = new Email
+                var email1 = new Email
                 {
-                    email = CustomerServiceEmail,
+                    email = CustomerServiceEmail1,
                     IsVerified = true,
+                    ownerUsername = "CustomerService1"
 
                 };
+
+                var email2 = new Email
+                {
+                    email = CustomerServiceEmail2,
+                    IsVerified = true,
+                    ownerUsername = "CustomerService2"
+
+                };
+
+                var email3 = new Email
+                {
+                    email = CustomerServiceEmail3,
+                    IsVerified = true,
+                    ownerUsername = "CustomerService3"
+
+
+                };
+
 
                 var CustomerServiceUser1 = new CustomerService
                 {
@@ -75,6 +96,7 @@ namespace semsary_backend.Service
                     Lastname = "b",
                     password = passwordHash,
                     UserType = Enums.UserType.Customerservice,
+                    Emails = new List<Email> { email1 },
 
                 };
                 var CustomerServiceUser2 = new CustomerService
@@ -84,6 +106,7 @@ namespace semsary_backend.Service
                     Lastname = "b",
                     password = passwordHash,
                     UserType = Enums.UserType.Customerservice,
+                    Emails = new List<Email> { email2 },
 
                 };
 
@@ -94,14 +117,12 @@ namespace semsary_backend.Service
                     Lastname = "b",
                     password = passwordHash,
                     UserType = Enums.UserType.Customerservice,
+                    Emails = new List<Email> { email3 },
 
                 };
 
                 CustomerServiceUser2.DeviceTokens = new List<string> { "emuyK_OBTO1FbT1qiCuahf:APA91bECm-AVmGgbL75lHgX13u3xtAmx44TTcwdjtTp4WLRvDdJHEMs5NlAO5j8erEdyDVKJg0bCcyKkGcaEzOfkGJhJo7LcZZ326QptG-6THDSw21y37pk" };
-                CustomerServiceUser2.Emails = new List<Email> { email };
-                email.owner = CustomerServiceUser2;
-                email.ownerUsername = CustomerServiceUser2.Username;
-
+                
                 dbContext.CustomerServices.Add(CustomerServiceUser1);
                 dbContext.CustomerServices.Add(CustomerServiceUser2);
                 dbContext.CustomerServices.Add(CustomerServiceUser3);
@@ -111,56 +132,71 @@ namespace semsary_backend.Service
 #endregion
 
 #region Landlord
-            string LandlordEmail = "Landlord@gmail.com";
+            string LandlordEmail1 = "landlord1@gmail.com";
             string LandlordPassword = "jhg765*&JHy";
+            string LandlordEmail2 = "landlord2@gmail.com";
+            string LandlordEmail3 = "landlord3@gmail.com";
 
             var LandlordUser = dbContext.SermsaryUsers
-                .FirstOrDefault(u => u.Emails.Any(m => m.email == LandlordEmail));
+                .FirstOrDefault(u => u.Emails.Any(m => m.email == LandlordEmail1));
 
             if(LandlordUser == null)
             {
                 var passwordHash = PasswordHelper.HashPassword(LandlordPassword);
 
-                var email = new Email
+                var email1 = new Email
                 {
-                    email = LandlordEmail,
-                    IsVerified = true
+                    email = LandlordEmail1,
+                    IsVerified = true,
+                    ownerUsername= "landlord1"
+                };
+                var email2 = new Email
+                {
+                    email = LandlordEmail2,
+                    IsVerified = true,
+                    ownerUsername = "landlord2"
+                };
+                var email3 = new Email
+                {
+                    email = LandlordEmail3,
+                    IsVerified = true,
+                    ownerUsername = "landlord3"
                 };
                 var LandlordUser1 = new Landlord
                 {
                     Username = "landlord1",
-                    Firstname = "b",
-                    Lastname = "b",
+                    Firstname = "mahmoud",
+                    Lastname = "ahmed",
                     password = passwordHash,
                     UserType = Enums.UserType.landlord,
+                    Emails = new List<Email> { email1 },
 
                 };
 
                 var LandlordUser2 = new Landlord
                 {
                     Username = "landlord2",
-                    Firstname = "b",
-                    Lastname = "b",
+                    Firstname = "ali",
+                    Lastname = "zenhom",
                     password = passwordHash,
                     UserType = Enums.UserType.landlord,
+                    Emails = new List<Email> { email2 },
 
                 };
 
                 var LandlordUser3 = new Landlord
                 {
                     Username = "landlord3",
-                    Firstname = "b",
-                    Lastname = "b",
+                    Firstname = "mohamed",
+                    Lastname = "gomaa",
                     password = passwordHash,
                     UserType = Enums.UserType.landlord,
+                    Emails = new List<Email> { email3 },
 
                 };
 
-                LandlordUser2.DeviceTokens = new List<string> { "emuyK_OBTO1FbT1qiCuahf:APA91bECm-AVmGgbL75lHgX13u3xtAmx44TTcwdjtTp4WLRvDdJHEMs5NlAO5j8erEdyDVKJg0bCcyKkGcaEzOfkGJhJo7LcZZ326QptG-6THDSw21y37pk" };
-                LandlordUser2.Emails = new List<Email> { email };
-                email.owner = LandlordUser2;
-                email.ownerUsername = LandlordUser2.Username;
-
+                LandlordUser1.DeviceTokens = new List<string> { "emuyK_OBTO1FbT1qiCuahf:APA91bECm-AVmGgbL75lHgX13u3xtAmx44TTcwdjtTp4WLRvDdJHEMs5NlAO5j8erEdyDVKJg0bCcyKkGcaEzOfkGJhJo7LcZZ326QptG-6THDSw21y37pk" };
+                
                 dbContext.Landlords.Add(LandlordUser2);
                 dbContext.Landlords.Add(LandlordUser1);
                 dbContext.Landlords.Add(LandlordUser3);
@@ -169,57 +205,75 @@ namespace semsary_backend.Service
 #endregion
 
 #region Tenant
-            string TenantEmail = "Tenant@gmail.com";
+            string TenantEmail1 = "tenant1@gmail.com";
+            string TenantEmail2 = "tenant2@gmail.com";
+            string TenantEmail3 = "tenant3@gmail.com";
             string TenantPassword = "jhg765*&JHy";
 
             var TenantUser = dbContext.SermsaryUsers
-                .FirstOrDefault(u => u.Emails.Any(m => m.email == TenantEmail));
+                .FirstOrDefault(u => u.Emails.Any(m => m.email == TenantEmail1));
 
             if (TenantUser == null)
             {
                 var passwordHash = PasswordHelper.HashPassword(TenantPassword);
 
-                var email = new Email
+                var email1 = new Email
                 {
-                    email = TenantEmail,
-                    IsVerified = true
+                    email = TenantEmail1,
+                    IsVerified = true,
+                    ownerUsername = "tenant1"
                 };
+
+                var email2 = new Email
+                {
+                    email = TenantEmail2,
+                    IsVerified = true,
+                    ownerUsername = "tenant2"
+                };
+                var email3 = new Email
+                {
+                    email = TenantEmail3,
+                    IsVerified = true,
+                    ownerUsername = "tenant3"
+                };
+
+
                 var Tenant1 = new Tenant
                 {
                     Username = "tenant1",
-                    Firstname = "b",
-                    Lastname = "b",
+                    Firstname = "ebrahim",
+                    Lastname = "ahmed",
                     password = passwordHash,
                     UserType = Enums.UserType.Tenant,
+                    Emails = new List<Email> { email1 },
 
                 };
 
                 var Tenant2 = new Tenant
                 {
                     Username = "tenant2",
-                    Firstname = "b",
-                    Lastname = "b",
+                    Firstname = "mohamed",
+                    Lastname = "badaqy",
                     password = passwordHash,
                     UserType = Enums.UserType.Tenant,
+                    Emails = new List<Email> { email2 },
 
                 };
 
                 var Tenant3 = new Tenant
                 {
                     Username = "tenant3",
-                    Firstname = "b",
-                    Lastname = "b",
+                    Firstname = "ahmed",
+                    Lastname = "gelany",
                     password = passwordHash,
                     UserType = Enums.UserType.Tenant,
+                    Emails = new List<Email> { email3 },
 
                 };
 
 
-                Tenant2.Emails = new List<Email> { email };
                 Tenant2.DeviceTokens = new List<string> { "emuyK_OBTO1FbT1qiCuahf:APA91bECm-AVmGgbL75lHgX13u3xtAmx44TTcwdjtTp4WLRvDdJHEMs5NlAO5j8erEdyDVKJg0bCcyKkGcaEzOfkGJhJo7LcZZ326QptG-6THDSw21y37pk" };
-                email.owner = Tenant2;
-                email.ownerUsername = Tenant2.Username;
-
+                
                 dbContext.Tenant.Add(Tenant2);
                 dbContext.Tenant.Add(Tenant1);
                 dbContext.Tenant.Add(Tenant3);

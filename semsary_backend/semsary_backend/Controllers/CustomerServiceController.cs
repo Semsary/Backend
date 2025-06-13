@@ -12,7 +12,7 @@ namespace semsary_backend.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class CustomerServiceController(TokenService tokenGenertor, ApiContext apiContext, R2StorageService r2StorageService , NotificationService notificationService) : ControllerBase
+    public class CustomerServiceController(TokenService tokenGenertor, ApiContext apiContext, R2StorageService r2StorageService, NotificationService notificationService) : ControllerBase
     {
         [HttpPut("HouseInspection/create/{houseId}")]
         public async Task<IActionResult> MakeHouseInspection(string houseId, [FromBody] HouseInspectionDTO HouseInspectionDTO)
@@ -43,7 +43,7 @@ namespace semsary_backend.Controllers
                 .OrderByDescending(i => i.InspectionDate)
                 .FirstOrDefaultAsync();
 
-            if(inspection == null)
+            if (inspection == null)
                 return BadRequest(new { message = "There is no inspection in progress for this house." });
 
             var landlord = await apiContext.Landlords
@@ -52,7 +52,7 @@ namespace semsary_backend.Controllers
             if (landlord == null)
                 return NotFound(new { message = "Landlord not found" });
 
-            inspection.HouseInspectionId = Ulid.NewUlid().ToString(); 
+            inspection.HouseInspectionId = Ulid.NewUlid().ToString();
             inspection.InspectorId = user.Username;
             inspection.InspectionDate = DateTime.UtcNow;
             inspection.inspectionStatus = InspectionStatus.Completed;
@@ -66,15 +66,15 @@ namespace semsary_backend.Controllers
             inspection.NumberOfChairs = HouseInspectionDTO.NumberOfChairs;
             inspection.HouseFeature = HouseInspectionDTO.HouseFeature;
 
-            foreach(var img in HouseInspectionDTO.HouseImages)
+            foreach (var img in HouseInspectionDTO.HouseImages)
             {
-                var url= await r2StorageService.UploadFileAsync(img);
+                var url = await r2StorageService.UploadFileAsync(img);
                 inspection.HouseImages.Add(url);
             }
             await apiContext.SaveChangesAsync();
 
             await notificationService.SendNotificationAsync("طلب تأكيد للمعاينة", $"قام {user.Firstname} {user.Lastname}\n من خدمة العملاء بادخال البيانات المطلوبة, قم بزيارة ملفك الشخصي لتأكيد بيانات المعاينة.", landlord);
-            return Ok(new{  message = $"House Inespection completed successfully"});
+            return Ok(new { message = $"House Inespection completed successfully" });
         }
 
         [HttpPut("HouseInspection/acknowledge/{houseInspectionId}")]
@@ -88,7 +88,7 @@ namespace semsary_backend.Controllers
                 return Forbid();
 
             var houseInspection = await apiContext.HouseInspections
-                .Include(hi => hi.House)  
+                .Include(hi => hi.House)
                 .FirstOrDefaultAsync(hi => hi.HouseInspectionId == houseInspectionId);
 
             if (houseInspection == null)
@@ -99,7 +99,7 @@ namespace semsary_backend.Controllers
 
             var landlord = await apiContext.Landlords
                 .FirstOrDefaultAsync(l => l.Username == houseInspection.House.LandlordUsername);
-            
+
             if (landlord == null)
                 return NotFound(new { message = "Landlord not found" });
 
@@ -108,7 +108,7 @@ namespace semsary_backend.Controllers
 
             await notificationService.SendNotificationAsync("طلب المعاينة قد التقدم", $"قام {user.Firstname} {user.Lastname}\nمن خدمة العملاء بتولي عملية معاينة المنزل\nتستطيع الآن التواصل معه عبر الدردشة الخاصة بالموقع لتحديد ميعاد المعاينة", landlord);
             await apiContext.SaveChangesAsync();
-            return Ok(new { message = $"House inspection status updated to \"{InspectionStatus.InProgress}\" successfully" , InspectorId = user.Username });
+            return Ok(new { message = $"House inspection status updated to \"{InspectionStatus.InProgress}\" successfully", InspectorId = user.Username });
         }
 
         [HttpGet("Complaint/GetAll")]
@@ -124,7 +124,7 @@ namespace semsary_backend.Controllers
             }
 
             var complaints = await apiContext.Complaints.Where(c => c.status == ComplainStatus.Bending)
-                .Select(c => new 
+                .Select(c => new
                 {
                     ownerFirstName = c.Tenant.Firstname,
                     ownerLastName = c.Tenant.Lastname,
@@ -150,7 +150,7 @@ namespace semsary_backend.Controllers
             {
                 return Forbid();
             }
-            
+
             int id;
             if (!int.TryParse(complaintId, out id))
             {
@@ -163,7 +163,7 @@ namespace semsary_backend.Controllers
             if (complaint == null)
                 return NotFound(new { message = "Complaint not found" });
 
-            if(complaint.status != ComplainStatus.Bending)
+            if (complaint.status != ComplainStatus.Bending)
                 return BadRequest(new { message = "Complaint is not in bending status" });
 
             complaint.status = ComplainStatus.InProgress;
@@ -171,11 +171,11 @@ namespace semsary_backend.Controllers
             await apiContext.SaveChangesAsync();
 
             await notificationService.SendNotificationAsync("تم استلام الشكوى", $"قام {user.Firstname} {user.Lastname}\nمن خدمة العملاء باستلام الشكوى الخاصة بك, تستطيع الآن التواصل معه عبر الدردشة الخاصة بالموقع.", complaint.Tenant);
-            return Ok(new { message = $"Complaint status updated to {complaint.status} successfully" , InspectorId = user.Username });
+            return Ok(new { message = $"Complaint status updated to {complaint.status} successfully", InspectorId = user.Username });
         }
 
         [HttpPut("Complaint/Review/{complaintId}")]
-        public async Task<IActionResult> ReviewComplaint(string complaintId , [FromBody] ComplaintReviewDTO complaintReviewDTO)
+        public async Task<IActionResult> ReviewComplaint(string complaintId, [FromBody] ComplaintReviewDTO complaintReviewDTO)
         {
             var username = tokenGenertor.GetCurUser();
             var user = await apiContext.SermsaryUsers
@@ -202,7 +202,7 @@ namespace semsary_backend.Controllers
             await apiContext.SaveChangesAsync();
 
             return Ok(new { message = "Complaint review added successfully" });
-           
+
         }
         [HttpGet("HouseInspections/GetAll")]
         public async Task<IActionResult> GetHouseInspections()
@@ -217,18 +217,18 @@ namespace semsary_backend.Controllers
             }
 
             var houseInspections = await apiContext.HouseInspections
-                .Include(h => h.House).Where(e=>e.inspectionStatus== InspectionStatus.Bending)
-                .Select(h => new 
+                .Include(h => h.House).Where(e => e.inspectionStatus == InspectionStatus.Bending)
+                .Select(h => new
                 {
                     HouseInspectionId = h.HouseInspectionId,
                     HouseId = h.HouseId,
                     ownerId = h.House.LandlordUsername,
-                    ownerFirstName=h.House.owner.Firstname,
-                    ownerLastName=h.House.owner.Lastname,
-                    SubmitedAt=h.InspectionRequestDate,
-                    Governorate=h.House.governorate,
-                    city=h.House.city,
-                    street=h.House.street
+                    ownerFirstName = h.House.owner.Firstname,
+                    ownerLastName = h.House.owner.Lastname,
+                    SubmitedAt = h.InspectionRequestDate,
+                    Governorate = h.House.governorate,
+                    city = h.House.city,
+                    street = h.House.street
 
                 })
                 .ToListAsync();
@@ -262,7 +262,7 @@ namespace semsary_backend.Controllers
             if (complaint == null)
                 return NotFound(new { message = "Complaint not found" });
 
-            if(complaint.status != ComplainStatus.InProgress)
+            if (complaint.status != ComplainStatus.InProgress)
                 return BadRequest(new { message = "Complaint is not in progress status" });
 
             var tenant = complaint.Rental.Tenant;
@@ -321,7 +321,7 @@ namespace semsary_backend.Controllers
         }
 
         [HttpPost("BlockLandlord/{complaintId}")]
-        public async Task<IActionResult> BlockLandlord(string complaintId , [FromBody] BlockIeddDTO blockIeddDTO)
+        public async Task<IActionResult> BlockLandlord(string complaintId, [FromBody] BlockIeddDTO blockIeddDTO)
         {
             var username = tokenGenertor.GetCurUser();
             var user = await apiContext.SermsaryUsers
@@ -356,7 +356,7 @@ namespace semsary_backend.Controllers
             if (isBlocked != null)
                 return BadRequest(new { message = "Landlord is already blocked." });
 
-            if(landlord.IsVerified == false)
+            if (landlord.IsVerified == false)
                 return BadRequest(new { message = "Landlord is not verified, cannot be blocked." });
 
             landlord.IsBlocked = true;
@@ -370,6 +370,40 @@ namespace semsary_backend.Controllers
             await apiContext.BlockedIds.AddAsync(blockedId);
             await apiContext.SaveChangesAsync();
             return Ok(new { message = "Landlord blocked successfully" });
+        }
+        [Authorize]
+        [HttpGet("CustomerService/Inspictions")]
+        public async Task<IActionResult> GetCustomerServiceInspictions()
+        {
+            var username = tokenGenertor.GetCurUser();
+            var user = await apiContext.SermsaryUsers
+                .FirstOrDefaultAsync(e => e.Username == username);
+
+            if (user == null || user.UserType != UserType.Customerservice)
+            {
+                return Forbid();
+            }
+
+            var inspections = await apiContext.HouseInspections
+                .Include(h => h.House)
+                .Where(e => e.inspectionStatus == InspectionStatus.InProgress && e.InspectorId == username)
+                .Select(h => new
+                {
+                    HouseInspectionId = h.HouseInspectionId,
+                    HouseId = h.HouseId,
+                    ownerId = h.House.LandlordUsername,
+                    ownerFirstName = h.House.owner.Firstname,
+                    ownerLastName = h.House.owner.Lastname,
+                    SubmitedAt = h.InspectionRequestDate,
+                    Governorate = h.House.governorate,
+                    city = h.House.city,
+                    street = h.House.street
+
+                })
+                .ToListAsync();
+
+            return Ok(inspections);
+
         }
     }
 }

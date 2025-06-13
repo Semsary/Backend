@@ -281,13 +281,16 @@ namespace semsary_backend.Controllers
                 .FirstOrDefaultAsync(e => e.Username == username);
             if (user == null)
                 return NotFound("User not found.");
-            var userInfo = new UserDTOcs();
-            userInfo.firstname = user.Firstname;
-            userInfo.lastname = user.Lastname;
-            userInfo.username = user.Username;
-            userInfo.emails = user.Emails;
-            userInfo.address = user.Address;
-            userInfo.userType = user.UserType;
+            var userInfo = new {
+                firstname= user.Firstname,
+                lastname = user.Lastname,
+                username = user.Username,
+                emails = user.Emails.Select(e => e.email).ToList(),
+                address = user.Address,
+                userType = user.UserType
+
+            };
+
             return Ok(userInfo);
         }
 
@@ -512,7 +515,7 @@ namespace semsary_backend.Controllers
                 return NotFound("User not found.");
             
             if (user.Identity.Count == 0)
-                return NotFound("this user didn't submit any identity");
+                return NoContent();
             
             return Ok(user.Identity);
 
@@ -559,6 +562,8 @@ namespace semsary_backend.Controllers
             var identity = await apiContext.identityDocuments.Include(e => e.Owner).FirstOrDefaultAsync(e => e.Id == id);
             if (identity == null)
                 return NotFound("this identity wasn't found");
+            if (status==IdentityStatus.Pending)
+                return BadRequest("you can't set the status to pending,only Verified or Rejected are allowed");
 
             identity.Status = status;
             identity.Comment = comment;
@@ -570,12 +575,9 @@ namespace semsary_backend.Controllers
             else if (status == IdentityStatus.Rejected)
             {
                 identity.Owner.IsVerified = false;
-                identity.Owner.Identity.Clear(); // Clear the identity documents if rejected
+
             }
-            else
-            {
-                return BadRequest("Invalid status. Only Verified or Rejected are allowed.");
-            }
+           
             
             var message = status == IdentityStatus.Verified 
                 ? "Your identity has been verified successfully." 
