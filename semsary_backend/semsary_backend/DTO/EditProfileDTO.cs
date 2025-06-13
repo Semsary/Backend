@@ -1,6 +1,7 @@
 ﻿using Org.BouncyCastle.Bcpg.OpenPgp;
 using semsary_backend.Enums;
 using semsary_backend.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace semsary_backend.DTO
 {
@@ -14,9 +15,10 @@ namespace semsary_backend.DTO
         public string ?city { get; set; }
         public string ?street { get; set; }
         public IFormFile? ProfileImage { get; set; }
-
+        [Range(50, 230, ErrorMessage = "high must be between 50 and 230.")]
         public int ?height { get; set; }
         public Gender ? gender { get; set; }
+        [Range(16, 100, ErrorMessage = "Age must be between 16 and 120.")]
         public int ? age { get; set; }
         public bool? IsSmoker { get; set; }
         public bool? NeedPublicService { get; set; }
