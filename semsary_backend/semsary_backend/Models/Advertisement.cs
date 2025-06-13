@@ -8,6 +8,8 @@ namespace semsary_backend.Models
         {
         }
         public required string AdvertisementId { get; set; }
+        public string HouseName { get; set; } 
+        public string houseDescription { get; set; }
         public required string HouseId { get; set; }  
         public required DateTime PublishDate { get; set; }
         public List<RentalUnit> RentalUnits { get; set; } = new List<RentalUnit>();

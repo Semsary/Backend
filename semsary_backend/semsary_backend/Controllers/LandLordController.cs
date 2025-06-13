@@ -260,8 +260,10 @@ namespace semsary_backend.Controllers
                 AdvertisementId = Ulid.NewUlid().ToString(),
                 HouseId = dto.HouseId,
                 PublishDate = DateTime.Now,
+                HouseName = dto.HouseName,
+                houseDescription = dto.HouseDescription,
                 RentalUnits = new()
-
+               
             };
 
             if (dto.RentalType == Enums.RentalType.ByHouse)

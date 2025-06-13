@@ -15,7 +15,7 @@ namespace semsary_backend.Controllers
     public class CustomerServiceController(TokenService tokenGenertor, ApiContext apiContext, R2StorageService r2StorageService, NotificationService notificationService) : ControllerBase
     {
         [HttpPut("HouseInspection/create/{houseId}")]
-        public async Task<IActionResult> MakeHouseInspection(string houseId, [FromBody] HouseInspectionDTO HouseInspectionDTO)
+        public async Task<IActionResult> MakeHouseInspection(string houseId, [FromForm] HouseInspectionDTO HouseInspectionDTO)
         {
             var username = tokenGenertor.GetCurUser();
             var user = await apiContext.SermsaryUsers
@@ -52,6 +52,8 @@ namespace semsary_backend.Controllers
             if (landlord == null)
                 return NotFound(new { message = "Landlord not found" });
 
+            inspection.latitude = HouseInspectionDTO.latitude;
+            inspection.longitude = HouseInspectionDTO.longitude;
             inspection.HouseInspectionId = Ulid.NewUlid().ToString();
             inspection.InspectorId = user.Username;
             inspection.InspectionDate = DateTime.UtcNow;

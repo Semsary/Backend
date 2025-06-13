@@ -295,7 +295,7 @@ namespace semsary_backend.Service
                 {
                     HouseId = "H2",
                     LandlordUsername = "landlord1",
-                    HouseInspections=new()
+                    HouseInspections =new()
                 };
                 dbContext.Houses.Add(house2);
                 dbContext.Houses.Add(house3);
@@ -309,7 +309,9 @@ namespace semsary_backend.Service
                 HouseId="H1",
                 HouseImages=new(),
                 HouseInspectionId="In1",
-                inspectionStatus= InspectionStatus.Completed,
+                longitude = "31.2345",
+                latitude = "30.1234",
+                inspectionStatus = InspectionStatus.Completed,
                 price=0,
                 NumberOfBeds=5,
                 InspectorId= "CustomerService1",
