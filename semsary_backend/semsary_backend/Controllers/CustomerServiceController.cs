@@ -353,12 +353,17 @@ namespace semsary_backend.Controllers
             if (landlord == null)
                 return NotFound(new { message = "Landlord not found" });
 
-            var isBlocked = await apiContext.BlockedIds.FindAsync(landlord.SocialId);
+            var isBlocked = await apiContext.BlockedIds
+                .FirstOrDefaultAsync(b => b.SocialId == landlord.SocialId);
+
             if (isBlocked != null)
                 return BadRequest(new { message = "Landlord is already blocked." });
 
             if (landlord.IsVerified == false)
                 return BadRequest(new { message = "Landlord is not verified, cannot be blocked." });
+
+            if(landlord.SocialId == null)
+                return BadRequest(new { message = "Landlord does not have a SocialId, cannot be blocked." });
 
             landlord.IsBlocked = true;
             var blockedId = new BlockedId

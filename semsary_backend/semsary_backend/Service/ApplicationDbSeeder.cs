@@ -148,7 +148,7 @@ namespace semsary_backend.Service
                 {
                     email = LandlordEmail1,
                     IsVerified = true,
-                    ownerUsername= "landlord1"
+                    ownerUsername= "landlord1",
                 };
                 var email2 = new Email
                 {
@@ -167,10 +167,11 @@ namespace semsary_backend.Service
                     Username = "landlord1",
                     Firstname = "mahmoud",
                     Lastname = "ahmed",
+                    SocialId = "7687543456543",
                     password = passwordHash,
                     UserType = Enums.UserType.landlord,
                     Emails = new List<Email> { email1 },
-
+                    IsVerified = true
                 };
 
                 var LandlordUser2 = new Landlord
@@ -382,7 +383,7 @@ namespace semsary_backend.Service
                     ComplaintDetails = "This is a test complaint",
                     SubmittedBy = "tenant1",
                     SubmittingDate = DateTime.UtcNow,
-                    status = ComplainStatus.InProgress,
+                    status = ComplainStatus.Bending,
                     RentalId = 1
                 };
                 dbContext.Complaints.Add(complaint2);
