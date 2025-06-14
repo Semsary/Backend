@@ -65,7 +65,7 @@ namespace semsary_backend.Controllers
             inspection.NumberOfBalacons = HouseInspectionDTO.NumberOfBalacons;
             inspection.NumberOfTables = HouseInspectionDTO.NumberOfTables;
             inspection.NumberOfChairs = HouseInspectionDTO.NumberOfChairs;
-            inspection.HouseFeature = HouseInspectionDTO.HouseFeature;
+            inspection.HouseFeature = HouseInspectionDTO.HouseFeatures.Aggregate((current, next) => current | next);
 
             foreach (var img in HouseInspectionDTO.HouseImages)
             {

@@ -27,7 +27,7 @@ namespace semsary_backend.DTO
         [Required]
         public int NumberOfChairs { get; set; }
         [Required]
-        public HouseFeature HouseFeature { get; set; }
+        public List<HouseFeature> HouseFeatures { get; set; }
         [Required]
         public List<IFormFile> HouseImages { get; set; }
     }
