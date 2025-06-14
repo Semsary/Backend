@@ -196,7 +196,7 @@ namespace semsary_backend.Controllers
 
             return Ok(new { message = "Inspection approved successfully" });
         }
-
+        
         [HttpGet("get/house/{HouseId}")]
         public async Task<IActionResult> GetHouse(string HouseId)
         {
@@ -396,7 +396,28 @@ namespace semsary_backend.Controllers
                 return BadRequest("Invalid status");
             
         }
-        
+        [HttpGet("get/all/approved/houses")]
+        public async Task<IActionResult> GetAllApprovedHouses()
+        {
+            var userid = tokenHandler.GetCurUser();
+            var user = apiContext.Landlords.FirstOrDefault(x => x.Username == userid);
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+
+            var housesWithApprovedInspections = await apiContext.Houses
+                .Include(h => h.HouseInspections)
+                .Where(h => h.LandlordUsername == user.Username)
+                .ToListAsync();
+
+            var houses = housesWithApprovedInspections
+                .Where(h => h.HouseInspections.Any(i => i.inspectionStatus == Enums.InspectionStatus.Aproved))
+                .ToList();
+
+            return Ok(houses);
+        }
+
     }
 }
 //w s
