@@ -283,6 +283,48 @@ namespace semsary_backend.Controllers
             apiContext.SaveChanges();
             return Created();
         }
+        [HttpGet("get/All/Advertisements")]
+        public async Task<IActionResult> GetAllAdvertisements()
+        {
+            var username = tokenHandler.GetCurUser();
+            var user = await apiContext.Landlords.Where(r => r.Username == username).FirstOrDefaultAsync();
+            if (user == null)
+                return Unauthorized();
+
+            var advertisements = await apiContext.Advertisements
+                .Include(a => a.House)
+                .Include(a => a.RentalUnits)
+                .ToListAsync();
+
+            if (advertisements == null || advertisements.Count == 0)
+            {
+                return NotFound(new { message = "No advertisements found" });
+            }
+
+            return Ok(advertisements);
+        }
+        [HttpDelete("delete/Advertisement/{advId}")]
+        public async Task<IActionResult> deleteAdv(string advId)
+        {
+            var username = tokenHandler.GetCurUser();
+            var user = await apiContext.Landlords.Where(r => r.Username == username).FirstOrDefaultAsync();
+            if (user == null)
+                return Unauthorized();
+
+            var adv = await apiContext.Advertisements.Where(r => r.AdvertisementId == advId).FirstOrDefaultAsync();
+            if(adv == null)
+                return NotFound("Advertisement not found");         
+
+            var rentalUnits = await apiContext.RentalUnits
+                .Where(r => r.AdvertisementId == advId)
+                .ToListAsync();
+
+            apiContext.RentalUnits.RemoveRange(rentalUnits);
+            apiContext.Advertisements.Remove(adv);
+            await apiContext.SaveChangesAsync();
+            return Ok(new { message = "Advertisement deleted successfully" });
+        }
+
         [Authorize]
         [HttpGet("rental/request")]
         public async Task<IActionResult> GetRentalRequests()
@@ -406,16 +448,25 @@ namespace semsary_backend.Controllers
                 return Unauthorized();
             }
 
-            var housesWithApprovedInspections = await apiContext.Houses
-                .Include(h => h.HouseInspections)
-                .Where(h => h.LandlordUsername == user.Username)
-                .ToListAsync();
-
-            var houses = housesWithApprovedInspections
-                .Where(h => h.HouseInspections.Any(i => i.inspectionStatus == Enums.InspectionStatus.Aproved))
-                .ToList();
-
-            return Ok(houses);
+            var result = await apiContext.Houses
+                 .Where(h => h.LandlordUsername == user.Username)
+                 .Select(h => new
+                 {
+                     House = new
+                     {
+                         h.governorate,
+                         h.city,
+                         h.street,
+                        
+                     },
+                     LastApprovedInspection = h.HouseInspections
+                         .Where(i => i.inspectionStatus == Enums.InspectionStatus.Aproved)
+                         .OrderByDescending(i => i.InspectionDate)
+                         .FirstOrDefault()
+                 })
+                 .Where(x => x.LastApprovedInspection != null)
+                 .ToListAsync();
+            return Ok(result);
         }
 
     }

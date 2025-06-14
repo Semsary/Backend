@@ -394,6 +394,25 @@ namespace semsary_backend.Service
 
             #endregion
 
+
+            #region adv
+            var adv = dbContext.Advertisements.FirstOrDefault(c => c.AdvertisementId == "adv1");
+            if(adv == null)
+            {
+                var adv2 = new Advertisement
+                {
+                    AdvertisementId = "adv1",
+                    HouseId = "H1",
+                    PublishDate = DateTime.UtcNow,
+                    HouseName = "house1",
+                    houseDescription = "bla bla bla",
+
+                };
+                dbContext.Advertisements.Add(adv2);
+                dbContext.SaveChanges();
+            }
+
+#endregion
         }
     }
 
