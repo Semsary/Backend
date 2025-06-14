@@ -675,6 +675,7 @@ namespace semsary_backend.Controllers
             object otherLanlordData = null;
             var basicUserInfo = new
             {
+                user.Username,
                 user.Firstname,
                 user.Lastname,
                 user.ProfileImageUrl,
