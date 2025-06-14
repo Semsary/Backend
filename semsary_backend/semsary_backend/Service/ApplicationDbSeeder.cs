@@ -308,15 +308,15 @@ namespace semsary_backend.Service
             {
                 HouseId="H1",
                 HouseImages=new(),
-                HouseInspectionId="In1",
-                longitude = "31.2345",
-                latitude = "30.1234",
-                inspectionStatus = InspectionStatus.Completed,
-                price=0,
-                NumberOfBeds=5,
+                //HouseInspectionId="In1",
+                //longitude = "31.2345",
+                //latitude = "30.1234",
+                inspectionStatus = InspectionStatus.InProgress,
+                //price=0,
+                //NumberOfBeds=5,
                 InspectorId= "CustomerService1",
                 InspectionRequestDate=DateTime.UtcNow,
-                InspectionDate=DateTime.UtcNow,
+                //InspectionDate=DateTime.UtcNow,
                 
             };
             dbContext.HouseInspections.Add(indpect);

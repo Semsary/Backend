@@ -54,7 +54,6 @@ namespace semsary_backend.Controllers
 
             inspection.latitude = HouseInspectionDTO.latitude;
             inspection.longitude = HouseInspectionDTO.longitude;
-            inspection.HouseInspectionId = Ulid.NewUlid().ToString();
             inspection.InspectorId = user.Username;
             inspection.InspectionDate = DateTime.UtcNow;
             inspection.inspectionStatus = InspectionStatus.Completed;
