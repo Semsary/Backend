@@ -615,6 +615,7 @@ namespace semsary_backend.Controllers
             var username = tokenGenertor.GetCurUser();
             var user = await apiContext.SermsaryUsers
                 .Include(e => e.Emails)
+                
                 .FirstOrDefaultAsync(e => e.Username == username);
 
             if (user == null)

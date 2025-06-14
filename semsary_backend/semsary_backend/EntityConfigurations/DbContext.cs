@@ -16,6 +16,9 @@ namespace semsary_backend.EntityConfigurations
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApiContext).Assembly);
 
+            modelBuilder.Entity<SermsaryUser>()
+            .OwnsOne(u => u.Address);
+
         }
 
 
@@ -35,5 +38,7 @@ namespace semsary_backend.EntityConfigurations
         public DbSet<Rate> Rates { get; set; }
         public DbSet<Advertisement> Advertisements { get; set; }
         public DbSet<BlockedId> BlockedIds { get; set; }
+       
+
     }
 }

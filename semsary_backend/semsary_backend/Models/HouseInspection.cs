@@ -13,8 +13,8 @@ namespace semsary_backend.Models
             HouseInspectionId=Ulid.NewUlid().ToString();
 
         } // unique random value
-        public string longitude { get; set; }
-        public string latitude { get; set; }
+        public string ?longitude { get; set; }
+        public string ?latitude { get; set; }
         public int FloorNumber {  get; set; }
         public int NumberOfAirConditionnar {  get; set; }
         public int NumberOfPathRooms {  get; set; }
