@@ -121,7 +121,7 @@ namespace semsary_backend.Service
 
                 };
 
-                CustomerServiceUser2.DeviceTokens = new List<string> { "emuyK_OBTO1FbT1qiCuahf:APA91bECm-AVmGgbL75lHgX13u3xtAmx44TTcwdjtTp4WLRvDdJHEMs5NlAO5j8erEdyDVKJg0bCcyKkGcaEzOfkGJhJo7LcZZ326QptG-6THDSw21y37pk" };
+                CustomerServiceUser2.DeviceTokens = new List<string> { "fiBvN86L8KLNUI-3FN83y4:APA91bF6yyXcaOKCT50WCzdM7oqNCkTwiJXuoUTevkl8Mjmx2vyu0XdKpx1iC0YopSy_c4EjNeHYz0c601u3B8cRZG3OKU9kY7462b_sV7SaG4nkwK62-CI" };
                 
                 dbContext.CustomerServices.Add(CustomerServiceUser1);
                 dbContext.CustomerServices.Add(CustomerServiceUser2);
@@ -389,7 +389,7 @@ namespace semsary_backend.Service
                 LandlordUser3.DeviceTokens =
                 LandlordUser4.DeviceTokens =
                 LandlordUser5.DeviceTokens =
-                new List<string> { "emuyK_OBTO1FbT1qiCuahf:APA91bECm-AVmGgbL75lHgX13u3xtAmx44TTcwdjtTp4WLRvDdJHEMs5NlAO5j8erEdyDVKJg0bCcyKkGcaEzOfkGJhJo7LcZZ326QptG-6THDSw21y37pk" };
+                new List<string> { "fiBvN86L8KLNUI-3FN83y4:APA91bF6yyXcaOKCT50WCzdM7oqNCkTwiJXuoUTevkl8Mjmx2vyu0XdKpx1iC0YopSy_c4EjNeHYz0c601u3B8cRZG3OKU9kY7462b_sV7SaG4nkwK62-CI" };
                 
                 dbContext.Landlords.Add(LandlordUser2);
                 dbContext.Landlords.Add(LandlordUser1);
@@ -479,7 +479,7 @@ namespace semsary_backend.Service
                 Tenant1.DeviceTokens =
                 Tenant2.DeviceTokens =
                 Tenant3.DeviceTokens =                    
-                new List<string> { "emuyK_OBTO1FbT1qiCuahf:APA91bECm-AVmGgbL75lHgX13u3xtAmx44TTcwdjtTp4WLRvDdJHEMs5NlAO5j8erEdyDVKJg0bCcyKkGcaEzOfkGJhJo7LcZZ326QptG-6THDSw21y37pk" };
+                new List<string> { "fiBvN86L8KLNUI-3FN83y4:APA91bF6yyXcaOKCT50WCzdM7oqNCkTwiJXuoUTevkl8Mjmx2vyu0XdKpx1iC0YopSy_c4EjNeHYz0c601u3B8cRZG3OKU9kY7462b_sV7SaG4nkwK62-CI" };
                 
                 dbContext.Tenant.Add(Tenant2);
                 dbContext.Tenant.Add(Tenant1);
