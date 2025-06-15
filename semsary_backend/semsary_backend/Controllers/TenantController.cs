@@ -456,5 +456,18 @@ namespace semsary_backend.Controllers
                 return Ok(ads);
             }
         }
+        [HttpGet("MyRental")]
+        public async Task<IActionResult>GetRentalUnit()
+        {
+            var Id = tokenGenertor.GetCurUser();
+            var rental = await apiContext.Rentals.Where(r=>r.TenantUsername==Id).ToListAsync();
+            if (rental.Any())
+                return Ok(rental);
+            return NoContent();
+
+        
+
+
+        }
     }
 }
