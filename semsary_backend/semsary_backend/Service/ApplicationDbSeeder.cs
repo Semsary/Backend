@@ -824,9 +824,23 @@ namespace semsary_backend.Service
             {
                 HouseId = "H10",
                 HouseInspectionId = "In10",
-                inspectionStatus = InspectionStatus.InProgress,     
+                HouseImages = new(),
+                longitude = "31.2345",
+                latitude = "30.1234",
+                inspectionStatus = InspectionStatus.Aproved,
+                price = 7000,
+                NumberOfBeds = 3,
+                NumberOfPathRooms = 2,
+                NumberOfBedRooms = 2,
+                NumberOfChairs = 9,
+                NumberOfTables = 2,
+                NumberOfBalacons = 1,
+                NumberOfAirConditionnar = 3,
+                FloorNumber = 1,
+                HouseFeature = HouseFeature.Havekitchen | HouseFeature.HaveTV | HouseFeature.HaveNearGym | HouseFeature.HaveNearUniversity,
                 InspectorId = "CustomerService1",
                 InspectionRequestDate = DateTime.UtcNow,
+                InspectionDate = DateTime.UtcNow
             };
             var inspect11 = new HouseInspection()
             {

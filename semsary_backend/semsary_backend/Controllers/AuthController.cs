@@ -650,9 +650,13 @@ namespace semsary_backend.Controllers
             if (user.UserType == UserType.Tenant)
             {
                 Tenant tenant = (Tenant)user;
-                tenant.height = edit.height == null ? 0 : edit.height.Value;
-                tenant.age = edit.age == null ? 0 : edit.age.Value;
+                tenant.height = edit.height == null ? 160 : edit.height.Value;
+                tenant.weight = edit.weight == null ? 70 : (int)edit.weight.Value;
+                tenant.age = edit.age == null ? 20 : edit.age.Value;
+                tenant.NumberOfPeople = edit.NumberOfPeople == null ? 1 : edit.NumberOfPeople.Value;
+                tenant.FavouriteRentalType = edit.FavouriteRentalType == null ? RentalType2.Monthly : edit.FavouriteRentalType.Value;
                 tenant.gender = edit.gender == null ? 0 : edit.gender.Value;
+                tenant.IsSmoker = edit.IsSmoker == null ? false : edit.IsSmoker.Value;
                 tenant.NeedNearUniversity = edit.NeedNearUniversity == null ? false : edit.NeedNearUniversity.Value;
                 tenant.NeedNearVitalPlaces = edit.NeedNearVitalPlaces == null ? false : edit.NeedNearVitalPlaces.Value;
                 tenant.NeedPublicService = edit.NeedPublicService == null ? false : edit.NeedPublicService.Value;

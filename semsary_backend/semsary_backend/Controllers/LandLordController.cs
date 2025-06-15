@@ -234,15 +234,22 @@ namespace semsary_backend.Controllers
                 return Unauthorized();
             if(user.IsBlocked == true)
                 return BadRequest("You are blocked so you can't perform this operation");
-            var house = apiContext.Houses.Include(h => h.owner).Where(h => h.HouseId == dto.HouseId).FirstOrDefault();
+            var house = apiContext.Houses.Include(h => h.owner).Include(h => h.Advertisements).Where(h => h.HouseId == dto.HouseId).FirstOrDefault();
             if (house == null)
                 return NotFound();
             if (house.owner.Username != username)
                 return Forbid();
+            if(house.owner.Balance < 5000)
+                return BadRequest("You don't have enough balance to create an advertisement, you need at least 5000 EGP");
+
             var LastInspiction = apiContext.HouseInspections.Where(hin => hin.HouseId == dto.HouseId && hin.inspectionStatus == Enums.InspectionStatus.Aproved).OrderByDescending(t => t.InspectionDate).FirstOrDefault();
             if (LastInspiction == null)
                 return BadRequest("house must have at least one inspiction");
 
+            if(!(house.Advertisements == null || house.Advertisements.Count == 0))
+                return BadRequest("This house already has an advertisement");
+
+            house.owner.Balance -= 5000;
             var adv = new Advertisement()
             {
                 AdvertisementId = Ulid.NewUlid().ToString(),
