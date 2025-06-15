@@ -464,7 +464,8 @@ namespace semsary_backend.Controllers
                          h.governorate,
                          h.city,
                          h.street,
-                         estimated_Price = priceEstimator.EstimatePrice(h.HouseInspections.OrderByDescending(i => i.InspectionDate).FirstOrDefault(), h.governorate)
+                         estimated_Price = priceEstimator.EstimatePrice(h.HouseInspections.OrderByDescending(i => i.InspectionDate).FirstOrDefault(), h.governorate),
+                         hasPublishedAdv = h.Advertisements.Any(a => a.HouseId == h.HouseId)
                      },
                      LastApprovedInspection = h.HouseInspections
                          .Where(i => i.inspectionStatus == Enums.InspectionStatus.Aproved)
