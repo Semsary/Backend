@@ -12,7 +12,7 @@ namespace semsary_backend.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class CustomerServiceController(TokenService tokenGenertor, ApiContext apiContext, R2StorageService r2StorageService, NotificationService notificationService) : ControllerBase
+    public class CustomerServiceController(TokenService tokenGenertor, ApiContext apiContext, R2StorageService r2StorageService, NotificationService notificationService , PriceEstimator estimator) : ControllerBase
     {
         [HttpPut("HouseInspection/create/{houseId}")]
         public async Task<IActionResult> MakeHouseInspection(string houseId, [FromForm] HouseInspectionDTO HouseInspectionDTO)
@@ -72,6 +72,7 @@ namespace semsary_backend.Controllers
                 var url = await r2StorageService.UploadFileAsync(img);
                 inspection.HouseImages.Add(url);
             }
+            inspection.price =(int)estimator.EstimatePrice(inspection, house.governorate);
             await apiContext.SaveChangesAsync();
 
             await notificationService.SendNotificationAsync("طلب تأكيد للمعاينة", $"قام {user.Firstname} {user.Lastname}\n من خدمة العملاء بادخال البيانات المطلوبة, قم بزيارة ملفك الشخصي لتأكيد بيانات المعاينة.", landlord);

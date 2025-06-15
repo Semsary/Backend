@@ -10,6 +10,7 @@ namespace semsary_backend.Models
     
     public class Tenant:UnverifiedUser
     {
+        public bool CompletedProfile { get; set; } = false;
         public int Balance { get; set; }
         public int height {  get; set; }
         public float weight {  get; set; }

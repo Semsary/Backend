@@ -9,9 +9,9 @@ namespace semsary_backend.Service
 {
     public class RecommendationSystem
     {
-        private readonly InferenceSession item_scaler=new InferenceSession(Path.Combine("ML", "item_scaler"));
-        private readonly InferenceSession user_scaler = new InferenceSession(Path.Combine("ML", "user_scaler"));
-        private readonly InferenceSession recommender_model = new InferenceSession(Path.Combine("ML", "recommender_model"));
+        private readonly InferenceSession item_scaler=new InferenceSession(Path.Combine("ML", "item_scaler.onnx"));
+        private readonly InferenceSession user_scaler = new InferenceSession(Path.Combine("ML", "user_scaler.onnx"));
+        private readonly InferenceSession recommender_model = new InferenceSession(Path.Combine("ML", "recommender_model.onnx"));
         public float[] Itemscaler(HouseInspection houseInspection,Governorate _gover)
         {
             float[]input=new float[56];

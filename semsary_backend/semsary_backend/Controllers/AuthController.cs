@@ -640,6 +640,11 @@ namespace semsary_backend.Controllers
                 if (edit.street != null)
                     user.Address.street = edit.street;
             }
+            else
+            {
+                user.Address = new Address();
+                user.Address._gover = Governorate.Cairo; // Default value if not provided
+            }
             user.ProfileImageUrl =edit.ProfileImage is null?user.ProfileImageUrl: await storageService.UploadFileAsync( edit.ProfileImage);
 
             if (user.UserType == UserType.Tenant)
@@ -652,7 +657,9 @@ namespace semsary_backend.Controllers
                 tenant.NeedNearVitalPlaces = edit.NeedNearVitalPlaces == null ? false : edit.NeedNearVitalPlaces.Value;
                 tenant.NeedPublicService = edit.NeedPublicService == null ? false : edit.NeedPublicService.Value;
                 tenant.NeedPublicTransportation = edit.NeedPublicTransportation == null ? false : edit.NeedPublicTransportation.Value;
+                tenant.CompletedProfile = true;
             }
+
             apiContext.SaveChanges();
 
             return Ok("Profile updated successfully.");

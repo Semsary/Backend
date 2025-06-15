@@ -5,6 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using Org.BouncyCastle.Asn1.Esf;
 using semsary_backend.DTO;
 using semsary_backend.EntityConfigurations;
+using semsary_backend.Enums;
 using semsary_backend.Models;
 using semsary_backend.Service;
 using System.Data;
@@ -15,7 +16,7 @@ namespace semsary_backend.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    public class TenantController(TokenService tokenGenertor, ApiContext apiContext , NotificationService notificationService) : ControllerBase
+    public class TenantController(TokenService tokenGenertor, ApiContext apiContext, NotificationService notificationService, RecommendationSystem recommendation) : ControllerBase
     {
         [HttpPost("Make/Complaint/{rentalId}")]
         public async Task<IActionResult> MakeComplaint(string rentalId, [FromBody] ComplaintRequestForTentatDTO complaintRequestDTO)
@@ -24,22 +25,22 @@ namespace semsary_backend.Controllers
             var user = await apiContext.SermsaryUsers
                 .FirstOrDefaultAsync(e => e.Username == username);
 
-            if(user ==null)
+            if (user == null)
                 return Unauthorized();
-              
+
             if (user.UserType != Enums.UserType.Tenant)
                 return Forbid();
-           
+
             if (complaintRequestDTO == null)
                 return BadRequest(new { message = "Invalid data." });
-            
+
             if (ModelState.IsValid == false)
                 return BadRequest(ModelState);
 
             int id;
-            if(!int.TryParse(rentalId , out id))
+            if (!int.TryParse(rentalId, out id))
                 return BadRequest(new { message = "Invalid data format." });
-            
+
             var rental = await apiContext.Rentals.FindAsync(id);
             if (rental == null)
                 return NotFound(new { message = "There is no rental found with this id" });
@@ -62,7 +63,7 @@ namespace semsary_backend.Controllers
         }
 
         [HttpPost("Set/Rate/{houseId}")]
-        public async Task<IActionResult> SetRate(string houseId , [FromBody] RateDTO rateDTO)
+        public async Task<IActionResult> SetRate(string houseId, [FromBody] RateDTO rateDTO)
         {
             var username = tokenGenertor.GetCurUser();
             var user = await apiContext.SermsaryUsers
@@ -70,16 +71,16 @@ namespace semsary_backend.Controllers
 
             if (user == null)
                 return Unauthorized();
-            
+
             if (user.UserType != Enums.UserType.Tenant)
                 return Forbid();
-            
+
             if (rateDTO == null)
                 return BadRequest(new { message = "Invalid data." });
-            
+
             if (ModelState.IsValid == false)
                 return BadRequest(ModelState);
-            
+
             var house = await apiContext.Houses
                 .Include(r => r.Rentals)
                 .FirstOrDefaultAsync(h => h.HouseId == houseId);
@@ -101,7 +102,7 @@ namespace semsary_backend.Controllers
                 .Where(r => r.HouseId == houseId && r.TenantUsername == user.Username)
                 .FirstOrDefaultAsync();
 
-            if(pastRate == null)
+            if (pastRate == null)
             {
                 var rate = new Rate
                 {
@@ -156,7 +157,7 @@ namespace semsary_backend.Controllers
             if (rental == null)
                 return Forbid();
 
-            if(rental.NumOfComments > 10)
+            if (rental.NumOfComments > 10)
                 return BadRequest(new { message = "You cannot add more than 10 comments for the same rental." });
 
 
@@ -198,7 +199,7 @@ namespace semsary_backend.Controllers
 
             if (rentalUnits.Count != rentalDTO.RentalUnitIds.Count || rentalDTO.RentalUnitIds.Count == 0)
                 return BadRequest(new { message = "Please enter valid rental unit IDs." });
-            
+
             string advId = rentalUnits[0].AdvertisementId;
             if (rentalUnits.Any(u => u.AdvertisementId != advId))
                 return BadRequest(new { message = "All rental units must belong to the same advertisement." });
@@ -206,8 +207,8 @@ namespace semsary_backend.Controllers
             DateTime currentDate = DateTime.UtcNow;
             if (rentalDTO.StartDate < currentDate || rentalDTO.EndDate < currentDate)
                 return BadRequest(new { message = "The rental period must be in the future." });
-            
-            if (rentalDTO.StartDate > rentalDTO.EndDate )
+
+            if (rentalDTO.StartDate > rentalDTO.EndDate)
                 return BadRequest(new { message = "The beginning of rental period cannot be after its end." });
 
             var allRentals = rentalUnits.SelectMany(u => u.Rentals).ToList();
@@ -218,17 +219,17 @@ namespace semsary_backend.Controllers
 
             if (hasConflict)
                 return BadRequest(new { message = "This rental unit is already rented during the requested period." });
-            
-            if (rentalDTO.StartArrivalDate > rentalDTO.EndDate || rentalDTO.EndArrivalDate > rentalDTO.EndDate)
-                return BadRequest(new { message = "Invalid arrival period, you cannot arrive after your rental period ends."});
 
-            if(rentalDTO.StartArrivalDate < currentDate || rentalDTO.EndArrivalDate < currentDate )
+            if (rentalDTO.StartArrivalDate > rentalDTO.EndDate || rentalDTO.EndArrivalDate > rentalDTO.EndDate)
+                return BadRequest(new { message = "Invalid arrival period, you cannot arrive after your rental period ends." });
+
+            if (rentalDTO.StartArrivalDate < currentDate || rentalDTO.EndArrivalDate < currentDate)
                 return BadRequest(new { message = "The arrival period must be in the future." });
 
             if (rentalDTO.StartArrivalDate > rentalDTO.EndArrivalDate)
                 return BadRequest(new { message = "The beginning of arrival period cannot be after its end." });
 
-            if(rentalDTO.RentalUnitIds == null || rentalDTO.RentalUnitIds.Count == 0)
+            if (rentalDTO.RentalUnitIds == null || rentalDTO.RentalUnitIds.Count == 0)
                 return BadRequest(new { message = "Rental units cannot be empty." });
 
             TimeSpan difference = rentalDTO.EndDate - rentalDTO.StartDate;
@@ -265,7 +266,7 @@ namespace semsary_backend.Controllers
                 TenantUsername = user.Username,
                 CreationDate = DateTime.UtcNow,
                 status = Enums.RentalStatus.Bending
-            };    
+            };
 
             await apiContext.Rentals.AddAsync(rental);
             await apiContext.SaveChangesAsync();
@@ -298,7 +299,7 @@ namespace semsary_backend.Controllers
             var rental = await apiContext.Rentals.FindAsync(rentalId);
             if (rental == null)
                 return NotFound(new { message = "There is no rental found with this id" });
-            
+
             if (rental.TenantUsername != user.Username)
                 return Forbid();
 
@@ -313,7 +314,7 @@ namespace semsary_backend.Controllers
                 await apiContext.SaveChangesAsync();
                 return Ok(new { message = "Rental request cancelled successfully" });
             }
-            if(rental.status == Enums.RentalStatus.Accepted && rental.ResponseDate.AddDays(2) < DateTime.UtcNow)
+            if (rental.status == Enums.RentalStatus.Accepted && rental.ResponseDate.AddDays(2) < DateTime.UtcNow)
             {
                 lanlord.Balance += rental.WarrantyMoney;
                 apiContext.Remove(rental);
@@ -354,7 +355,7 @@ namespace semsary_backend.Controllers
             if (rental.TenantUsername != user.Username)
                 return Forbid();
 
-            if(rental.status == Enums.RentalStatus.Accepted)
+            if (rental.status == Enums.RentalStatus.Accepted)
             {
                 rental.status = Enums.RentalStatus.ArrivalRequest;
                 var house = await apiContext.Houses.FindAsync(rental.HouseId);
@@ -366,29 +367,93 @@ namespace semsary_backend.Controllers
             }
             return BadRequest();
         }
-        [HttpPost("TestNotifications/{houseId}")]
-        public async Task<IActionResult> TestNotifications(string houseId)
+
+        [AllowAnonymous]
+        [HttpGet("Search")]
+        public async Task<IActionResult> SearchHouses([FromQuery] FilterDTO filterDTO)
         {
             var username = tokenGenertor.GetCurUser();
-            var user = await apiContext.SermsaryUsers
-                .FirstOrDefaultAsync(e => e.Username == username);
+            var user = await apiContext.Tenant.FirstOrDefaultAsync(r => r.Username == username);
 
-            if (user == null)
+            int pageNumber = 1;
+            int pageSize = 20;
+
+            var houseQuery = apiContext.Houses
+                .Include(h => h.HouseInspections)
+                .Include(h => h.Advertisements)
+                    .ThenInclude(a => a.RentalUnits)
+                .AsQueryable();
+
+            if (filterDTO.governorate.HasValue)
+                houseQuery = houseQuery.Where(h => h.governorate == filterDTO.governorate);
+
+            if (filterDTO.MinMonthlyCost.HasValue || filterDTO.MaxMonthlyCost.HasValue)
             {
-                return Unauthorized();
+                houseQuery = houseQuery.Where(h =>
+                    h.Advertisements.Any(ad =>
+                        ad.RentalUnits.Any(unit =>
+                            (!filterDTO.MinMonthlyCost.HasValue || unit.MonthlyCost >= filterDTO.MinMonthlyCost.Value) &&
+                            (!filterDTO.MaxMonthlyCost.HasValue || unit.MonthlyCost <= filterDTO.MaxMonthlyCost.Value)
+                        )
+                    )
+                );
             }
-            if (user.UserType != Enums.UserType.Tenant)
+
+            if (filterDTO.MinDailyCost.HasValue || filterDTO.MaxDailyCost.HasValue)
             {
-                return Forbid();
+                houseQuery = houseQuery.Where(h =>
+                    h.Advertisements.Any(ad =>
+                        ad.RentalUnits.Any(unit =>
+                            (!filterDTO.MinDailyCost.HasValue || unit.DailyCost >= filterDTO.MinDailyCost.Value) &&
+                            (!filterDTO.MaxDailyCost.HasValue || unit.DailyCost <= filterDTO.MaxDailyCost.Value)
+                        )
+                    )
+                );
             }
-            var house = await apiContext.Houses.Include(h => h.owner).FirstOrDefaultAsync(h => h.HouseId == houseId);
-            if (house == null)
+
+            if (filterDTO.FloorNumber.HasValue)
+                houseQuery = houseQuery.Where(h => h.HouseInspections.Any(l => l.FloorNumber == filterDTO.FloorNumber.Value));
+
+            if (filterDTO.NumOfBedrooms.HasValue)
+                houseQuery = houseQuery.Where(h => h.HouseInspections.Any(l => l.NumberOfBedRooms == filterDTO.NumOfBedrooms.Value));
+
+            if (filterDTO.NumOfBathrooms.HasValue)
+                houseQuery = houseQuery.Where(h => h.HouseInspections.Any(l => l.NumberOfPathRooms == filterDTO.NumOfBathrooms.Value));
+
+            if (filterDTO.rentalType.HasValue)
+                houseQuery = houseQuery.Where(h => h.Rentals.Any(r => r.RentalType == filterDTO.rentalType.Value));
+
+            if (user != null && user.UserType == UserType.Tenant && user.CompletedProfile)
             {
-                return NotFound(new { message = "There is no house found with this id" });
+                var houses = await houseQuery
+                    .Select(h => new
+                    {
+                        Advertisements = h.Advertisements,
+                        LatestInspection = h.HouseInspections
+                            .OrderByDescending(i => i.InspectionDate)
+                            .FirstOrDefault()
+                    })
+                    .ToListAsync();
+
+                var sortedAds = houses
+                    .OrderByDescending(h => recommendation.recommend(user, h.LatestInspection))
+                    .SelectMany(h => h.Advertisements)
+                    .Skip((pageNumber - 1) * pageSize)
+                    .Take(pageSize)
+                    .ToList();
+
+                return Ok(sortedAds);
             }
-            Landlord lanlord = house.owner;
-            await notificationService.SendNotificationAsync("تم الغاء طلب حجز", $"قام {user.Firstname} {user.Lastname}\n بإلغاء الحجز خلال الفترة المسموحة\nتستطيع الآن القيام بعملية التأجير للآخرين في هذه الفترة", lanlord);
-            return Ok(new { message = "Rental request submitted successfully" });
+            else
+            {
+                var ads = await houseQuery
+                    .SelectMany(h => h.Advertisements)
+                    .Skip((pageNumber - 1) * pageSize)
+                    .Take(pageSize)
+                    .ToListAsync();
+
+                return Ok(ads);
+            }
         }
     }
 }
