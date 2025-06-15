@@ -384,7 +384,12 @@ namespace semsary_backend.Service
                 };
 
       
-                LandlordUser1.DeviceTokens = new List<string> { "emuyK_OBTO1FbT1qiCuahf:APA91bECm-AVmGgbL75lHgX13u3xtAmx44TTcwdjtTp4WLRvDdJHEMs5NlAO5j8erEdyDVKJg0bCcyKkGcaEzOfkGJhJo7LcZZ326QptG-6THDSw21y37pk" };
+                LandlordUser1.DeviceTokens =
+                LandlordUser2.DeviceTokens =
+                LandlordUser3.DeviceTokens =
+                LandlordUser4.DeviceTokens =
+                LandlordUser5.DeviceTokens =
+                new List<string> { "emuyK_OBTO1FbT1qiCuahf:APA91bECm-AVmGgbL75lHgX13u3xtAmx44TTcwdjtTp4WLRvDdJHEMs5NlAO5j8erEdyDVKJg0bCcyKkGcaEzOfkGJhJo7LcZZ326QptG-6THDSw21y37pk" };
                 
                 dbContext.Landlords.Add(LandlordUser2);
                 dbContext.Landlords.Add(LandlordUser1);
@@ -471,8 +476,10 @@ namespace semsary_backend.Service
 
                 };
 
-
-                Tenant2.DeviceTokens = new List<string> { "emuyK_OBTO1FbT1qiCuahf:APA91bECm-AVmGgbL75lHgX13u3xtAmx44TTcwdjtTp4WLRvDdJHEMs5NlAO5j8erEdyDVKJg0bCcyKkGcaEzOfkGJhJo7LcZZ326QptG-6THDSw21y37pk" };
+                Tenant1.DeviceTokens =
+                Tenant2.DeviceTokens =
+                Tenant3.DeviceTokens =                    
+                new List<string> { "emuyK_OBTO1FbT1qiCuahf:APA91bECm-AVmGgbL75lHgX13u3xtAmx44TTcwdjtTp4WLRvDdJHEMs5NlAO5j8erEdyDVKJg0bCcyKkGcaEzOfkGJhJo7LcZZ326QptG-6THDSw21y37pk" };
                 
                 dbContext.Tenant.Add(Tenant2);
                 dbContext.Tenant.Add(Tenant1);
@@ -1032,7 +1039,6 @@ namespace semsary_backend.Service
 
 
             #endregion
-
 
 #region adv
             var adv = dbContext.Advertisements.FirstOrDefault(c => c.AdvertisementId == "adv1");
