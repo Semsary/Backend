@@ -384,44 +384,44 @@ namespace semsary_backend.Controllers
                     .ThenInclude(a => a.RentalUnits)
                 .AsQueryable();
 
-            if (filterDTO.governorate.HasValue)
-                houseQuery = houseQuery.Where(h => h.governorate == filterDTO.governorate);
+                if (filterDTO.governorate.HasValue)
+                    houseQuery = houseQuery.Where(h => h.governorate == filterDTO.governorate);
 
-            if (filterDTO.MinMonthlyCost.HasValue || filterDTO.MaxMonthlyCost.HasValue)
-            {
-                houseQuery = houseQuery.Where(h =>
-                    h.Advertisements.Any(ad =>
-                        ad.RentalUnits.Any(unit =>
-                            (!filterDTO.MinMonthlyCost.HasValue || unit.MonthlyCost >= filterDTO.MinMonthlyCost.Value) &&
-                            (!filterDTO.MaxMonthlyCost.HasValue || unit.MonthlyCost <= filterDTO.MaxMonthlyCost.Value)
+                if (filterDTO.MinMonthlyCost.HasValue || filterDTO.MaxMonthlyCost.HasValue)
+                {
+                    houseQuery = houseQuery.Where(h =>
+                        h.Advertisements.Any(ad =>
+                            ad.RentalUnits.Any(unit =>
+                                (!filterDTO.MinMonthlyCost.HasValue || unit.MonthlyCost >= filterDTO.MinMonthlyCost.Value) &&
+                                (!filterDTO.MaxMonthlyCost.HasValue || unit.MonthlyCost <= filterDTO.MaxMonthlyCost.Value)
+                            )
                         )
-                    )
-                );
-            }
+                    );
+                }
 
-            if (filterDTO.MinDailyCost.HasValue || filterDTO.MaxDailyCost.HasValue)
-            {
-                houseQuery = houseQuery.Where(h =>
-                    h.Advertisements.Any(ad =>
-                        ad.RentalUnits.Any(unit =>
-                            (!filterDTO.MinDailyCost.HasValue || unit.DailyCost >= filterDTO.MinDailyCost.Value) &&
-                            (!filterDTO.MaxDailyCost.HasValue || unit.DailyCost <= filterDTO.MaxDailyCost.Value)
+                if (filterDTO.MinDailyCost.HasValue || filterDTO.MaxDailyCost.HasValue)
+                {
+                    houseQuery = houseQuery.Where(h =>
+                        h.Advertisements.Any(ad =>
+                            ad.RentalUnits.Any(unit =>
+                                (!filterDTO.MinDailyCost.HasValue || unit.DailyCost >= filterDTO.MinDailyCost.Value) &&
+                                (!filterDTO.MaxDailyCost.HasValue || unit.DailyCost <= filterDTO.MaxDailyCost.Value)
+                            )
                         )
-                    )
-                );
-            }
+                    );
+                }
 
-            if (filterDTO.FloorNumber.HasValue)
-                houseQuery = houseQuery.Where(h => h.HouseInspections.Any(l => l.FloorNumber == filterDTO.FloorNumber.Value));
+                if (filterDTO.FloorNumber.HasValue)
+                    houseQuery = houseQuery.Where(h => h.HouseInspections.Any(l => l.FloorNumber == filterDTO.FloorNumber.Value));
 
-            if (filterDTO.NumOfBedrooms.HasValue)
-                houseQuery = houseQuery.Where(h => h.HouseInspections.Any(l => l.NumberOfBedRooms == filterDTO.NumOfBedrooms.Value));
+                if (filterDTO.NumOfBedrooms.HasValue)
+                    houseQuery = houseQuery.Where(h => h.HouseInspections.Any(l => l.NumberOfBedRooms == filterDTO.NumOfBedrooms.Value));
 
-            if (filterDTO.NumOfBathrooms.HasValue)
-                houseQuery = houseQuery.Where(h => h.HouseInspections.Any(l => l.NumberOfPathRooms == filterDTO.NumOfBathrooms.Value));
+                if (filterDTO.NumOfBathrooms.HasValue)
+                    houseQuery = houseQuery.Where(h => h.HouseInspections.Any(l => l.NumberOfPathRooms == filterDTO.NumOfBathrooms.Value));
 
-            if (filterDTO.rentalType.HasValue)
-                houseQuery = houseQuery.Where(h => h.Rentals.Any(r => r.RentalType == filterDTO.rentalType.Value));
+                if (filterDTO.rentalType.HasValue)
+                    houseQuery = houseQuery.Where(h => h.Rentals.Any(r => r.RentalType == filterDTO.rentalType.Value));
 
             if (user != null && user.UserType == UserType.Tenant && user.CompletedProfile)
             {
