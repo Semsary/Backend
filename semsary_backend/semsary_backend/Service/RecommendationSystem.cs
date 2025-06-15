@@ -135,7 +135,7 @@ namespace semsary_backend.Service
             {
                 NamedOnnxValue.CreateFromTensor("input",tensor)
             };
-            using (var results = item_scaler!.Run(input1))
+            using (var results = user_scaler!.Run(input1))
             {
                 var output = results.FirstOrDefault()?.AsTensor<float>();
                 if (output != null)
@@ -147,10 +147,10 @@ namespace semsary_backend.Service
             return new float[38];
 
         }
-        public float recommend(Tenant t,HouseInspection item)
+        public float recommend(Tenant t,HouseInspection item,Governorate governorate)
         {
             var userInput=User_scaler(t);
-            var item_input = Itemscaler(item,item.House.governorate);
+            var item_input = Itemscaler(item,governorate);
             var userTensor = new DenseTensor<float>(userInput, new[] { 1,38 });
             var itemTensor = new DenseTensor<float>(item_input, new[] { 1, 56 });
             var input = new List<NamedOnnxValue>();

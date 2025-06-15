@@ -383,7 +383,7 @@ namespace semsary_backend.Controllers
                 .Include(h => h.Advertisements)
                     .ThenInclude(a => a.RentalUnits)
                 .AsQueryable();
-
+            
                 if (filterDTO.governorate.HasValue)
                     houseQuery = houseQuery.Where(h => h.governorate == filterDTO.governorate);
 
@@ -422,7 +422,7 @@ namespace semsary_backend.Controllers
 
                 if (filterDTO.rentalType.HasValue)
                     houseQuery = houseQuery.Where(h => h.Rentals.Any(r => r.RentalType == filterDTO.rentalType.Value));
-
+            
             if (user != null && user.UserType == UserType.Tenant && user.CompletedProfile)
             {
                 var houses = await houseQuery
@@ -431,12 +431,13 @@ namespace semsary_backend.Controllers
                         Advertisements = h.Advertisements,
                         LatestInspection = h.HouseInspections
                             .OrderByDescending(i => i.InspectionDate)
-                            .FirstOrDefault()
+                            .FirstOrDefault(),
+                        gover= h.governorate
                     })
                     .ToListAsync();
 
                 var sortedAds = houses
-                    .OrderByDescending(h => recommendation.recommend(user, h.LatestInspection))
+                    .OrderByDescending(h => recommendation.recommend(user, h.LatestInspection,h.gover))
                     .SelectMany(h => h.Advertisements)
                     .Skip((pageNumber - 1) * pageSize)
                     .Take(pageSize)
