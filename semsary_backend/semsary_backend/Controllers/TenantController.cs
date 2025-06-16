@@ -388,9 +388,6 @@ namespace semsary_backend.Controllers
             var username = tokenGenertor.GetCurUser();
             var user = await apiContext.Tenant.FirstOrDefaultAsync(r => r.Username == username);
 
-            int pageNumber = 1;
-            int pageSize = 20;
-
             var houseQuery = apiContext.Houses
                 .Include(h => h.HouseInspections)
                 .Include(h => h.Advertisements)
@@ -479,8 +476,6 @@ namespace semsary_backend.Controllers
                         DailyCost = ad.RentalUnits.Any() ? ad.RentalUnits.Min(u => u.DailyCost) : 0,
                         MonthlyCost = ad.RentalUnits.Any() ? ad.RentalUnits.Min(u => u.MonthlyCost) : 0,
                     })
-                    .Skip((pageNumber - 1) * pageSize)
-                    .Take(pageSize)
                     .ToList();
 
                 return Ok(sortedAds);
@@ -527,8 +522,6 @@ namespace semsary_backend.Controllers
                         DailyCost = ad.RentalUnits.Any() ? ad.RentalUnits.Min(u => u.DailyCost) : 0,
                         MonthlyCost = ad.RentalUnits.Any() ? ad.RentalUnits.Min(u => u.MonthlyCost) : 0,
                     })
-                    .Skip((pageNumber - 1) * pageSize)
-                    .Take(pageSize)
                     .ToList();
 
                 return Ok(advs);
