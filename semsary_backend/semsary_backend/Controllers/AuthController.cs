@@ -738,6 +738,94 @@ namespace semsary_backend.Controllers
 
             return Ok(notifications);
         }
+        [Authorize]
+        [HttpPut("Deposit/{Id}")]
+        public async Task<IActionResult> Deposit(string Id)
+        {
+            if (string.IsNullOrEmpty(Id))
+                return BadRequest("invalid Id");
+
+            var UserId = tokenGenertor.GetCurUser();
+            if (string.IsNullOrEmpty(UserId))
+                return Unauthorized("invalid username");
+            var user = await apiContext.SermsaryUsers.Where(c => c.Username == UserId).FirstOrDefaultAsync();
+            if (user == null)
+                return BadRequest("this user doesn't exist");
+            var Coupon = apiContext.Coupons.Where(c => c.Id.ToString() == Id).FirstOrDefault();
+            if (Coupon == null)
+                return BadRequest("this Coupon doesn't exist");
+            if (Coupon.IsUsed)
+                return BadRequest("this coupon is used before");
+            if (user.UserType == UserType.Customerservice)
+            {
+                Coupon.ExPosedPy = UserId;
+                Coupon.IsUsed = true;
+                apiContext.SaveChanges();
+            }
+            else if (user.UserType == UserType.Admin)
+                return BadRequest("this endpoint isn't designed to be used by the admin");
+            Coupon.ExPosedPy = UserId;
+            Coupon.IsUsed = true;
+            var uder = (UnverifiedUser)user;
+            uder.Balance += Coupon.Balance;
+            apiContext.SaveChanges();
+
+            return Ok("The selected coupon has been used successfully");
+
+
+        }
+        [Authorize]
+        [HttpPut("withdraw")]
+        public async Task<IActionResult> withdraw(int Balance)
+        {
+            var Id = tokenGenertor.GetCurUser();
+            if (string.IsNullOrEmpty(Id))
+                return BadRequest("invalid token");
+            var u = apiContext.SermsaryUsers.Where(c => c.Username == Id).FirstOrDefault();
+            if (u == null)
+                return BadRequest("this user doesn't exist");
+            if (u.UserType == UserType.Admin)
+                return BadRequest("this endpoint isn't designed to be used by the admin");
+            if (Balance < 1 || Balance >= 50000)
+                return BadRequest("you have exeeded the allowed coupon value");
+
+            if (u.UserType == UserType.Customerservice)
+            {
+                var coupon = new Coupon();
+                coupon.Balance = Balance;
+                coupon.CreatedBy = Id;
+                coupon.CreatedBy = Id;
+                apiContext.Coupons.Add(coupon);
+
+                await apiContext.SaveChangesAsync();
+                return Ok(new
+                {
+                    CouponId = coupon.Id.ToString()
+                });
+
+            }
+            var RealUder = (UnverifiedUser)u;
+            if (RealUder.IsVerified == false)
+                return BadRequest("you are not verified yet");
+            if (RealUder.IsBlocked)
+                return BadRequest("you has been blocked");
+            if (RealUder.Balance < Balance)
+                return BadRequest("you don't have enough balance");
+            RealUder.Balance -= Balance;
+            var Coupon = new Coupon();
+            Coupon.Balance = Balance;
+            Coupon.CreatedBy = Id;
+            apiContext.Coupons.Add(Coupon);
+
+            apiContext.SaveChanges();
+            return Ok(new
+            {
+                CouponId = Coupon.Id.ToString()
+            });
+
+
+        }
+
 
     }
 }

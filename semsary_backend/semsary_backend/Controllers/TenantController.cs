@@ -662,7 +662,7 @@ namespace semsary_backend.Controllers
                 adv.House.street,
                 HouseAverageRate = adv.House.AvrageRate,
                 NumOfRaters = adv.House.NumOfRaters,
-                ShowEstimatedPrice = (user != null && user.Premium == true)
+                ShowEstimatedPrice = (user != null && user.PremiumEnd >=DateTime.UtcNow)
             };
 
             return Ok(new { HouseMainInfo , HouseInspectionInfo , RentalUnitInfo , Comments });
@@ -680,5 +680,31 @@ namespace semsary_backend.Controllers
 
 
         }
+        [Authorize]
+        [HttpPut("premium")]
+        public async Task<IActionResult> UpgradeToPremium()
+        {
+            var username = tokenGenertor.GetCurUser();
+            var user = await apiContext.Tenant.FirstOrDefaultAsync(r => r.Username == username);
+            if (user == null)
+                return Unauthorized();
+
+            if (user.PremiumEnd >= DateTime.UtcNow)
+                return BadRequest(new { message = "You are already a premium user." });
+
+            if (user.Balance < 1000)
+                return BadRequest(new { message = "Insufficient balance to upgrade to premium." });
+
+            user.PremiumBegin = DateTime.UtcNow;
+            user.PremiumEnd = DateTime.UtcNow.AddYears(1);
+            user.Balance -= 1000;
+
+            await apiContext.SaveChangesAsync();
+
+            return Ok(new { message = "Successfully upgraded to premium." });
+
+
+        }
     }
+
 }
