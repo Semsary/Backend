@@ -201,7 +201,7 @@ namespace semsary_backend.Controllers
             if (ModelState.IsValid == false)
                 return BadRequest(ModelState);
 
-            var adv = await apiContext.Advertisements.Where(r => r.AdvertisementId == rentalDTO.AdvId).FirstOrDefaultAsync();
+            var adv = await apiContext.Advertisements.Where(r => r.AdvertisementId == rentalDTO.AdvId).Include(r => r.RentalUnits).FirstOrDefaultAsync();
             if (adv == null)
                 return BadRequest("There is no advertisement with this id");
 
@@ -221,23 +221,14 @@ namespace semsary_backend.Controllers
             if (rentalDTO.StartArrivalDate > rentalDTO.EndArrivalDate)
                 return BadRequest(new { message = "The beginning of arrival period cannot be after its end." });
 
-
-            var rentalUnits = await apiContext.RentalUnits
-                .Include(u => u.Advertisement)
-                .Where(u => u.Advertisement.AdvertisementId == rentalDTO.AdvId &&
-                            u.Rentals.All(r =>
-                                (rentalDTO.StartDate < r.EndDate && rentalDTO.StartDate >= r.StartDate) ||
-                                (rentalDTO.EndDate > r.StartDate && rentalDTO.EndDate <= r.EndDate) == false))
-                .ToListAsync();
-
-            var conflictsPerUnit = rentalUnits
-                  .Select(unit => new
-                  {
-                      RentalUnitId = unit.RentalUnitId,
-                      HasConflict = unit.Rentals.Any(rent =>
-                          rentalDTO.StartDate < rent.EndDate && rentalDTO.EndDate > rent.StartDate)
-                  })
-                  .ToList();
+            var conflictsPerUnit = adv.RentalUnits
+                .Select(unit => new
+                {
+                    RentalUnitId = unit.RentalUnitId,
+                    HasConflict = unit.Rentals.Any(r =>
+                        rentalDTO.StartDate < r.EndDate && rentalDTO.EndDate > r.StartDate)
+                })
+                .ToList();
             return Ok(conflictsPerUnit);
         }
 
