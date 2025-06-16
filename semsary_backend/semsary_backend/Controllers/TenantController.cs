@@ -174,7 +174,6 @@ namespace semsary_backend.Controllers
             if (rental.NumOfComments > 10)
                 return BadRequest(new { message = "You cannot add more than 10 comments for the same rental." });
 
-
             var Comment = new Comment
             {
                 HouseId = houseId,
@@ -186,6 +185,60 @@ namespace semsary_backend.Controllers
             await apiContext.SaveChangesAsync();
             rental.NumOfComments++;
             return Ok(new { message = "Comment added successfully" });
+        }
+
+        [HttpPost("show/available/rentalUnits")]
+        public async Task<IActionResult> ShowAvailableRentalUnits([FromBody]RentalPeriodDTO rentalDTO)
+        {
+            var username = tokenGenertor.GetCurUser();
+            var user = await apiContext.Tenant.Where(r => r.Username == username).FirstOrDefaultAsync();
+            if (user == null)
+                return Unauthorized();
+
+            if (rentalDTO == null)
+                return BadRequest(new { message = "Invalid data." });
+
+            if (ModelState.IsValid == false)
+                return BadRequest(ModelState);
+
+            var adv = await apiContext.Advertisements.Where(r => r.AdvertisementId == rentalDTO.AdvId).FirstOrDefaultAsync();
+            if (adv == null)
+                return BadRequest("There is no advertisement with this id");
+
+            DateTime currentDate = DateTime.UtcNow;
+            if (rentalDTO.StartDate < currentDate || rentalDTO.EndDate < currentDate)
+                return BadRequest(new { message = "The rental period must be in the future." });
+
+            if (rentalDTO.StartDate > rentalDTO.EndDate)
+                return BadRequest(new { message = "The beginning of rental period cannot be after its end." });
+
+            if (rentalDTO.StartArrivalDate > rentalDTO.EndDate || rentalDTO.EndArrivalDate > rentalDTO.EndDate)
+                return BadRequest(new { message = "Invalid arrival period, you cannot arrive after your rental period ends." });
+
+            if (rentalDTO.StartArrivalDate < currentDate || rentalDTO.EndArrivalDate < currentDate)
+                return BadRequest(new { message = "The arrival period must be in the future." });
+
+            if (rentalDTO.StartArrivalDate > rentalDTO.EndArrivalDate)
+                return BadRequest(new { message = "The beginning of arrival period cannot be after its end." });
+
+
+            var rentalUnits = await apiContext.RentalUnits
+                .Include(u => u.Advertisement)
+                .Where(u => u.Advertisement.AdvertisementId == rentalDTO.AdvId &&
+                            u.Rentals.All(r =>
+                                (rentalDTO.StartDate < r.EndDate && rentalDTO.StartDate >= r.StartDate) ||
+                                (rentalDTO.EndDate > r.StartDate && rentalDTO.EndDate <= r.EndDate) == false))
+                .ToListAsync();
+
+            var conflictsPerUnit = rentalUnits
+                  .Select(unit => new
+                  {
+                      RentalUnitId = unit.RentalUnitId,
+                      HasConflict = unit.Rentals.Any(rent =>
+                          rentalDTO.StartDate < rent.EndDate && rentalDTO.EndDate > rent.StartDate)
+                  })
+                  .ToList();
+            return Ok(conflictsPerUnit);
         }
 
         [HttpPost("Make/Rental/Request/")]
@@ -210,41 +263,6 @@ namespace semsary_backend.Controllers
                 .Where(u => rentalDTO.RentalUnitIds.Contains(u.RentalUnitId))
                 .Include(u => u.Rentals)
                 .ToListAsync();
-
-            if (rentalUnits.Count != rentalDTO.RentalUnitIds.Count || rentalDTO.RentalUnitIds.Count == 0)
-                return BadRequest(new { message = "Please enter valid rental unit IDs." });
-
-            string advId = rentalUnits[0].AdvertisementId;
-            if (rentalUnits.Any(u => u.AdvertisementId != advId))
-                return BadRequest(new { message = "All rental units must belong to the same advertisement." });
-
-            DateTime currentDate = DateTime.UtcNow;
-            if (rentalDTO.StartDate < currentDate || rentalDTO.EndDate < currentDate)
-                return BadRequest(new { message = "The rental period must be in the future." });
-
-            if (rentalDTO.StartDate > rentalDTO.EndDate)
-                return BadRequest(new { message = "The beginning of rental period cannot be after its end." });
-
-            var allRentals = rentalUnits.SelectMany(u => u.Rentals).ToList();
-
-            bool hasConflict = allRentals.Any(rent =>
-                 (rentalDTO.StartDate < rent.EndDate && rentalDTO.StartDate >= rent.StartDate) ||
-                 (rentalDTO.EndDate > rent.StartDate && rentalDTO.EndDate <= rent.EndDate));
-
-            if (hasConflict)
-                return BadRequest(new { message = "This rental unit is already rented during the requested period." });
-
-            if (rentalDTO.StartArrivalDate > rentalDTO.EndDate || rentalDTO.EndArrivalDate > rentalDTO.EndDate)
-                return BadRequest(new { message = "Invalid arrival period, you cannot arrive after your rental period ends." });
-
-            if (rentalDTO.StartArrivalDate < currentDate || rentalDTO.EndArrivalDate < currentDate)
-                return BadRequest(new { message = "The arrival period must be in the future." });
-
-            if (rentalDTO.StartArrivalDate > rentalDTO.EndArrivalDate)
-                return BadRequest(new { message = "The beginning of arrival period cannot be after its end." });
-
-            if (rentalDTO.RentalUnitIds == null || rentalDTO.RentalUnitIds.Count == 0)
-                return BadRequest(new { message = "Rental units cannot be empty." });
 
             TimeSpan difference = rentalDTO.EndDate - rentalDTO.StartDate;
             int WarrantyCost = 0;
