@@ -922,7 +922,7 @@ namespace semsary_backend.Service
                     TenantUsername = "tenant1",
                     HouseId = "H1",
                     CreationDate = DateTime.UtcNow,
-                    status = RentalStatus.Bending,
+                    status = RentalStatus.ArrivalAccept,
                     RentalType = RentalType.ByHouse,
                     RentalUnitIds = new List<string> { "RentalUnit1" }
                 };
@@ -938,7 +938,7 @@ namespace semsary_backend.Service
                 var rentalUnit1 = new RentalUnit
                 {
                     RentalUnitId = "RentalUnit1",
-                    AdvertisementId = "Adv1",
+                    AdvertisementId = "adv1",
                     MonthlyCost = 5000,
                     DailyCost = 100,
 
@@ -946,14 +946,14 @@ namespace semsary_backend.Service
                 var rentalUnit2 = new RentalUnit
                 {
                     RentalUnitId = "RentalUnit2",
-                    AdvertisementId = "Adv2",
+                    AdvertisementId = "adv2",
                     MonthlyCost = 7000,
                     DailyCost = 300,
                 };
                 var rentalUnit3 = new RentalUnit
                 {
                     RentalUnitId = "RentalUnit3",
-                    AdvertisementId = "Adv3",
+                    AdvertisementId = "adv3",
                     MonthlyCost = 6500,
                     DailyCost = 250,
                 };
@@ -961,7 +961,7 @@ namespace semsary_backend.Service
                 var rentalUnit4 = new RentalUnit
                 {
                     RentalUnitId = "RentalUnit4",
-                    AdvertisementId = "Adv4",
+                    AdvertisementId = "adv4",
                     MonthlyCost = 4000,
                     DailyCost = 150,
                 };
@@ -969,7 +969,7 @@ namespace semsary_backend.Service
                 var rentalUnit5 = new RentalUnit
                 {
                     RentalUnitId = "RentalUnit5",
-                    AdvertisementId = "Adv5",
+                    AdvertisementId = "adv5",
                     MonthlyCost = 8000,
                     DailyCost = 350,
                 };
@@ -977,7 +977,7 @@ namespace semsary_backend.Service
                 var rentalUnit6 = new RentalUnit
                 {
                     RentalUnitId = "RentalUnit6",
-                    AdvertisementId = "Adv6",
+                    AdvertisementId = "adv6",
                     MonthlyCost = 7200,
                     DailyCost = 300,
                 };
@@ -985,7 +985,7 @@ namespace semsary_backend.Service
                 var rentalUnit7 = new RentalUnit
                 {
                     RentalUnitId = "RentalUnit7",
-                    AdvertisementId = "Adv7",
+                    AdvertisementId = "adv7",
                     MonthlyCost = 5000,
                     DailyCost = 180,
                 };
@@ -993,7 +993,7 @@ namespace semsary_backend.Service
                 var rentalUnit8 = new RentalUnit
                 {
                     RentalUnitId = "RentalUnit8",
-                    AdvertisementId = "Adv8",
+                    AdvertisementId = "adv8",
                     MonthlyCost = 6000,
                     DailyCost = 200,
                 };
@@ -1001,7 +1001,7 @@ namespace semsary_backend.Service
                 var rentalUnit9 = new RentalUnit
                 {
                     RentalUnitId = "RentalUnit9",
-                    AdvertisementId = "Adv9",
+                    AdvertisementId = "adv9",
                     MonthlyCost = 5800,
                     DailyCost = 220,
                 };

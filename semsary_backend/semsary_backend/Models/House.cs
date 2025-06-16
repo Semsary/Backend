@@ -10,7 +10,8 @@ namespace semsary_backend.Models
         public Governorate governorate { get; set; }
         public string? city { get; set; }
         public string? street { get; set; }
-        
+        public double AvrageRate { get; set; } = 0;
+        public int NumOfRaters { get; set; } = 0;
         public List<Rate> ?Rates { get; set; }
         public List<Comment>? Comments { get; set; }
         public List<HouseInspection> HouseInspections { get; set; }

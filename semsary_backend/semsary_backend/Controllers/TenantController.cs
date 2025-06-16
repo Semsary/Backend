@@ -111,6 +111,14 @@ namespace semsary_backend.Controllers
                     RateDate = DateTime.UtcNow,
                     StarsNumber = rateDTO.StarsNumber,
                 };
+
+                var rates = apiContext.Rates
+                    .Where(h => h.HouseId == houseId)
+                    .ToList();
+
+                house.AvrageRate = rates.Any() ? rates.Average(rate => rate.StarsNumber) : rateDTO.StarsNumber;
+                house.NumOfRaters++;
+
                 await apiContext.Rates.AddAsync(rate);
                 await apiContext.SaveChangesAsync();
             }
@@ -118,7 +126,12 @@ namespace semsary_backend.Controllers
             {
                 pastRate.StarsNumber = rateDTO.StarsNumber;
                 pastRate.RateDate = DateTime.UtcNow;
-                apiContext.Rates.Update(pastRate);
+
+                var rates = apiContext.Rates
+                    .Where(h => h.HouseId == houseId)
+                    .ToList();
+
+                house.AvrageRate = rates.Any() ? rates.Average(rate => rate.StarsNumber) : rateDTO.StarsNumber;
                 await apiContext.SaveChangesAsync();
             }
             return Ok(new { message = "Rate submitted successfully" });
@@ -428,17 +441,44 @@ namespace semsary_backend.Controllers
                 var houses = await houseQuery
                     .Select(h => new
                     {
-                        Advertisements = h.Advertisements,
+                        Advertisements = h.Advertisements.Select(ad => new
+                        {
+                            ad.AdvertisementId,
+                            ad.HouseName,
+                            ad.houseDescription,
+                            ad.PublishDate,
+                            ad.rentalType,
+                            RentalUnits = ad.RentalUnits.ToList()
+                        }).ToList(),
+                        houseRate = h.AvrageRate,
+                        NumOfRaters = h.NumOfRaters,
                         LatestInspection = h.HouseInspections
                             .OrderByDescending(i => i.InspectionDate)
                             .FirstOrDefault(),
-                        gover= h.governorate
+                        gover = h.governorate,
+                        city = h.city,
+                        street = h.street
                     })
                     .ToListAsync();
 
                 var sortedAds = houses
-                    .OrderByDescending(h => recommendation.recommend(user, h.LatestInspection,h.gover))
-                    .SelectMany(h => h.Advertisements)
+                    .OrderByDescending(h => recommendation.recommend(user, h.LatestInspection, h.gover))
+                    .SelectMany(h => h.Advertisements, (h, ad) => new
+                    {
+                        AdvertisementId = ad.AdvertisementId,
+                        HouseRate = h.houseRate,
+                        NumOfRaters = h.NumOfRaters,
+                        HouseName = ad.HouseName,
+                        HouseDescription = ad.houseDescription,
+                        PublishDate = ad.PublishDate,
+                        Governorate = h.gover,
+                        City = h.city,
+                        Street = h.street,
+                        RentalType = ad.rentalType,
+                        Images = h.LatestInspection?.HouseImages,
+                        DailyCost = ad.RentalUnits.Any() ? ad.RentalUnits.Min(u => u.DailyCost) : 0,
+                        MonthlyCost = ad.RentalUnits.Any() ? ad.RentalUnits.Min(u => u.MonthlyCost) : 0,
+                    })
                     .Skip((pageNumber - 1) * pageSize)
                     .Take(pageSize)
                     .ToList();
@@ -447,13 +487,51 @@ namespace semsary_backend.Controllers
             }
             else
             {
-                var ads = await houseQuery
-                    .SelectMany(h => h.Advertisements)
-                    .Skip((pageNumber - 1) * pageSize)
-                    .Take(pageSize)
+                var houses = await houseQuery
+                    .Select(h => new
+                    {
+                        Advertisements = h.Advertisements.Select(ad => new
+                        {
+                            ad.AdvertisementId,
+                            ad.HouseName,
+                            ad.houseDescription,
+                            ad.PublishDate,
+                            ad.rentalType,
+                            RentalUnits = ad.RentalUnits.ToList()
+                        }).ToList(),
+                        houseRate = h.AvrageRate,
+                        NumOfRaters = h.NumOfRaters,
+                        LatestInspection = h.HouseInspections
+                            .OrderByDescending(i => i.InspectionDate)
+                            .FirstOrDefault(),
+                        gover = h.governorate,
+                        city = h.city,
+                        street = h.street
+                    })
                     .ToListAsync();
 
-                return Ok(ads);
+                var advs = houses
+                    .SelectMany(h => h.Advertisements, (h, ad) => new
+                    {
+                        AdvertisementId = ad.AdvertisementId,
+                        HouseRate = h.houseRate,
+                        NumOfRaters = h.NumOfRaters,
+                        HouseName = ad.HouseName,
+                        HouseDescription = ad.houseDescription,
+                        PublishDate = ad.PublishDate,
+                        Governorate = h.gover,
+                        City = h.city,
+                        Street = h.street,
+                        RentalType = ad.rentalType,
+                        Images = h.LatestInspection?.HouseImages,
+                        DailyCost = ad.RentalUnits.Any() ? ad.RentalUnits.Min(u => u.DailyCost) : 0,
+                        MonthlyCost = ad.RentalUnits.Any() ? ad.RentalUnits.Min(u => u.MonthlyCost) : 0,
+                    })
+                    .Skip((pageNumber - 1) * pageSize)
+                    .Take(pageSize)
+                    .ToList();
+
+                return Ok(advs);
             }
         }
         [HttpGet("MyRental")]

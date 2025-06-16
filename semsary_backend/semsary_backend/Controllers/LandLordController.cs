@@ -286,6 +286,7 @@ namespace semsary_backend.Controllers
                     adv.RentalUnits.Add(rentunit);
                 }
             }
+            adv.rentalType = dto.RentalType;
             apiContext.Advertisements.Add(adv);
             apiContext.SaveChanges();
             return Created();
