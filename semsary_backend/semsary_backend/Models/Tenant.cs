@@ -16,7 +16,7 @@ namespace semsary_backend.Models
         public float weight {  get; set; }
         public int NumberOfPeople { get; set; }
         public RentalType2 FavouriteRentalType { get; set; }
-
+        public bool Premium { get; set; } = false;
         public Gender gender { get; set; }
         public int age { get; set; }
         public bool IsSmoker {  get; set; }

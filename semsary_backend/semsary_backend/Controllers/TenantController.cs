@@ -534,6 +534,86 @@ namespace semsary_backend.Controllers
                 return Ok(advs);
             }
         }
+        [AllowAnonymous]
+        [HttpGet("Advertisment/Detials/{advId}")]
+        public async Task<IActionResult> AdvDetails(string advId)
+        {
+            var username = tokenGenertor.GetCurUser();
+            var user = await apiContext.Tenant.FirstOrDefaultAsync(r => r.Username == username);
+
+            var adv = await apiContext.Advertisements
+                .Include(a => a.RentalUnits)
+                .Include(a => a.House)
+                    .ThenInclude(h => h.Comments)
+                .Include(a => a.House)
+                    .ThenInclude(h => h.HouseInspections)
+                .FirstOrDefaultAsync(a => a.AdvertisementId == advId);
+
+            if (adv == null)
+                return NotFound(new { message = "Advertisement not found." });
+
+
+            var HouseInspectionInfo = adv.House.HouseInspections
+                .OrderByDescending(i => i.InspectionDate)
+                .Select(i => new
+                {
+                    i.HouseId,
+                    i.longitude,
+                    i.latitude,
+                    i.FloorNumber,
+                    i.NumberOfAirConditionnar,
+                    i.NumberOfPathRooms,
+                    i.NumberOfBedRooms,
+                    i.NumberOfBeds,
+                    i.NumberOfBalacons,
+                    i.NumberOfTables,
+                    i.NumberOfChairs,
+                    i.InspectionDate,
+                    i.HouseFeature,
+                    i.HouseImages,
+                    estimatedPrice = i.price,
+                })
+                .FirstOrDefault();
+
+            var RentalUnitInfo = adv.RentalUnits
+                .Select(u => new
+                {
+                    u.RentalUnitId,
+                    u.MonthlyCost,
+                    u.DailyCost,
+                })
+                .ToList();
+
+            object Comments = null;
+            if (adv.House.Comments != null)
+            {
+                 Comments = adv.House.Comments
+                    .Select(r => new
+                    {
+                        r.Tenant.Firstname,
+                        r.Tenant.Lastname,
+                        r.CommentDate,
+                        r.CommentDetails,
+                    })
+                    .ToList();
+            }
+
+            var HouseMainInfo = new
+            {
+                HouseName = adv.HouseName,
+                HouseDescription = adv.houseDescription,
+                RentalType = adv.rentalType,
+
+                adv.House.governorate,
+                adv.House.city,
+                adv.House.street,
+                HouseAverageRate = adv.House.AvrageRate,
+                NumOfRaters = adv.House.NumOfRaters,
+                ShowEstimatedPrice = (user != null && user.Premium == true)
+            };
+
+            return Ok(new { HouseMainInfo , HouseInspectionInfo , RentalUnitInfo , Comments });
+        }
         [HttpGet("MyRental")]
         public async Task<IActionResult>GetRentalUnit()
         {
