@@ -12,5 +12,6 @@ namespace semsary_backend.Models
         public List<string> ?DeviceTokens { get; set; }
         public List<House> ?Houses { get; set; }
         public BlockedId BlockedId { get; set; }
+        public List<Notification> Notifications { get; set; } = new List<Notification>();
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using FirebaseAdmin.Messaging;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -282,10 +283,22 @@ namespace semsary_backend.Controllers
             };
 
             await apiContext.Rentals.AddAsync(rental);
+            Landlord lanlord = house.owner;
+
+            string title = "طلب تأجير جديد";
+            string message = $"لقد حصلت علي طلب تأجير جديد من {user.Firstname} {user.Lastname}\nللمزيد من التفاصيل قم بزيارة الموقع.";
+
+            var notification = new Models.Notification
+            {
+                Title = title,
+                Message = message,
+                SentTo = lanlord.Username,
+                CreatedAt = DateTime.UtcNow,
+            };
+            apiContext.Notifications.Add(notification);
             await apiContext.SaveChangesAsync();
 
-            Landlord lanlord = house.owner;
-            await notificationService.SendNotificationAsync("طلب تأجير جديد", $"لقد حصلت علي طلب تأجير جديد من {user.Firstname} {user.Lastname}\nللمزيد من التفاصيل قم بزيارة الموقع.", lanlord);
+            await notificationService.SendNotificationAsync(title, message, lanlord);
 
             return Ok(new
             {
@@ -331,16 +344,41 @@ namespace semsary_backend.Controllers
             {
                 lanlord.Balance += rental.WarrantyMoney;
                 apiContext.Remove(rental);
+
+                string title = "تم الغاء طلب حجز";
+                string message = $"قام {user.Firstname} {user.Lastname}\nبإلغاء الحجز بعد الفترة المسموحة\n و قد تم تحويل فلوس الضمان لحسابك.";
+
+                var notification = new Models.Notification
+                {
+                    Title = title,
+                    Message = message,
+                    SentTo = lanlord.Username,
+                    CreatedAt = DateTime.UtcNow,
+                };
+                apiContext.Notifications.Add(notification);
                 await apiContext.SaveChangesAsync();
-                await notificationService.SendNotificationAsync("تم الغاء طلب حجز", $"قام {user.Firstname} {user.Lastname}\nبإلغاء الحجز بعد الفترة المسموحة\n و قد تم تحويل فلوس الضمان لحسابك.", lanlord);
+                await notificationService.SendNotificationAsync(title,message, lanlord);
                 return Ok(new { message = "Rental request cancelled successfully" });
             }
             if (rental.status == Enums.RentalStatus.Accepted && rental.ResponseDate.AddDays(2) >= DateTime.UtcNow)
             {
                 user.Balance += (int)(rental.WarrantyMoney - rental.WarrantyMoney * Rental.OurPercentage);
                 apiContext.Remove(rental);
+
+                string title = "تم الغاء طلب حجز";
+                string message = $"قام {user.Firstname} {user.Lastname}\n بإلغاء الحجز خلال الفترة المسموحة\nتستطيع الآن القيام بعملية التأجير للآخرين في هذه الفترة";
+
+                var notification = new Models.Notification
+                {
+                    Title = title,
+                    Message = message,
+                    SentTo = lanlord.Username,
+                    CreatedAt = DateTime.UtcNow,
+                };
+                apiContext.Notifications.Add(notification);
+
                 await apiContext.SaveChangesAsync();
-                await notificationService.SendNotificationAsync("تم الغاء طلب حجز", $"قام {user.Firstname} {user.Lastname}\n بإلغاء الحجز خلال الفترة المسموحة\nتستطيع الآن القيام بعملية التأجير للآخرين في هذه الفترة", lanlord);
+                await notificationService.SendNotificationAsync(title, message, lanlord);
                 return Ok(new { message = "Rental request cancelled successfully" });
             }
             return BadRequest();
@@ -375,7 +413,20 @@ namespace semsary_backend.Controllers
                 if (house == null)
                     return NotFound(new { message = "There is no house found with this id" });
                 var lanlord = house.owner;
-                await notificationService.SendNotificationAsync("طلب تأكيد الوصول", $"قام {user.Firstname} {user.Lastname}\nبطلب تأكيد الوصول قم لتأكيد أو رفض العملية فم بزيارة الموقع", lanlord);
+
+                string title = "طلب تأكيد الوصول";
+                string message = $"قام {user.Firstname} {user.Lastname}\nبطلب تأكيد الوصول قم لتأكيد أو رفض العملية فم بزيارة الموقع";
+
+                var notification = new Models.Notification
+                {
+                    Title = title,
+                    Message = message,
+                    SentTo = lanlord.Username,
+                    CreatedAt = DateTime.UtcNow,
+                };
+                apiContext.Notifications.Add(notification);
+                await apiContext.SaveChangesAsync();
+                await notificationService.SendNotificationAsync(title, message, lanlord);
                 return Ok(new { message = "Arrival request sent successfully" });
             }
             return BadRequest();

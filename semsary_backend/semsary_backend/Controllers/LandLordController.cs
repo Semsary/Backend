@@ -381,7 +381,16 @@ namespace semsary_backend.Controllers
                     rental.status= Enums.RentalStatus.Rejected;
                     var message2 = "لقد تم رفض طلب الايجار خاصتك بسبب عدم كفاية الرصيد, يرجى المحاولة مرة اخرى لاحقا";
                     var title2 = "رفض طلب الايجار";
+
+                    var notification1 = new Notification
+                    {
+                        Title = title2,
+                        Message = message2,
+                        SentTo = tenant.Username,
+                        CreatedAt = DateTime.UtcNow,
+                    };
                     await notificationService.SendNotificationAsync(title2, message2, tenant);
+                    apiContext.Notifications.Add(notification1);
                     apiContext.SaveChanges();
                     return BadRequest("Tenant does not have enough balance to accept the rental request");
                 }
@@ -389,10 +398,17 @@ namespace semsary_backend.Controllers
                 tenant.Balance -= rental.WarrantyMoney;
 
                 await notificationService.SendNotificationAsync(title, message, tenant);
+
+                var notification2 = new Notification
+                {
+                    Title = title,
+                    Message = message,
+                    SentTo = tenant.Username,
+                    CreatedAt = DateTime.UtcNow,
+                };
+                apiContext.Notifications.Add(notification2);
                 apiContext.SaveChanges();
                 return Ok(new { message = "Rental request accepted successfully" });
-
-
 
             }
             else if (status == RentalStatus.Rejected)
@@ -402,6 +418,15 @@ namespace semsary_backend.Controllers
                 var title = "رفض طلب الايجار";
                 var tenant = await apiContext.Tenant.Include(t => t.DeviceTokens).FirstOrDefaultAsync(r => r.Username == rental.TenantUsername);
                 await notificationService.SendNotificationAsync(title, message, tenant);
+
+                var notification3 = new Notification
+                {
+                    Title = title,
+                    Message = message,
+                    SentTo = tenant.Username,
+                    CreatedAt = DateTime.UtcNow,
+                };
+                apiContext.Notifications.Add(notification3);
                 apiContext.SaveChanges();
                 return Ok(new { message = "Rental request rejected successfully" });
             }
@@ -431,6 +456,16 @@ namespace semsary_backend.Controllers
                 tenant.Balance += (int)(.95 * rental.WarrantyMoney);
                 var message = "لقد تم الموافقة على طلب الوصول خاصتك, و تم اضافة التامين الى رصيدك";
                 var title = "تم الموافقة على طلب الوصول";
+
+                var notification = new Notification
+                {
+                    Title = title,
+                    Message = message,
+                    SentTo = tenant.Username,
+                    CreatedAt = DateTime.UtcNow,
+                };
+                apiContext.Notifications.Add(notification);
+
                 await notificationService.SendNotificationAsync(title, message, tenant);
                 rental.status = Enums.RentalStatus.ArrivalAccept;
                 apiContext.SaveChanges();
@@ -441,6 +476,15 @@ namespace semsary_backend.Controllers
                 var message = "لقد تم رفض طلب الوصول خاصتك, لمزيد من التفاصيل عن سبب الرفض تواصل مع المؤجر ";
                 var title = "رفض طلب الوصول";
                 await notificationService.SendNotificationAsync(title, message, tenant);
+                var notification = new Notification
+                {
+                    Title = title,
+                    Message = message,
+                    SentTo = tenant.Username,
+                    CreatedAt = DateTime.UtcNow,
+                };
+                apiContext.Notifications.Add(notification);
+                apiContext.SaveChanges();
             }
             
                 return BadRequest("Invalid status");

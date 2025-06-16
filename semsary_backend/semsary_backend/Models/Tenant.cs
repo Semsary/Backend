@@ -33,8 +33,8 @@ namespace semsary_backend.Models
         public List<Rate> ?Rates { get; set; }
         public List<Comment>? Comments { get; set; }
 
-        public List<Complaint> Complaints { get; set; }
-
+        public List<Complaint>? Complaints { get; set; }
+        public List<Notification> Notifications { get; set; } = new List<Notification>();
 
 
     }

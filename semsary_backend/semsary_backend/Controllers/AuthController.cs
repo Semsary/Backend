@@ -164,8 +164,6 @@ namespace semsary_backend.Controllers
         }
 
 
-        
-
         [HttpPost("Login")]
         public async Task<IActionResult> Login(LoginDTO loginDTO)
         {
@@ -722,6 +720,23 @@ namespace semsary_backend.Controllers
                 };
             }
             return Ok(new { basicUserInfo, otherTenantData, otherLanlordData });
+        }
+        [HttpGet("User/Notifications")]
+        public async Task<IActionResult> GetNotifications()
+        {
+            var username = tokenGenertor.GetCurUser();
+            var user = await apiContext.SermsaryUsers
+                .FirstOrDefaultAsync(e => e.Username == username);
+
+            if (user == null)
+                return NotFound("User not found");
+
+            var notifications = await apiContext.Notifications
+                .Where(n => n.SentTo == user.Username)
+                .OrderByDescending(n => n.CreatedAt)
+                .ToListAsync();
+
+            return Ok(notifications);
         }
 
     }

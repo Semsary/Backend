@@ -73,9 +73,21 @@ namespace semsary_backend.Controllers
                 inspection.HouseImages.Add(url);
             }
             inspection.price =(int)estimator.EstimatePrice(inspection, house.governorate);
+
+            string title = "طلب تأكيد للمعاينة";
+            string message = $"قام {user.Firstname} {user.Lastname}\n من خدمة العملاء بادخال البيانات المطلوبة, قم بزيارة ملفك الشخصي لتأكيد بيانات المعاينة.";
+
+            var notification = new Notification
+            {
+                Title = title,
+                Message = message,
+                SentTo = landlord.Username,
+                CreatedAt = DateTime.UtcNow,
+            };
+            apiContext.Notifications.Add(notification);
             await apiContext.SaveChangesAsync();
 
-            await notificationService.SendNotificationAsync("طلب تأكيد للمعاينة", $"قام {user.Firstname} {user.Lastname}\n من خدمة العملاء بادخال البيانات المطلوبة, قم بزيارة ملفك الشخصي لتأكيد بيانات المعاينة.", landlord);
+            await notificationService.SendNotificationAsync(title,message, landlord);
             return Ok(new { message = $"House Inespection completed successfully" });
         }
 
@@ -108,8 +120,20 @@ namespace semsary_backend.Controllers
             houseInspection.inspectionStatus = InspectionStatus.InProgress;
             houseInspection.InspectorId = user.Username;
 
-            await notificationService.SendNotificationAsync("طلب المعاينة قد التقدم", $"قام {user.Firstname} {user.Lastname}\nمن خدمة العملاء بتولي عملية معاينة المنزل\nتستطيع الآن التواصل معه عبر الدردشة الخاصة بالموقع لتحديد ميعاد المعاينة", landlord);
+            string title = "طلب المعاينة قد التقدم";
+            string message = $"قام {user.Firstname} {user.Lastname}\nمن خدمة العملاء بتولي عملية معاينة المنزل\nتستطيع الآن التواصل معه عبر الدردشة الخاصة بالموقع لتحديد ميعاد المعاينة";
+
+            var notification = new Notification
+            {
+                Title = title,
+                Message = message,
+                SentTo = landlord.Username,
+                CreatedAt = DateTime.UtcNow,
+            };
+            apiContext.Notifications.Add(notification);
             await apiContext.SaveChangesAsync();
+
+            await notificationService.SendNotificationAsync(title, message, landlord);
             return Ok(new { message = $"House inspection status updated to \"{InspectionStatus.InProgress}\" successfully", InspectorId = user.Username });
         }
 
@@ -170,9 +194,21 @@ namespace semsary_backend.Controllers
 
             complaint.status = ComplainStatus.InProgress;
             complaint.VerifiedBy = user.Username;
+
+            string title = "تم استلام الشكوى";
+            string message = $"قام {user.Firstname} {user.Lastname}\nمن خدمة العملاء باستلام الشكوى الخاصة بك, تستطيع الآن التواصل معه عبر الدردشة الخاصة بالموقع.";
+
+            var notification = new Notification
+            {
+                Title = title,
+                Message = message,
+                SentTo = complaint.Tenant.Username,
+                CreatedAt = DateTime.UtcNow,
+            };
+            apiContext.Notifications.Add(notification);
             await apiContext.SaveChangesAsync();
 
-            await notificationService.SendNotificationAsync("تم استلام الشكوى", $"قام {user.Firstname} {user.Lastname}\nمن خدمة العملاء باستلام الشكوى الخاصة بك, تستطيع الآن التواصل معه عبر الدردشة الخاصة بالموقع.", complaint.Tenant);
+            await notificationService.SendNotificationAsync(title,message, complaint.Tenant);
             return Ok(new { message = $"Complaint status updated to {complaint.status} successfully", InspectorId = user.Username });
         }
 
@@ -273,9 +309,22 @@ namespace semsary_backend.Controllers
 
             tenant.Balance += (int)(complaint.Rental.WarrantyMoney - complaint.Rental.WarrantyMoney * Rental.OurPercentage);
             complaint.status = ComplainStatus.NoBlock;
-            await apiContext.SaveChangesAsync();
 
-            await notificationService.SendNotificationAsync("تم استرداد مبلغ الضمان", $"تم استرداد مبلغ الضمان الخاص بك بنجاح, يمكنك الآن استخدامه في عمليات أخرى.", tenant);
+
+            string title = "تم استرداد مبلغ الضمان";
+            string message = $"تم استرداد مبلغ الضمان الخاص بك بنجاح, يمكنك الآن استخدامه في عمليات أخرى.";
+
+            var notification = new Notification
+            {
+                Title = title,
+                Message = message,
+                SentTo = tenant.Username,
+                CreatedAt = DateTime.UtcNow,
+            };
+            apiContext.Notifications.Add(notification);
+            await apiContext.SaveChangesAsync();
+          
+            await notificationService.SendNotificationAsync(title, message, tenant);
             return Ok(new { message = "Warranty money returned successfully" });
         }
 
@@ -317,8 +366,21 @@ namespace semsary_backend.Controllers
 
             landlord.Balance += (int)(complaint.Rental.WarrantyMoney * Rental.OurPercentage);
             complaint.status = ComplainStatus.NoBlock;
+
+            string title = "تم استلام مبلغ الضمان";
+            string message = $"تم تحويل مبلغ الضمان الخاص بك بنجاح, لمعرفة رصيدك الحالي قم بزيارة ملفك الشخصي علي الموقع.";
+
+            var notification = new Notification
+            {
+                Title = title,
+                Message = message,
+                SentTo = landlord.Username,
+                CreatedAt = DateTime.UtcNow,
+            };
+            apiContext.Notifications.Add(notification);
             await apiContext.SaveChangesAsync();
-            await notificationService.SendNotificationAsync("تم استلام مبلغ ضمان", $"تم تحويل مبلغ الضمان الخاص بك بنجاح, لمعرفة رصيدك الحالي قم بزيارة ملفك الشخصي علي الموقع.", landlord);
+
+            await notificationService.SendNotificationAsync(title, message , landlord);
             return Ok(new { message = "Warranty money transformed to landlord successfully" });
         }
 
