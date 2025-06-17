@@ -84,7 +84,7 @@ namespace semsary_backend.Controllers
                 SentTo = landlord.Username,
                 CreatedAt = DateTime.UtcNow,
             };
-            apiContext.Notifications.Add(notification);
+            await apiContext.Notifications.AddAsync(notification);
             await apiContext.SaveChangesAsync();
 
             await notificationService.SendNotificationAsync(title,message, landlord);
@@ -130,7 +130,7 @@ namespace semsary_backend.Controllers
                 SentTo = landlord.Username,
                 CreatedAt = DateTime.UtcNow,
             };
-            apiContext.Notifications.Add(notification);
+            await apiContext.Notifications.AddAsync(notification);
             await apiContext.SaveChangesAsync();
 
             await notificationService.SendNotificationAsync(title, message, landlord);
@@ -205,7 +205,7 @@ namespace semsary_backend.Controllers
                 SentTo = complaint.Tenant.Username,
                 CreatedAt = DateTime.UtcNow,
             };
-            apiContext.Notifications.Add(notification);
+            await apiContext.Notifications.AddAsync(notification);
             await apiContext.SaveChangesAsync();
 
             await notificationService.SendNotificationAsync(title,message, complaint.Tenant);
@@ -321,7 +321,7 @@ namespace semsary_backend.Controllers
                 SentTo = tenant.Username,
                 CreatedAt = DateTime.UtcNow,
             };
-            apiContext.Notifications.Add(notification);
+            await apiContext.Notifications.AddAsync(notification);
             await apiContext.SaveChangesAsync();
           
             await notificationService.SendNotificationAsync(title, message, tenant);
@@ -377,7 +377,7 @@ namespace semsary_backend.Controllers
                 SentTo = landlord.Username,
                 CreatedAt = DateTime.UtcNow,
             };
-            apiContext.Notifications.Add(notification);
+            await apiContext.Notifications.AddAsync(notification);
             await apiContext.SaveChangesAsync();
 
             await notificationService.SendNotificationAsync(title, message , landlord);

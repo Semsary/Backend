@@ -311,7 +311,7 @@ namespace semsary_backend.Controllers
                 SentTo = lanlord.Username,
                 CreatedAt = DateTime.UtcNow,
             };
-            apiContext.Notifications.Add(notification);
+            await apiContext.Notifications.AddAsync(notification);
             await apiContext.SaveChangesAsync();
 
             await notificationService.SendNotificationAsync(title, message, lanlord);
@@ -345,7 +345,11 @@ namespace semsary_backend.Controllers
             if (rental.TenantUsername != user.Username)
                 return Forbid();
 
-            var house = await apiContext.Houses.FindAsync(rental.HouseId);
+            var house = await apiContext.Houses
+                    .Include(h => h.owner)
+                    .Include(h => h.Rentals)
+                    .Where(h => h.Rentals.Any(r => r.RentalId == rentalId))
+                    .FirstOrDefaultAsync();
             if (house == null)
                 return NotFound(new { message = "There is no house found with this id" });
             var lanlord = house.owner;
@@ -371,7 +375,7 @@ namespace semsary_backend.Controllers
                     SentTo = lanlord.Username,
                     CreatedAt = DateTime.UtcNow,
                 };
-                apiContext.Notifications.Add(notification);
+                await apiContext.Notifications.AddAsync(notification);
                 await apiContext.SaveChangesAsync();
                 await notificationService.SendNotificationAsync(title,message, lanlord);
                 return Ok(new { message = "Rental request cancelled successfully" });
@@ -391,7 +395,7 @@ namespace semsary_backend.Controllers
                     SentTo = lanlord.Username,
                     CreatedAt = DateTime.UtcNow,
                 };
-                apiContext.Notifications.Add(notification);
+                await apiContext.Notifications.AddAsync(notification);
 
                 await apiContext.SaveChangesAsync();
                 await notificationService.SendNotificationAsync(title, message, lanlord);
@@ -463,7 +467,12 @@ namespace semsary_backend.Controllers
             if (rental.status == Enums.RentalStatus.Accepted)
             {
                 rental.status = Enums.RentalStatus.ArrivalRequest;
-                var house = await apiContext.Houses.FindAsync(rental.HouseId);
+                var house = await apiContext.Houses
+                    .Include(h => h.owner)
+                    .Include(h => h.Rentals)
+                    .Where(h => h.Rentals.Any(r => r.RentalId == rentalId))
+                    .FirstOrDefaultAsync();
+
                 if (house == null)
                     return NotFound(new { message = "There is no house found with this id" });
                 var lanlord = house.owner;
@@ -478,7 +487,7 @@ namespace semsary_backend.Controllers
                     SentTo = lanlord.Username,
                     CreatedAt = DateTime.UtcNow,
                 };
-                apiContext.Notifications.Add(notification);
+                await apiContext.Notifications.AddAsync(notification);
                 await apiContext.SaveChangesAsync();
                 await notificationService.SendNotificationAsync(title, message, lanlord);
                 return Ok(new { message = "Arrival request sent successfully" });

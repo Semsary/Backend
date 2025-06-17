@@ -287,8 +287,8 @@ namespace semsary_backend.Controllers
                 }
             }
             adv.rentalType = dto.RentalType;
-            apiContext.Advertisements.Add(adv);
-            apiContext.SaveChanges();
+            await apiContext.Advertisements.AddAsync(adv);
+            await apiContext.SaveChangesAsync();
             return Created();
         }
         [HttpGet("get/All/Advertisements")]
@@ -403,8 +403,8 @@ namespace semsary_backend.Controllers
                         CreatedAt = DateTime.UtcNow,
                     };
                     await notificationService.SendNotificationAsync(title2, message2, tenant);
-                    apiContext.Notifications.Add(notification1);
-                    apiContext.SaveChanges();
+                    await apiContext.Notifications.AddAsync(notification1);
+                    await apiContext.SaveChangesAsync();
                     return BadRequest("Tenant does not have enough balance to accept the rental request");
                 }
 
@@ -419,9 +419,9 @@ namespace semsary_backend.Controllers
                     SentTo = tenant.Username,
                     CreatedAt = DateTime.UtcNow,
                 };
-                apiContext.Notifications.Add(notification2);
+                await apiContext.Notifications.AddAsync(notification2);
 
-                apiContext.SaveChanges();
+                await apiContext.SaveChangesAsync();
                 return Ok(new { message = "Rental request accepted successfully" });
 
             }
@@ -440,8 +440,8 @@ namespace semsary_backend.Controllers
                     SentTo = tenant.Username,
                     CreatedAt = DateTime.UtcNow,
                 };
-                apiContext.Notifications.Add(notification3);
-                apiContext.SaveChanges();
+                await apiContext.Notifications.AddAsync(notification3);
+                await apiContext.SaveChangesAsync();
                 return Ok(new { message = "Rental request rejected successfully" });
             }
             else if (status == Enums.RentalStatus.ArrivalAccept)
@@ -458,11 +458,11 @@ namespace semsary_backend.Controllers
                     SentTo = tenant.Username,
                     CreatedAt = DateTime.UtcNow,
                 };
-                apiContext.Notifications.Add(notification);
+                await apiContext.Notifications.AddAsync(notification);
 
                 await notificationService.SendNotificationAsync(title, message, tenant);
                 rental.status = Enums.RentalStatus.ArrivalAccept;
-                apiContext.SaveChanges();
+                await apiContext.SaveChangesAsync();
                 return Ok(new { message = "Arrival request approved successfully" });
             }
             else if (status == Enums.RentalStatus.ArrivalReject)
@@ -478,8 +478,8 @@ namespace semsary_backend.Controllers
                     SentTo = tenant.Username,
                     CreatedAt = DateTime.UtcNow,
                 };
-                apiContext.Notifications.Add(notification);
-                apiContext.SaveChanges();
+                await apiContext.Notifications.AddAsync(notification);
+                await apiContext.SaveChangesAsync();
                 return Ok(new { message = "Arrival request rejected successfully" });
             }
             else
