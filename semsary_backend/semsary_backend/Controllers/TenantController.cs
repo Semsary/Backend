@@ -201,7 +201,11 @@ namespace semsary_backend.Controllers
             if (ModelState.IsValid == false)
                 return BadRequest(ModelState);
 
-            var adv = await apiContext.Advertisements.Where(r => r.AdvertisementId == rentalDTO.AdvId).Include(r => r.RentalUnits).FirstOrDefaultAsync();
+            var adv = await apiContext.Advertisements
+            .Include(a => a.RentalUnits)
+                .ThenInclude(u => u.Rentals)
+            .FirstOrDefaultAsync(a => a.AdvertisementId == rentalDTO.AdvId);
+
             if (adv == null)
                 return BadRequest("There is no advertisement with this id");
 
@@ -226,7 +230,7 @@ namespace semsary_backend.Controllers
                 {
                     RentalUnitId = unit.RentalUnitId,
                     HasConflict = unit.Rentals.Any(r =>
-                        rentalDTO.StartDate < r.EndDate && rentalDTO.EndDate > r.StartDate)
+                        rentalDTO.StartDate < r.EndDate && rentalDTO.EndDate > r.StartDate && !(r.status == RentalStatus.Bending || r.status == RentalStatus.Rejected || r.status==RentalStatus.ArrivalReject))
                 })
                 .ToList();
             return Ok(conflictsPerUnit);

@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
 using semsary_backend.DTO;
 using semsary_backend.EntityConfigurations;
 using semsary_backend.Service;
@@ -9,6 +8,7 @@ using semsary_backend.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Net;
 using semsary_backend.Enums;
+using FirebaseAdmin.Auth.Multitenancy;
 namespace semsary_backend.Controllers
 {
     [Route("api/[controller]")]
@@ -360,7 +360,6 @@ namespace semsary_backend.Controllers
                 ).ToListAsync();
             return Ok(allRentalRequests);
 
-
         }
         [Authorize]
         [HttpPut("Rental/Request/{RentalId}")]
@@ -421,16 +420,17 @@ namespace semsary_backend.Controllers
                     CreatedAt = DateTime.UtcNow,
                 };
                 apiContext.Notifications.Add(notification2);
+
                 apiContext.SaveChanges();
                 return Ok(new { message = "Rental request accepted successfully" });
 
             }
             else if (status == RentalStatus.Rejected)
             {
+                var tenant = await apiContext.Tenant.FirstOrDefaultAsync(r => r.Username == rental.TenantUsername);
                 rental.status = Enums.RentalStatus.Rejected;
                 var message = "لقد تم رفض طلب الايجار خاصتك, لمزيد من التفاصيل عن سبب الرفض تواصل مع المؤجر ";
                 var title = "رفض طلب الايجار";
-                var tenant = await apiContext.Tenant.Include(t => t.DeviceTokens).FirstOrDefaultAsync(r => r.Username == rental.TenantUsername);
                 await notificationService.SendNotificationAsync(title, message, tenant);
 
                 var notification3 = new Notification
@@ -444,29 +444,9 @@ namespace semsary_backend.Controllers
                 apiContext.SaveChanges();
                 return Ok(new { message = "Rental request rejected successfully" });
             }
-            else
+            else if (status == Enums.RentalStatus.ArrivalAccept)
             {
-                return BadRequest("Invalid status");
-            }
-
-
-        }
-        [Authorize]
-        [HttpPut("arrivalrequest/{RentalId}")]
-        public async Task<IActionResult> ReviewArrivalRequest(int RentalId,RentalStatus rentalStatus)
-        {
-            var username = tokenHandler.GetCurUser();
-            var user = await apiContext.Landlords.Where(r => r.Username == username).FirstOrDefaultAsync();
-            if (user == null)
-                return Unauthorized();
-            var rental = await apiContext.Rentals.Include(r => r.RentalUnit).ThenInclude(r => r.Advertisement).ThenInclude(a => a.House)
-                .Where(r => r.RentalId == RentalId && r.RentalUnit[0].Advertisement.House.owner.Username == username && r.status == Enums.RentalStatus.ArrivalRequest)
-                .FirstOrDefaultAsync();
-            if (rental == null)
-                return NotFound();
-            var tenant= await apiContext.Tenant.Include(t => t.DeviceTokens).FirstOrDefaultAsync(r => r.Username == rental.TenantUsername);
-            if (rentalStatus == Enums.RentalStatus.ArrivalAccept)
-            {
+            var tenant = await apiContext.Tenant.FirstOrDefaultAsync(r => r.Username == rental.TenantUsername);
                 tenant.Balance += (int)(.95 * rental.WarrantyMoney);
                 var message = "لقد تم الموافقة على طلب الوصول خاصتك, و تم اضافة التامين الى رصيدك";
                 var title = "تم الموافقة على طلب الوصول";
@@ -485,8 +465,9 @@ namespace semsary_backend.Controllers
                 apiContext.SaveChanges();
                 return Ok(new { message = "Arrival request approved successfully" });
             }
-            else if (rentalStatus == Enums.RentalStatus.ArrivalReject)
+            else if (status == Enums.RentalStatus.ArrivalReject)
             {
+                var tenant = await apiContext.Tenant.FirstOrDefaultAsync(r => r.Username == rental.TenantUsername);
                 var message = "لقد تم رفض طلب الوصول خاصتك, لمزيد من التفاصيل عن سبب الرفض تواصل مع المؤجر ";
                 var title = "رفض طلب الوصول";
                 await notificationService.SendNotificationAsync(title, message, tenant);
@@ -499,11 +480,41 @@ namespace semsary_backend.Controllers
                 };
                 apiContext.Notifications.Add(notification);
                 apiContext.SaveChanges();
+                return Ok(new { message = "Arrival request rejected successfully" });
             }
-            
-                return BadRequest("Invalid status");
-            
+            else
+                 return BadRequest(); 
         }
+
+        [Authorize]
+        [HttpGet("Get/All/ArrivalRequests")]
+        public async Task<IActionResult> GetAllArrivalRequests()
+        {
+            var username = tokenHandler.GetCurUser();
+            var user = await apiContext.Landlords.Where(r => r.Username == username).FirstOrDefaultAsync();
+            if (user == null)
+                return Unauthorized();
+
+            var arrivalRequests = await apiContext.Rentals
+                .Include(a => a.House)
+                .Where(r => r.House.owner.Username == username && (r.status == RentalStatus.ArrivalRequest || r.status == RentalStatus.Bending))
+                .Select(r => new
+                {
+                    r.RentalId,
+                    r.WarrantyMoney,
+                    r.StartDate,
+                    r.EndDate,
+                    r.StartArrivalDate,
+                    r.EndArrivalDate,
+                    TenantName = $"{r.Tenant.Firstname} {r.Tenant.Lastname}",
+                    r.status,
+                })
+                .ToListAsync();
+
+            return Ok(arrivalRequests);
+        }
+
+  
         [HttpGet("get/all/approved/houses")]
         public async Task<IActionResult> GetAllApprovedHouses()
         {
