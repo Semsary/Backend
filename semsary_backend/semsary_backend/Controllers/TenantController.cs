@@ -395,6 +395,44 @@ namespace semsary_backend.Controllers
             }
             return BadRequest();
         }
+        [HttpGet("Get/All/Rental/Requests")]
+        public async Task<IActionResult> GetAllRentalRequests()
+        {
+            var username = tokenGenertor.GetCurUser();
+            var user = await apiContext.Tenant.Where(r => r.Username == username).FirstOrDefaultAsync();
+            if (user == null)
+                return Unauthorized();
+
+            var rentals = await apiContext.Rentals
+                .Where(r => r.TenantUsername == user.Username)
+                .OrderByDescending(r => r.CreationDate)
+                .Include(r => r.House)
+                .Select( r => new
+                    { 
+                        r.RentalId,
+                        HouseName = r.House.Advertisements.Select(a => a.HouseName),
+                        r.status,
+                        r.StartDate,
+                        r.EndDate,
+                        r.StartArrivalDate,
+                        r.EndArrivalDate,
+                        r.WarrantyMoney,
+                        RentalUnits = r.House.Advertisements.Select(a => a.RentalUnits
+                                .Select(unit => new
+                                {
+                                    unit.RentalUnitId,
+                                    unit.DailyCost,
+                                    unit.MonthlyCost,                                 
+                                }))
+                    }
+                ).ToListAsync();
+
+            if (!rentals.Any())
+                return NoContent();
+
+
+            return Ok(rentals);
+        }
 
         [HttpPost("Confirm/Arrival/Request/{rentId}")]
         public async Task<IActionResult> ConfirmArrival(string rentId)
