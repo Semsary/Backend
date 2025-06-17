@@ -739,24 +739,40 @@ namespace semsary_backend.Controllers
             }
             return Ok(new { basicUserInfo, otherTenantData, otherLanlordData });
         }
-        [HttpGet("Premium")]
+        [Authorize]
+        [HttpGet("Balance/Info")]
         public async Task<IActionResult> PreimumInfo()
         {
             var username = tokenGenertor.GetCurUser();
-            var user = await apiContext.Tenant
+            var user = await apiContext.SermsaryUsers
                 .FirstOrDefaultAsync(e => e.Username == username);
 
             if (user == null)
                 return NotFound("User not found.");
 
-            var info = new
+            if (user.UserType == UserType.Tenant && user is Tenant tenant)
             {
-                IsPremium = user.PremiumEnd >= DateTime.UtcNow,
-                IsVerified = user.IsVerified,
-                Balance = user.Balance
-            };
+                var info = new
+                {
+                    UserType = UserType.Tenant,
+                    Isverified = tenant.IsVerified,
+                    Balance = tenant.Balance,
+                    IsPremium = tenant.PremiumEnd >= DateTime.UtcNow
+                };
+                return Ok(info);
+            }
 
-            return Ok(info);
+            if (user.UserType == UserType.landlord && user is Landlord landlord)
+            {
+                var info = new
+                {
+                    UserType = UserType.landlord,
+                    Isverified = landlord.IsVerified,
+                    Balance = landlord.Balance
+                };
+                return Ok(info);
+            }
+            return BadRequest("Only tenants and landlords can access this information.");
         }
         [HttpGet("User/Notifications")]
         public async Task<IActionResult> GetNotifications()
