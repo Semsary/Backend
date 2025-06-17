@@ -225,14 +225,21 @@ namespace semsary_backend.Controllers
             if (rentalDTO.StartArrivalDate > rentalDTO.EndArrivalDate)
                 return BadRequest(new { message = "The beginning of arrival period cannot be after its end." });
 
-            var conflictsPerUnit = adv.RentalUnits
-                .Select(unit => new
-                {
-                    RentalUnitId = unit.RentalUnitId,
-                    HasConflict = unit.Rentals.Any(r =>
-                        rentalDTO.StartDate < r.EndDate && rentalDTO.EndDate > r.StartDate && !(r.status == RentalStatus.Bending || r.status == RentalStatus.Rejected || r.status==RentalStatus.ArrivalReject))
-                })
-                .ToList();
+
+            var units = await apiContext.RentalUnits
+                .Where(u => u.AdvertisementId == rentalDTO.AdvId)
+                .Include(u => u.Rentals)
+                .ToListAsync();
+
+            var conflictsPerUnit = units.Select(unit => new
+            {
+                RentalUnitId = unit.RentalUnitId,
+                HasConflict = unit.Rentals.Any(r =>
+                    rentalDTO.StartDate < r.EndDate &&
+                    rentalDTO.EndDate > r.StartDate &&
+                    !(r.status == RentalStatus.Bending || r.status == RentalStatus.Rejected || r.status == RentalStatus.ArrivalReject))
+            }).ToList();
+          
             return Ok(conflictsPerUnit);
         }
 

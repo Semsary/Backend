@@ -355,7 +355,8 @@ namespace semsary_backend.Controllers
                         r.StartDate,
                         r.EndDate,
                         r.StartArrivalDate,
-                        r.EndArrivalDate
+                        r.EndArrivalDate,
+                        r.status
                 }
                 ).ToListAsync();
             return Ok(allRentalRequests);
