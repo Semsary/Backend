@@ -334,22 +334,36 @@ namespace semsary_backend.Controllers
         }
 
         [Authorize]
-        [HttpGet("rental/request")]
+        [HttpGet("All/Rental/Requests")]
         public async Task<IActionResult> GetRentalRequests()
         {
             var username = tokenHandler.GetCurUser();
             var user = await apiContext.Landlords.Where(r => r.Username == username).FirstOrDefaultAsync();
             if (user == null)
                 return Unauthorized();
-            var requests = await apiContext.Rentals.Include(r => r.RentalUnit).ThenInclude(r => r.Advertisement).ThenInclude(a => a.House)
-                .Where(r => r.RentalUnit[0].Advertisement.House.owner.Username == username && r.status == Enums.RentalStatus.Bending &&r.WarrantyMoney<=r.Tenant.Balance)
-                .ToListAsync();
-            return Ok(requests);
+
+            var allRentalRequests = await apiContext.Rentals
+                .Include(h => h.House)
+                .Where(r => r.House.owner.Username == user.Username && r.status == Enums.RentalStatus.Bending)
+                .Select( r => new
+                    {
+                        r.RentalId,
+                        r.HouseId,
+                        r.WarrantyMoney,
+                        r.Tenant.Firstname,
+                        r.Tenant.Lastname,
+                        r.StartDate,
+                        r.EndDate,
+                        r.StartArrivalDate,
+                        r.EndArrivalDate
+                }
+                ).ToListAsync();
+            return Ok(allRentalRequests);
 
 
         }
         [Authorize]
-        [HttpPut("rentalrequest/{RentalId}")]
+        [HttpPut("Rental/Request/{RentalId}")]
         public async Task<IActionResult> reviewRentalRequest(int RentalId, RentalStatus status)
         {
             var username = tokenHandler.GetCurUser();
@@ -361,7 +375,7 @@ namespace semsary_backend.Controllers
                 return BadRequest("You are blocked so you can't perform this operation");
 
             var rental = await apiContext.Rentals.Include(r => r.RentalUnit).ThenInclude(r => r.Advertisement).ThenInclude(a => a.House)
-                .Where(r => r.RentalId == RentalId && r.RentalUnit[0].Advertisement.House.owner.Username == username && r.status == Enums.RentalStatus.Bending)
+                .Where(r => r.House.owner.Username == user.Username && r.RentalId == RentalId)
                 .FirstOrDefaultAsync();
             if (rental == null)
                 return NotFound();
@@ -370,7 +384,7 @@ namespace semsary_backend.Controllers
                 rental.status = Enums.RentalStatus.Accepted;
                 var message = "لقد تم الموافقة على طلب الايجار خاصتك و تم خصم التامين من رصيدك";
                 var title = "تم الموافقة على طلب الايجار";
-                var tenant = await apiContext.Tenant.Include(t => t.DeviceTokens).FirstOrDefaultAsync(r => r.Username == rental.TenantUsername);
+                var tenant = await apiContext.Tenant.FirstOrDefaultAsync(r => r.Username == rental.TenantUsername);
                 if (tenant == null)
                 {
                     return NotFound("Tenant not found");
