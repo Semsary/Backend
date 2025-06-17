@@ -706,7 +706,8 @@ namespace semsary_backend.Controllers
                     needPublicTransportation = tenant.NeedPublicTransportation,
                     needNearUniversity = tenant.NeedNearUniversity,
                     needNearVitalPlaces = tenant.NeedNearVitalPlaces,
-                    isVerified = tenant.IsVerified
+                    isVerified = tenant.IsVerified,
+                    IsPremium = tenant.PremiumEnd >= DateTime.UtcNow,
                 };
             }
             else if (user.UserType == UserType.landlord)
@@ -720,6 +721,25 @@ namespace semsary_backend.Controllers
                 };
             }
             return Ok(new { basicUserInfo, otherTenantData, otherLanlordData });
+        }
+        [HttpGet("Premium")]
+        public async Task<IActionResult> PreimumInfo()
+        {
+            var username = tokenGenertor.GetCurUser();
+            var user = await apiContext.Tenant
+                .FirstOrDefaultAsync(e => e.Username == username);
+
+            if (user == null)
+                return NotFound("User not found.");
+
+            var info = new
+            {
+                IsPremium = user.PremiumEnd >= DateTime.UtcNow,
+                IsVerified = user.IsVerified,
+                Balance = user.Balance
+            };
+
+            return Ok(info);
         }
         [HttpGet("User/Notifications")]
         public async Task<IActionResult> GetNotifications()
