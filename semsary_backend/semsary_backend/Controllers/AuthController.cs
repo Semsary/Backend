@@ -584,12 +584,21 @@ namespace semsary_backend.Controllers
                 ? "Identity Verified" 
                 : "Identity Rejected";
 
+
             // Send notification to the user not email 
             if (identity.Owner.UserType == UserType.Tenant)
             {
                 Tenant? tenant = apiContext.Tenant.Where(r => r.Username == identity.Owner.Username).FirstOrDefault();
                 if (tenant.DeviceTokens != null && tenant.DeviceTokens.Count > 0)
                 {
+                    var notification = new Notification
+                    {
+                        Title = title,
+                        Message = message,
+                        SentTo = tenant.Username,
+                        CreatedAt = DateTime.UtcNow,
+                    };
+                    await apiContext.Notifications.AddAsync(notification);
                     await notificationService.SendNotificationAsync(title, message,tenant);
                 }
             }
@@ -598,6 +607,14 @@ namespace semsary_backend.Controllers
                 Landlord? landlord = apiContext.Landlords.Where(r => r.Username == identity.Owner.Username).FirstOrDefault();
                 if (landlord.DeviceTokens != null && landlord.DeviceTokens.Count > 0)
                 {
+                    var notifcation = new Notification
+                    {
+                        Title = title,
+                        Message = message,
+                        SentTo = landlord.Username,
+                        CreatedAt = DateTime.UtcNow,
+                    };
+                    await apiContext.Notifications.AddAsync(notifcation);
                     await notificationService.SendNotificationAsync(title,message ,landlord);
                 }
             }

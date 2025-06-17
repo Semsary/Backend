@@ -23,13 +23,13 @@ namespace semsary_backend.Controllers
         public async Task<IActionResult> MakeComplaint(string rentalId, [FromBody] ComplaintRequestForTentatDTO complaintRequestDTO)
         {
             var username = tokenGenertor.GetCurUser();
-            var user = await apiContext.SermsaryUsers
+            var user = await apiContext.Tenant
                 .FirstOrDefaultAsync(e => e.Username == username);
 
             if (user == null)
                 return Unauthorized();
 
-            if (user.UserType != Enums.UserType.Tenant)
+            if (!user.IsVerified)
                 return Forbid();
 
             if (complaintRequestDTO == null)
@@ -67,13 +67,13 @@ namespace semsary_backend.Controllers
         public async Task<IActionResult> SetRate(string houseId, [FromBody] RateDTO rateDTO)
         {
             var username = tokenGenertor.GetCurUser();
-            var user = await apiContext.SermsaryUsers
+            var user = await apiContext.Tenant
                 .FirstOrDefaultAsync(e => e.Username == username);
 
             if (user == null)
                 return Unauthorized();
 
-            if (user.UserType != Enums.UserType.Tenant)
+            if (!user.IsVerified)
                 return Forbid();
 
             if (rateDTO == null)
@@ -142,13 +142,13 @@ namespace semsary_backend.Controllers
         public async Task<IActionResult> AddComment(string houseId, [FromBody] CommentDTO rateDTO)
         {
             var username = tokenGenertor.GetCurUser();
-            var user = await apiContext.SermsaryUsers
+            var user = await apiContext.Tenant
                 .FirstOrDefaultAsync(e => e.Username == username);
 
             if (user == null)
                 return Unauthorized();
 
-            if (user.UserType != Enums.UserType.Tenant)
+            if (!user.IsVerified)
                 return Forbid();
 
             if (rateDTO == null)
@@ -239,6 +239,9 @@ namespace semsary_backend.Controllers
             var user = await apiContext.Tenant.Where(r => r.Username == username).FirstOrDefaultAsync();
             if (user == null)
                 return Unauthorized();
+
+            if (!user.IsVerified)
+                return Forbid();
 
             if (rentalDTO == null)
                 return BadRequest(new { message = "Invalid data." });
