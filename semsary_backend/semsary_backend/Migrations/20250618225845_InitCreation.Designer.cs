@@ -12,7 +12,7 @@ using semsary_backend.EntityConfigurations;
 namespace semsary_backend.Migrations
 {
     [DbContext(typeof(ApiContext))]
-    [Migration("20250618182207_InitCreation")]
+    [Migration("20250618225845_InitCreation")]
     partial class InitCreation
     {
         /// <inheritdoc />
@@ -960,8 +960,7 @@ namespace semsary_backend.Migrations
                                 .HasForeignKey("SermsaryUserUsername");
                         });
 
-                    b.Navigation("Address")
-                        .IsRequired();
+                    b.Navigation("Address");
                 });
 
             modelBuilder.Entity("semsary_backend.Models.Advertisement", b =>
