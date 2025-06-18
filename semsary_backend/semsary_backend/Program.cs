@@ -29,9 +29,9 @@ namespace semsary_backend
             builder.Services.AddScoped<NotificationService>();
 
             builder.Services.AddHttpContextAccessor();
-            builder.Services.AddDbContext<EntityConfigurations.ApiContext>(options=>options.UseInMemoryDatabase("semsary_db"));
-            //builder.Services.AddDbContext<EntityConfigurations.ApiContext>(options =>
-            //    options.UseSqlServer("Server=31.97.154.184,1433;Database=SemsaryDB;User Id=sa;Password=Semsary@2025;TrustServerCertificate=True;"));
+            //builder.Services.AddDbContext<EntityConfigurations.ApiContext>(options=>options.UseInMemoryDatabase("semsary_db"));
+            builder.Services.AddDbContext<EntityConfigurations.ApiContext>(options =>
+                options.UseSqlServer("Server=31.97.154.184,1433;Database=SemsaryDB;User Id=sa;Password=Semsary@2025;TrustServerCertificate=True;"));
             builder.Services.AddSingleton<PriceEstimator>();
             builder.Services.AddSingleton<RecommendationSystem>();
 

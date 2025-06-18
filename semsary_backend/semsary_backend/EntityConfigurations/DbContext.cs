@@ -72,6 +72,45 @@ namespace semsary_backend.EntityConfigurations
                 .HasForeignKey(r => r.TenantUsername)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            modelBuilder.Entity<Complaint>()
+                .HasOne(c => c.Rental)
+                .WithOne(r => r.Complaint)
+                .HasForeignKey<Complaint>(c => c.RentalId)
+                .OnDelete(DeleteBehavior.Cascade); // allow deleting rental to remove complaint
+
+            modelBuilder.Entity<Complaint>()
+                .HasOne(c => c.CustomerService)
+                .WithMany(cs => cs.Complaints)
+                .HasForeignKey(c => c.VerifiedBy)
+                .OnDelete(DeleteBehavior.Restrict); // ❌ prevent cascade path issue
+
+            modelBuilder.Entity<Complaint>()
+                .HasOne(c => c.Tenant)
+                .WithMany()
+                .HasForeignKey(c => c.SubmittedBy)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Rental>()
+                .HasMany(r => r.RentalUnit)
+                .WithMany(ru => ru.Rentals)
+                .UsingEntity<Dictionary<string, object>>(
+                    "RentalRentalUnit",
+                    j => j
+                        .HasOne<RentalUnit>()
+                        .WithMany()
+                        .HasForeignKey("RentalUnitId")
+                        .OnDelete(DeleteBehavior.Cascade), // cascade OK on this side
+                    j => j
+                        .HasOne<Rental>()
+                        .WithMany()
+                        .HasForeignKey("RentalsRentalId")
+                        .OnDelete(DeleteBehavior.Restrict), // ❌ restrict this side
+                    j =>
+                    {
+                        j.HasKey("RentalUnitId", "RentalsRentalId");
+                    });
+
+
         }
 
 
