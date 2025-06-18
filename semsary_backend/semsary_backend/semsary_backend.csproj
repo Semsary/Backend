@@ -28,12 +28,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="private_key2.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
     <None Update="ML\apartment_model.onnx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

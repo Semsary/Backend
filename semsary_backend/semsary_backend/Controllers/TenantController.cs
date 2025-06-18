@@ -226,17 +226,17 @@ namespace semsary_backend.Controllers
                 return BadRequest(new { message = "The beginning of arrival period cannot be after its end." });
 
 
-            var units = await apiContext.RentalUnits
+            var units = await apiContext.RentalUnits.Include(u => u.Rentals)
                 .Where(u => u.AdvertisementId == rentalDTO.AdvId)
-                .Include(u => u.Rentals)
+                
                 .ToListAsync();
 
             var conflictsPerUnit = units.Select(unit => new
             {
                 RentalUnitId = unit.RentalUnitId,
-                HasConflict = unit.Rentals.Any(r =>
-                    rentalDTO.StartDate < r.EndDate &&
-                    rentalDTO.EndDate > r.StartDate &&
+                HasConflict = apiContext.Rentals.Where(r=>r.RentalUnitIds.Contains(unit.RentalUnitId)).Any(r =>
+                    rentalDTO.StartDate.Date < r.EndDate.Date &&
+                    rentalDTO.EndDate.Date > r.StartDate.Date &&
                     !(r.status == RentalStatus.Bending || r.status == RentalStatus.Rejected || r.status == RentalStatus.ArrivalReject))
             }).ToList();
           
@@ -302,10 +302,13 @@ namespace semsary_backend.Controllers
                 WarrantyMoney = WarrantyCost,
                 TenantUsername = user.Username,
                 CreationDate = DateTime.UtcNow,
-                status = Enums.RentalStatus.Bending
+                status = Enums.RentalStatus.Bending,
+
             };
 
+
             await apiContext.Rentals.AddAsync(rental);
+
             Landlord lanlord = house.owner;
 
             string title = "طلب تأجير جديد";
@@ -766,6 +769,8 @@ namespace semsary_backend.Controllers
 
 
         }
+        
+        
     }
 
 }

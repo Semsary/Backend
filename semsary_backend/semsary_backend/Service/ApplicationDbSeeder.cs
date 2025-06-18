@@ -451,6 +451,7 @@ namespace semsary_backend.Service
                     password = passwordHash,
                     UserType = Enums.UserType.Tenant,
                     Emails = new List<Email> { email1 },
+                    IsVerified = true
 
                 };
 
@@ -908,7 +909,7 @@ namespace semsary_backend.Service
 #endregion
 
 #region Rental
-            var rental = dbContext.Rentals.FirstOrDefault(r => r.RentalId == 1);
+          /*  var rental = dbContext.Rentals.FirstOrDefault(r => r.RentalId == 1);
             Rental rental2 = null;
             if (rental == null)
             {
@@ -928,7 +929,7 @@ namespace semsary_backend.Service
                 };
                 dbContext.Rentals.Add(rental2);
                 dbContext.SaveChanges();
-            }
+            }*/
 #endregion
 
 #region RenalUnit
@@ -1006,7 +1007,7 @@ namespace semsary_backend.Service
                     DailyCost = 220,
                 };
 
-                rentalUnit1.Rentals = new List<Rental> {rental2 };
+               // rentalUnit1.Rentals = new List<Rental> {rental2 };
                 dbContext.RentalUnits.Add(rentalUnit1);
                 dbContext.RentalUnits.Add(rentalUnit2);
                 dbContext.RentalUnits.Add(rentalUnit3);

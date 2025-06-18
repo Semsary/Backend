@@ -390,6 +390,21 @@ namespace semsary_backend.Controllers
                     return NotFound("Tenant not found");
                 }
 
+                foreach(var UnitId in rental.RentalUnitIds)
+                {
+                    bool hasconflict = apiContext.Rentals.Where(r => r.RentalUnitIds.Contains(UnitId)).Any(r =>
+                    rental.StartDate.Date < r.EndDate.Date &&
+                    rental.EndDate.Date > r.StartDate.Date &&
+                    !(r.status == RentalStatus.Bending || r.status == RentalStatus.Rejected || r.status == RentalStatus.ArrivalReject));
+                    if(hasconflict)
+                    {
+                        rental.status = Enums.RentalStatus.Rejected;
+                        apiContext.SaveChanges();
+                        return BadRequest("This rental unit is already rented during the requested period, please choose another rental unit or change the dates of your request.");
+                    }
+
+                }
+
                 if (tenant.Balance< rental.WarrantyMoney)
                 {
                     rental.status= Enums.RentalStatus.Rejected;
