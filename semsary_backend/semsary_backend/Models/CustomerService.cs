@@ -4,5 +4,6 @@
     {
         public List<Complaint> Complaints { get; set; }
         public List<string>? DeviceTokens { get; set; }
+        public List<BlockedId> BlockedIds { get; set; } = new List<BlockedId>();
     }
 }

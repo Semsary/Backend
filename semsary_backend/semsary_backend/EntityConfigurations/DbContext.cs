@@ -17,7 +17,60 @@ namespace semsary_backend.EntityConfigurations
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApiContext).Assembly);
 
             modelBuilder.Entity<SermsaryUser>()
-            .OwnsOne(u => u.Address);
+                .OwnsOne(u => u.Address);
+
+            modelBuilder.Entity<Coupon>()
+                .Property(c => c.Id)
+                .HasConversion(
+                    ulid => ulid.ToString(),          // Convert Ulid to string for DB
+                    str => Ulid.Parse(str));
+
+            modelBuilder.Entity<BlockedId>()
+                .HasOne(b => b.Landlord)
+                .WithOne(l => l.BlockedId)
+                .HasForeignKey<BlockedId>(b => b.LandlordId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<BlockedId>()
+                .HasOne(b => b.customerService)
+                .WithMany(c => c.BlockedIds)
+                .HasForeignKey(b => b.BlockedBy);
+
+            modelBuilder.Entity<Comment>()
+                .HasOne(c => c.House)
+                .WithMany(h => h.Comments)
+                .HasForeignKey(c => c.HouseId)
+                .OnDelete(DeleteBehavior.Cascade); // keep cascade here if you want house deletion to remove comments
+
+            modelBuilder.Entity<Comment>()
+                .HasOne(c => c.Tenant)
+                .WithMany()
+                .HasForeignKey(c => c.TenantUsername)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Rate>()
+                .HasOne(r => r.House)
+                .WithMany(h => h.Rates)
+                .HasForeignKey(r => r.HouseId)
+                .OnDelete(DeleteBehavior.Cascade); // allow deleting house to delete related rates
+
+            modelBuilder.Entity<Rate>()
+                .HasOne(r => r.Tenant)
+                .WithMany()
+                .HasForeignKey(r => r.TenantUsername)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Rental>()
+                .HasOne(r => r.House)
+                .WithMany(h => h.Rentals)
+                .HasForeignKey(r => r.HouseId)
+                .OnDelete(DeleteBehavior.Cascade); // keep if house deletion should remove rentals
+
+            modelBuilder.Entity<Rental>()
+                .HasOne(r => r.Tenant)
+                .WithMany()
+                .HasForeignKey(r => r.TenantUsername)
+                .OnDelete(DeleteBehavior.Restrict);
 
         }
 

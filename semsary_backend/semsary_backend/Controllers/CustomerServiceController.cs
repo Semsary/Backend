@@ -434,7 +434,8 @@ namespace semsary_backend.Controllers
                 SocialId = landlord.SocialId,
                 BlockedBy = user.Username,
                 BlockedDate = DateTime.UtcNow,
-                Reason = blockIeddDTO.Reason
+                Reason = blockIeddDTO.Reason,
+                LandlordId = landlord.Username,
             };
             var advs = await apiContext.Advertisements
                 .Include(a => a.House)
