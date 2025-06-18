@@ -117,8 +117,8 @@ namespace semsary_backend
                 });
             });
 
-            builder.Services.AddHostedService<BackgroundJobs.PendingRentalRequests>();
-            builder.Services.AddHostedService<BackgroundJobs.LateArrivalDateTenant>();
+            //builder.Services.AddHostedService<BackgroundJobs.PendingRentalRequests>();
+            //builder.Services.AddHostedService<BackgroundJobs.LateArrivalDateTenant>();
             var app = builder.Build();
             
             using (var scope = app.Services.CreateScope())
