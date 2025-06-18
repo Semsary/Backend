@@ -428,6 +428,7 @@ namespace semsary_backend.Controllers
                 .Select( r => new
                     { 
                         r.RentalId,
+                        r.HouseId,
                         HouseName = r.House.Advertisements.Select(a => a.HouseName),
                         r.status,
                         r.StartDate,
