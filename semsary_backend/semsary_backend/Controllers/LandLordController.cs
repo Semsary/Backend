@@ -514,7 +514,7 @@ namespace semsary_backend.Controllers
 
             var arrivalRequests = await apiContext.Rentals
                 .Include(a => a.House)
-                .Where(r => r.House.owner.Username == username && (r.status == RentalStatus.ArrivalRequest || r.status == RentalStatus.Bending))
+                .Where(r => r.House.owner.Username == username)
                 .Select(r => new
                 {
                     r.RentalId,
