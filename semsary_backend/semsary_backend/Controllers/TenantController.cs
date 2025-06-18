@@ -430,6 +430,7 @@ namespace semsary_backend.Controllers
                         r.RentalId,
                         r.HouseId,
                         HouseName = r.House.Advertisements.Select(a => a.HouseName),
+                        HouseOwnerUsername = r.House.owner.Username,
                         r.status,
                         r.StartDate,
                         r.EndDate,

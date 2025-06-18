@@ -350,6 +350,7 @@ namespace semsary_backend.Controllers
                         r.RentalId,
                         r.HouseId,
                         r.WarrantyMoney,
+                        r.Tenant.Username,
                         r.Tenant.Firstname,
                         r.Tenant.Lastname,
                         r.StartDate,
